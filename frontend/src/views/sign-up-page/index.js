@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
-import { URL_USER_SVC } from "../common/configs";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "../common/constants";
+import { URL_USER_SVC } from "common/configs";
+import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
 import { Link } from "react-router-dom";
 
 function SignupPage() {

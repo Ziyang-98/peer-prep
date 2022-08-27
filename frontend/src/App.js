@@ -4,24 +4,30 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import SignupPage from "./views/SignupPage";
+import SignInPage from "views/sign-in-page";
+import SignUpPage from "views/sign-up-page";
 import { Box } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "common/theme.js";
 
 function App() {
   return (
     <div className="App">
-      <Box display={"flex"} flexDirection={"column"} padding={"4rem"}>
-        <Router>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={<Navigate replace to="/signup" />}
-            ></Route>
-            <Route path="/signup" element={<SignupPage />} />
-          </Routes>
-        </Router>
-      </Box>
+      <ThemeProvider theme={theme}>
+        <Box display={"flex"} flexDirection={"column"} sx={{ height: "100vh" }}>
+          <Router>
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={<Navigate replace to="/login" />}
+              ></Route>
+              <Route path="/login" element={<SignInPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+            </Routes>
+          </Router>
+        </Box>
+      </ThemeProvider>
     </div>
   );
 }
