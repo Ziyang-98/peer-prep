@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import SignupPage from "./components/SignupPage";
+import SignupPage from "./views/SignupPage";
 import { Box } from "@mui/material";
 
 function App() {
