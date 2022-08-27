@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import Button from "@mui/lab/LoadingButton";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Link } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -8,15 +8,12 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { userLogin } from "api/index";
+import Alert from "@mui/material/Alert";
 import { styles } from "./styles";
+import useLogin from "hooks/useLogin";
 
 const SignInPage = () => {
-  const handleSignIn = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    userLogin(data.get("email"), data.get("password"));
-  };
+  const { handleLogin, loading, isInvalidLogin } = useLogin();
 
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
@@ -25,24 +22,26 @@ const SignInPage = () => {
         <Avatar sx={styles.icon}>
           <LockOutlinedIcon />
         </Avatar>
+
         <Typography component="h1" variant="h5">
           Sign in to PeerPrep
         </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSignIn}
-          noValidate
-          sx={styles.formContainter}
-        >
+        {isInvalidLogin && (
+          <Alert sx={styles.invalidAlert} severity="error">
+            Incorrect username or password
+          </Alert>
+        )}
+        <Box component="form" onSubmit={handleLogin} sx={styles.formContainter}>
           <TextField
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
             autoFocus
+            disabled={loading}
           />
           <TextField
             margin="normal"
@@ -53,10 +52,18 @@ const SignInPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            disabled={loading}
           />
 
-          <Box container sx={styles.buttons}>
-            <Button type="submit" variant="contained" sx={styles.signInButton}>
+          <Box sx={styles.buttons}>
+            <Button
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<></>}
+              type="submit"
+              variant="contained"
+              sx={styles.signInButton}
+            >
               Sign In
             </Button>
             <Link href="/signup" sx={styles.signUpLink}>

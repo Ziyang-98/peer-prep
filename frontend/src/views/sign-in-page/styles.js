@@ -9,6 +9,9 @@ export const styles = {
     alignItems: "center",
   },
   icon: { m: 1, bgcolor: "primary.main" },
+  invalidAlert: {
+    mt: 2,
+  },
   formContainter: { mt: 1 },
   buttons: {
     mt: 2,
