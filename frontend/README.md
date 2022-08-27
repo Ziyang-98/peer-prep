@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+Ensure you have [NodeJS](https://nodejs.org/en/download/) installed on you device.
 In the project directory, you can run:
 
 ### `npm start`

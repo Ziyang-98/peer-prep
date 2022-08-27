@@ -15,13 +15,17 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.5.1",
+    "source-map-explorer": "^2.5.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "prettier:check": "prettier \"src/**/*.{js,jsx,css}\"",
+    "prettier:fix": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +47,7 @@
   },
   "devDependencies": {
     "eslint": "^8.21.0",
-    "eslint-plugin-react": "^7.30.1"
+    "eslint-plugin-react": "^7.30.1",
+    "prettier": "^2.7.1"
   }
 }
