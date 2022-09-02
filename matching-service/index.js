@@ -10,6 +10,14 @@ app.options('*', cors())
 app.get('/', (req, res) => {
     res.send('Hello World from matching-service');
 });
+// Database
+const db = require('./db')
+
+db.sync({ force: true })
+    .then(() => {
+        console.log('Connection has been established successfully!')
+    })
+    .catch(error => console.error('Unable to connect to the database:', error))
 
 // HTTP server
 const { createServer } = require('http')
