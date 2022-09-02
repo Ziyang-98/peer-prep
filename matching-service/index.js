@@ -7,9 +7,42 @@ app.use(express.json())
 app.use(cors()) // config cors so that front-end can use
 app.options('*', cors())
 
+// Routes
 app.get('/', (req, res) => {
-    res.send('Hello World from matching-service');
-});
+    res.send('Hello World from matching-service')
+})
+
+const Match = require('./models/Match')
+app.post('/match', async (req, res) => {
+    await Match.create(req.body)
+    res.send('New match is inserted!')
+})
+
+app.get('/matches', async (req, res) => {
+    const matches = await Match.findAll()
+    res.send(matches)
+})
+
+app.get('/match/:id', async (req, res) => {
+    const id = req.params.id
+    const match = await Match.findOne({ where: { id }})
+    res.send(match)
+})
+
+app.put('/match/:id', async (req, res) => {
+    const id = req.params.id
+    const match = await Match.findOne({ where: { id }})
+    match.status = req.body.status
+    await match.save()
+    res.send('updated!')
+})
+
+app.delete('/match/:id', async (req, res) => {
+    const id = req.params.id
+    await Match.destroy({ where: { id }})
+    res.send('removed!')
+})
+
 // Database
 const db = require('./db')
 
