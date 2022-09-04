@@ -57,9 +57,7 @@ const MainLayout = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box>
-        <Outlet />
-      </Box>
+      <Outlet />
     </Box>
   );
 };
