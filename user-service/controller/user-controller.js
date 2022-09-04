@@ -12,7 +12,7 @@ export async function createUser(req, res) {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             
             const resp = await _createUser(username, hashedPassword);
-            console.log(resp);
+
             if (resp.err) {
                 return res.status(400).json({message: 'Could not create a new user!'});
             } else {
