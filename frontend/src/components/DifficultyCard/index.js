@@ -1,26 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { styles } from "./styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
+import MatchingDialog from "./MatchingDialog";
+import useDifficultyCard from "hooks/useDifficultyCard";
 
 const DifficultyCard = ({ difficulty }) => {
-  const [raised, setRaised] = useState(false);
+  const { cardProps, dialogProps, handleCardClick } =
+    useDifficultyCard(difficulty);
 
-  const toggleRaised = () => setRaised(true);
-  const toggleUnraised = () => setRaised(false);
-
-  const handleCardClick = (difficulty) => {
-    console.log(difficulty);
-  };
   return (
-    <Card
-      raised={raised}
-      onMouseOver={toggleRaised}
-      onMouseOut={toggleUnraised}
-    >
+    <Card {...cardProps}>
       <CardActionArea onClick={() => handleCardClick(difficulty.title)}>
         <CardContent>
           <Box sx={styles.cardContent}>
@@ -30,6 +23,7 @@ const DifficultyCard = ({ difficulty }) => {
           </Box>
         </CardContent>
       </CardActionArea>
+      <MatchingDialog {...dialogProps} />
     </Card>
   );
 };
