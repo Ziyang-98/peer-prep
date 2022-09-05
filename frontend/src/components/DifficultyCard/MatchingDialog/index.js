@@ -9,7 +9,7 @@ const MatchingDialog = ({ difficulty, open, handleClose }) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth={"sm"} fullWidth>
       <DialogTitle>Find a match for Difficulty: {difficulty.title}</DialogTitle>
-      <MatchingDialogContent />
+      <MatchingDialogContent difficulty={difficulty} />
       <DialogActions>
         <Button onClick={handleClose}>Close</Button>
       </DialogActions>

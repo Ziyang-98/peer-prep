@@ -9,11 +9,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import Grow from "@mui/material/Grow";
 import { useStyles } from "./useStyles";
 
-const MatchingDialogContent = () => {
-  const { timer, success, failure, loading, handleMatchButtonClick } =
-    useMatching();
+const MatchingDialogContent = ({ difficulty }) => {
+  const { timer, success, failure, loading, error, handleMatchButtonClick } =
+    useMatching(difficulty);
 
-  const styles = useStyles(success, failure);
+  const styles = useStyles(success, failure, error);
 
   return (
     <DialogContent>
@@ -54,6 +54,13 @@ const MatchingDialogContent = () => {
             <Typography variant="subtitle1" sx={styles.failureText}>
               Click to search for match again, or try selecting another
               difficulty?
+            </Typography>
+          </Grow>
+        )}
+        {error && (
+          <Grow in={error} {...(error ? { timeout: 2000 } : {})}>
+            <Typography variant="subtitle1" sx={styles.failureText}>
+              Encountered issues when matching, please try again later!
             </Typography>
           </Grow>
         )}

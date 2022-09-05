@@ -1,6 +1,6 @@
 import { blue, green, red } from "@mui/material/colors";
 
-export const useStyles = (success, failure) => ({
+export const useStyles = (success, failure, error) => ({
   dialogContent: {
     mt: 4,
     display: "flex",
@@ -20,7 +20,7 @@ export const useStyles = (success, failure) => ({
         },
       }),
 
-    ...(failure && {
+    ...((failure || error) && {
       bgcolor: red[500],
       "&:hover": {
         bgcolor: red[200],
@@ -43,5 +43,6 @@ export const useStyles = (success, failure) => ({
   },
   failureText: {
     mt: 2,
+    textAlign: "center",
   },
 });
