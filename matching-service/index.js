@@ -13,10 +13,6 @@ app.get('/', (req, res) => {
 })
 
 const Match = require('./models/Match')
-app.post('/match', async (req, res) => {
-    await Match.create(req.body)
-    res.send('New match is inserted!')
-})
 
 app.get('/matches', async (req, res) => {
     const matches = await Match.findAll()
@@ -43,6 +39,29 @@ app.delete('/match/:id', async (req, res) => {
     res.send('removed!')
 })
 
+app.post('/match', async (req, res) => {
+    const { difficulty, username } = req.body
+    // TODO: validate input
+    const match = await Match.findOne({ where: { difficulty }})
+    
+    if (match) {
+        const room = match.room
+        await match.destroy()
+        res.status(200).json({ msg: 'Match found!', room, isMatch: true })
+    } else {
+        const { v4 } = require('uuid')
+        const room = `${difficulty}-${v4()}`
+        const newMatch = {
+            difficulty,
+            username,
+            room
+        }
+
+        await Match.create(newMatch)
+        res.status(200).json({ msg: 'Finding a match for you!', room, isMatch: false })
+    }
+})
+
 // Database
 const db = require('./db')
 
@@ -64,19 +83,33 @@ httpServer.listen(PORT, () => {
 // Socket.io
 const { Server } = require('socket.io')
 const io = new Server(httpServer)
+const timeoutTable = new Map()
 
 io.on('connection', (socket) => {
     console.log('a user connected')
-    io.emit('new connection', 'someone new has connected!')
+
+    socket.on('matchWaiting', data => {
+        const { room } = data
+        socket.join(room)
+
+        const timeoutId = setTimeout(() => {
+            socket.emit('failToMatch', { msg: "Sorry! We can't find a match at this time." })
+        }, 30000)
+        timeoutTable.set(room, timeoutId)
+    })
+
+    socket.on('matchFound', data => {
+        const { room } = data
+        
+        clearTimeout(timeoutTable.get(room))
+        timeoutTable.delete(room)
+
+        socket.join(room)
+        io.to(room).emit('room', { room })
+    })
 
     socket.on('disconnect', () => {
         console.log('a user disconnected')
-        io.emit('new disconnection', 'someone disconnected!')
-    })
-
-    socket.on('match', (data) => {
-        // using the data, create a new match in database (validate data first)
-        console.log(`${data.name} wants to create a new match`)
     })
 
     socket.on('message', (data) => {

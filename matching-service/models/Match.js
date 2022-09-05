@@ -7,13 +7,10 @@ Match.init({
   difficulty: {
     type: DataTypes.STRING
   },
-  status: {
+  room: {
     type: DataTypes.STRING
   },
-  user1: {
-    type: DataTypes.STRING
-  },
-  user2: {
+  username: {
     type: DataTypes.STRING
   }
 }, { sequelize: db, modelName: 'match', timestamps: false })
