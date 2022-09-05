@@ -25,13 +25,7 @@ const MainLayout = () => {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={styles.appTitle}
-          >
+          <Typography variant="h6" component="a" href="/" sx={styles.appTitle}>
             PeerPrep
           </Typography>
           <Box>

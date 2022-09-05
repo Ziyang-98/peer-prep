@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { matchUser } from "api";
+import { matchUser, deleteMatch } from "api";
 import { URI_MATCHING_SVC } from "common/configs";
 import io from "socket.io-client";
 
@@ -12,6 +12,9 @@ const useMatching = ({ title }) => {
   const [error, setError] = useState(false);
   const [timer, setTimer] = useState(TIMER_COUNTDOWN);
 
+  const [socket, setSocket] = useState(null);
+  const [id, setId] = useState(NaN);
+
   let intervalRef = useRef();
 
   const stopLoading = () => {
@@ -20,10 +23,13 @@ const useMatching = ({ title }) => {
   };
 
   const hardReset = () => {
+    stopLoading();
     setSuccess(false);
     setFailure(false);
     setError(false);
-    stopLoading();
+    setTimer(TIMER_COUNTDOWN);
+    setSocket(null);
+    setId(NaN);
   };
 
   useEffect(() => {
@@ -38,10 +44,10 @@ const useMatching = ({ title }) => {
   const handleSuccess = () => {
     setSuccess(true);
     stopLoading();
+    // TODO: Redirect user to collab page
   };
 
   const handleFailure = () => {
-    // Add delete match with id
     setFailure(true);
     stopLoading();
   };
@@ -64,7 +70,7 @@ const useMatching = ({ title }) => {
     socket.emit("matchFound", { room });
   };
 
-  const emitMatchWaiting = (socket, room) => {
+  const emitMatchWaiting = (socket, room, matchId) => {
     socket.emit("matchWaiting", { room });
 
     socket.on("room", ({ room }) => {
@@ -74,8 +80,14 @@ const useMatching = ({ title }) => {
 
     socket.on("failToMatch", ({ msg }) => {
       console.log("No Match found ", msg);
-      handleFailure();
+      deleteMatch(matchId);
     });
+  };
+
+  const handleDisconnect = () => {
+    socket?.disconnect();
+    id && deleteMatch(id);
+    hardReset();
   };
 
   const handleMatchButtonClick = () => {
@@ -86,17 +98,18 @@ const useMatching = ({ title }) => {
       hardReset();
       setLoading(true);
       intervalRef.current = setInterval(performIntervalAction, 1000);
-
       matchUser(user, difficulty)
         .then((res) => {
-          const { isMatch, room } = res.data;
+          const { id, room, isMatch } = res.data;
           const socket = io.connect(URI_MATCHING_SVC);
+          setSocket(socket);
 
           if (isMatch) {
             emitMatchFound(socket, room);
             handleSuccess();
           } else {
-            emitMatchWaiting(socket, room);
+            setId(id);
+            emitMatchWaiting(socket, room, id);
           }
         })
         .catch((error) => {
@@ -114,6 +127,7 @@ const useMatching = ({ title }) => {
     loading,
     error,
     handleMatchButtonClick,
+    handleDisconnect,
   };
 };
 

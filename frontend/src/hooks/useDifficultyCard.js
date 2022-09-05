@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useDifficultyCard = (difficulty) => {
+const useDifficultyCard = (difficulty, handleDisconnect) => {
   const [raised, setRaised] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -14,6 +14,7 @@ const useDifficultyCard = (difficulty) => {
   const handleDialogClose = () => {
     toggleUnraised();
     setOpenDialog(false);
+    handleDisconnect();
   };
   return {
     cardProps: {

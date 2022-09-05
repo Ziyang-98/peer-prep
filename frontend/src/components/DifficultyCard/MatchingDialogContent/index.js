@@ -3,16 +3,19 @@ import Box from "@mui/material/Box";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import useMatching from "hooks/useMatching";
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckIcon from "@mui/icons-material/Check";
 import Grow from "@mui/material/Grow";
 import { useStyles } from "./useStyles";
 
-const MatchingDialogContent = ({ difficulty }) => {
-  const { timer, success, failure, loading, error, handleMatchButtonClick } =
-    useMatching(difficulty);
-
+const MatchingDialogContent = ({
+  timer,
+  success,
+  failure,
+  loading,
+  error,
+  handleMatchButtonClick,
+}) => {
   const styles = useStyles(success, failure, error);
 
   return (

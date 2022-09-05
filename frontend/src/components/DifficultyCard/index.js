@@ -7,10 +7,23 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import MatchingDialog from "./MatchingDialog";
 import useDifficultyCard from "hooks/useDifficultyCard";
+import useMatching from "hooks/useMatching";
 
 const DifficultyCard = ({ difficulty }) => {
-  const { cardProps, dialogProps, handleCardClick } =
-    useDifficultyCard(difficulty);
+  const {
+    timer,
+    success,
+    failure,
+    loading,
+    error,
+    handleMatchButtonClick,
+    handleDisconnect,
+  } = useMatching(difficulty);
+
+  const { cardProps, dialogProps, handleCardClick } = useDifficultyCard(
+    difficulty,
+    handleDisconnect,
+  );
 
   return (
     <Card {...cardProps}>
@@ -23,7 +36,10 @@ const DifficultyCard = ({ difficulty }) => {
           </Box>
         </CardContent>
       </CardActionArea>
-      <MatchingDialog {...dialogProps} />
+      <MatchingDialog
+        {...dialogProps}
+        {...{ timer, success, failure, loading, error, handleMatchButtonClick }}
+      />
     </Card>
   );
 };
