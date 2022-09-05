@@ -57,8 +57,9 @@ app.post('/match', async (req, res) => {
             room
         }
 
-        await Match.create(newMatch)
-        res.status(200).json({ msg: 'Finding a match for you!', room, isMatch: false })
+        const newMatchInstance = await Match.create(newMatch)
+        const id = newMatchInstance.get('id')
+        res.status(200).json({ msg: 'Finding a match for you!', id, room, isMatch: false })
     }
 })
 
