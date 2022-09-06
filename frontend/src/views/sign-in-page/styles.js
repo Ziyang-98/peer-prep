@@ -7,12 +7,21 @@ export const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    bgcolor: "primary.light",
+    boxShadow: 10,
+    borderRadius: "10px",
   },
-  icon: { m: 1, bgcolor: "primary.main" },
+  icon: {
+    m: 1,
+    bgcolor: "primary.main",
+  },
   invalidAlert: {
     mt: 2,
   },
-  formContainter: { mt: 1 },
+  formContainter: {
+    mt: 1,
+    padding: 2,
+  },
   buttons: {
     mt: 2,
     display: "flex",
