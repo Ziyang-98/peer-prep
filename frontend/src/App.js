@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import SignInPage from "views/sign-in-page";
-import SignUpPage from "views/sign-up-page";
+import SignUpPage from "views/sign-up";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "common/theme.js";
