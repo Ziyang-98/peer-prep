@@ -66,11 +66,14 @@ const SignInPage = () => {
             >
               Sign In
             </Button>
-            <Link href="/signup" sx={styles.signUpLink}>
-              Create account
-            </Link>
           </Box>
         </Box>
+        <Typography component="subtitle1">
+          Dont have account? Create account{" "}
+          <Link href="/signup" sx={styles.signUpLink}>
+            here
+          </Link>
+        </Typography>
       </Box>
     </Container>
   );
