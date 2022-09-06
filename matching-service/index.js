@@ -35,8 +35,13 @@ app.put('/match/:id', async (req, res) => {
 
 app.delete('/match/:id', async (req, res) => {
     const id = req.params.id
-    await Match.destroy({ where: { id }})
-    res.send('removed!')
+    const numOfRowDeleted = await Match.destroy({ where: { id }})
+
+    if (numOfRowDeleted === 0) {
+        res.json({ msg: 'No match is deleted'})
+    } else {
+        res.status(200).json({ msg: `Match ${id} deleted successfully!`})
+    }
 })
 
 app.post('/match', async (req, res) => {
