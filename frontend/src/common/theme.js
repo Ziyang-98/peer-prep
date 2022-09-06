@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import { light } from "@mui/material/styles/createPalette";
 
 export const theme = createTheme({
   typography: {
@@ -8,7 +7,7 @@ export const theme = createTheme({
 
   palette: {
     primary: {
-      main: "#7464bc",
+      main: "#ecf09c",
       light: "#88f2e3",
       dark: "#08c9ae",
       contrastText: "#fff",

@@ -23,8 +23,8 @@ const SignInPage = () => {
           <LockOutlinedIcon />
         </Avatar>
 
-        <Typography component="h1" variant="h5">
-          Sign in to PeerPrep
+        <Typography component="h1" variant="h4">
+          Sign In
         </Typography>
         {isInvalidLogin && (
           <Alert sx={styles.invalidAlert} severity="error">
