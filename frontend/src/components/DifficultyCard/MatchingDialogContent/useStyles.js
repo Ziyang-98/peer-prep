@@ -31,10 +31,13 @@ export const useStyles = (success, failure, error) => ({
       bgcolor: green[500],
     },
   },
+  buttonHolder: { m: 1, position: "relative" },
   circularProgress: {
     color: blue[200],
     position: "absolute",
     zIndex: 1,
+    top: -6,
+    left: -6,
   },
   buttonText: {
     color: "#FFFFFF",

@@ -50,7 +50,7 @@ app.post("/match", async (req, res) => {
     res.status(200).json({ msg: "Match found!", room, isMatch: true });
   } else {
     const { v4 } = require("uuid");
-    const room = `${difficulty}-${v4()}`;
+    const room = `match-${difficulty}-${v4()}`;
     const newMatch = {
       difficulty,
       username,
@@ -58,10 +58,14 @@ app.post("/match", async (req, res) => {
     };
 
     const newMatchInstance = await Match.create(newMatch);
-    const id = newMatchInstance.get("id");
     res
       .status(200)
-      .json({ msg: "Finding a match for you!", id, room, isMatch: false });
+      .json({
+        msg: "Finding a match for you!",
+        id: newMatchInstance.id,
+        room,
+        isMatch: false,
+      });
   }
 });
 
@@ -97,7 +101,6 @@ io.on("connection", (socket) => {
   socket.on("matchWaiting", (data) => {
     const { room } = data;
     socket.join(room);
-    console.log(`Receive data to match!`);
 
     const timeoutId = setTimeout(() => {
       socket.emit("failToMatch", {
@@ -117,8 +120,25 @@ io.on("connection", (socket) => {
     io.to(room).emit("room", { room });
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason) => {
     console.log("a user disconnected");
+  });
+
+  socket.on("disconnecting", async (reason) => {
+    console.log("a user is disconnecting");
+
+    for (const room of socket.rooms.values()) {
+      const roomSplit = room.split("-");
+
+      if (roomSplit[0] === "match") {
+        const match = await Match.findOne({ where: { room } });
+
+        if (match) {
+          await match.destroy();
+          return;
+        }
+      }
+    }
   });
 
   socket.on("message", (data) => {

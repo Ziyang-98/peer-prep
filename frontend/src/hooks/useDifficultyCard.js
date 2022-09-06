@@ -12,8 +12,8 @@ const useDifficultyCard = (difficulty, handleDisconnect) => {
   };
 
   const handleDialogClose = () => {
-    toggleUnraised();
     setOpenDialog(false);
+    toggleUnraised();
     handleDisconnect();
   };
   return {

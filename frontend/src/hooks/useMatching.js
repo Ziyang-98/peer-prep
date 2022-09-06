@@ -13,7 +13,6 @@ const useMatching = ({ title }) => {
   const [timer, setTimer] = useState(TIMER_COUNTDOWN);
 
   const [socket, setSocket] = useState(null);
-  const [id, setId] = useState(NaN);
 
   let intervalRef = useRef();
 
@@ -29,7 +28,6 @@ const useMatching = ({ title }) => {
     setError(false);
     setTimer(TIMER_COUNTDOWN);
     setSocket(null);
-    setId(NaN);
   };
 
   useEffect(() => {
@@ -84,10 +82,10 @@ const useMatching = ({ title }) => {
     });
   };
 
-  const handleDisconnect = () => {
+  const handleDisconnect = async () => {
     socket?.disconnect();
-    id && deleteMatch(id);
-    hardReset();
+    // Set timeout for smoother transition when user closes dialog
+    setTimeout(hardReset, 200);
   };
 
   const handleMatchButtonClick = () => {
@@ -108,7 +106,6 @@ const useMatching = ({ title }) => {
             emitMatchFound(socket, room);
             handleSuccess();
           } else {
-            setId(id);
             emitMatchWaiting(socket, room, id);
           }
         })
