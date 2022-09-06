@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "api/index";
+import useAPICall from "api/index";
 
 const useLogin = () => {
+  const { loginUser } = useAPICall();
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);

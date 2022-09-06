@@ -9,10 +9,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import { styles } from "./styles";
-import useLogin from "hooks/useLogin";
+import useSignUp from "hooks/useSignUp";
 
 const SignUpPage = () => {
-  const { handleLogin, loading, isInvalidLogin } = useLogin();
+  const { handleSignUp, loading, isSignupSuccess } = useSignUp();
 
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
@@ -25,12 +25,16 @@ const SignUpPage = () => {
         <Typography component="h1" variant="h4">
           Create Account
         </Typography>
-        {isInvalidLogin && (
+        {!isSignupSuccess && (
           <Alert sx={styles.invalidAlert} severity="error">
             Incorrect username or password
           </Alert>
         )}
-        <Box component="form" onSubmit={handleLogin} sx={styles.formContainter}>
+        <Box
+          component="form"
+          onSubmit={handleSignUp}
+          sx={styles.formContainter}
+        >
           <TextField
             margin="normal"
             required
