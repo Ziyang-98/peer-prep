@@ -1,4 +1,3 @@
-import cors from 'cors';
 import express from 'express';
 var router = express.Router();
 import LoginAuth from '../controller/authentication-controller.js'

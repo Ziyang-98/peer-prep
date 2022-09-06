@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import UserModel from '../model/user-model.js'
 import jwt from "jsonwebtoken"
+import { ormUserExists as _userExists } from '../model/user-orm.js'
 const secret_token = '123457';
 export async function LoginAuth(req, res) {
     try {
@@ -22,6 +23,7 @@ export async function LoginAuth(req, res) {
         // Authorisation success
         if (user && (await bcrypt.compare(password, user.password))) {
           // Create token
+          console.log("Password and Username are correct and succcessful")
           const token = jwt.sign(
               { user_id: user._id },
               secret_token,
