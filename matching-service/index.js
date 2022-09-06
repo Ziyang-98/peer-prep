@@ -52,7 +52,7 @@ app.post('/match', async (req, res) => {
     if (match) {
         const room = match.room
         await match.destroy()
-        res.status(200).json({ msg: 'Match found!', room, isMatch: true })
+        res.status(200).json({ msg: 'Match found!', id: match.id, room, isMatch: true })
     } else {
         const { v4 } = require('uuid')
         const room = `${difficulty}-${v4()}`
@@ -71,7 +71,7 @@ app.post('/match', async (req, res) => {
 // Database
 const db = require('./db')
 
-db.sync({ force: true })
+db.sync({ force: true }) // TODO: need to remove this when in production
     .then(() => {
         console.log('Connection has been established successfully!')
     })
