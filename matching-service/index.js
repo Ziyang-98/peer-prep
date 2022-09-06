@@ -59,7 +59,7 @@ httpServer.listen(PORT, () => {
 
 // Socket.io
 const { Server } = require('socket.io')
-const { setRoomTimeout, clearRoomTimeout } = require('./utils/socket')
+const { setRoomTimeout, clearRoomTimeout, deleteMatch } = require('./utils/socket')
 const io = new Server(httpServer)
 
 io.on('connection', (socket) => {
@@ -81,21 +81,10 @@ io.on('connection', (socket) => {
         io.to(room).emit('room', { room })
     })
 
-    socket.on('disconnecting', async () => {
+    socket.on('disconnecting', () => {
         console.log('a user is disconnecting')
       
-        for (const room of socket.rooms.values()) {
-            const roomSplit = room.split('-')
-            
-            if (roomSplit[0] === 'match') {
-                const match = await findMatchWith({ room })
-      
-                if (match) {
-                    await match.destroy()
-                    return
-                }
-            }
-        }
+        deleteMatch(socket)
     })
 
     socket.on('disconnect', () => {
