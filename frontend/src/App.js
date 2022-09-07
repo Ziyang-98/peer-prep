@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "layout/main";
 import SelectionContent from "views/selection-content";
 import SignInPage from "views/sign-in-page";
-import SignUpPage from "views/sign-up";
+import SignUpPage from "views/sign-up-page";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "common/theme.js";
