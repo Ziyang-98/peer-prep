@@ -42,6 +42,14 @@ app.delete("/match/:id", async (req, res) => {
 app.post("/match", async (req, res) => {
   const { difficulty, username } = req.body;
   // TODO: validate input
+  const matchWhereUsername = await findMatchWith({ username });
+
+  if (matchWhereUsername) {
+    return res
+      .status(400)
+      .json({ msg: "Cannot have multiple matches at the same time!" });
+  }
+
   const match = await findMatchWith({ difficulty });
 
   if (match) {
