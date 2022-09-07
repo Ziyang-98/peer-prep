@@ -24,6 +24,8 @@ export async function signUpUser(username, password) {
         console.log("Please try again later");
       }
     });
+
+  return response;
 }
 
 export async function matchUser(username, difficulty) {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "api/index";
+import { STATUS_CODE_CREATED } from "common/constants";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -8,20 +9,25 @@ const useSignUp = () => {
 
   const navigate = useNavigate();
 
-  const handleSignUpSuccess = (user, jwt) => {
+  const handleSignUpSuccess = (user, password) => {
     console.log("Signed Up!");
-    console.log(`User: ${user}, JWT: ${jwt}`);
-    // TODO: set JWT to cookie
+    console.log(`User: ${user}, Password: ${password}`);
     navigate("#", { replace: true });
     setLoading(false);
   };
 
-  const handleSignup = async (event) => {
-    // setLoading(true);
-    // setIsSignupSuccess(false);
-    // event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    console.log("hello");
+  const handleSignUp = async (event) => {
+    setLoading(true);
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    await signUpUser(data.get("username"), data.get("password")).then(
+      (response) => {
+        if (response.status == STATUS_CODE_CREATED) {
+          handleSignUpSuccess(data.get("username"), data.get("password"));
+        }
+      },
+    );
+
     // await signUpUser(data.get("username"), data.get("password")).catch(
     //   (error) => {
     //     setIsSignupSuccess(false);
@@ -31,7 +37,7 @@ const useSignUp = () => {
   };
 
   return {
-    handleSignup,
+    handleSignUp,
     loading,
     isSignupSuccess,
   };
