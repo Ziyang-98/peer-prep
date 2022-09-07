@@ -37,3 +37,6 @@ export async function deleteUser(_id) {
   return UserModel.findByIdAndDelete(_id)
 }
  
+export async function getUser(params) {
+  return UserModel.findOne(params)
+}
