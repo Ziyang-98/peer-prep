@@ -22,8 +22,12 @@ const useSignUp = () => {
     const data = new FormData(event.currentTarget);
     await signUpUser(data.get("username"), data.get("password")).then(
       (response) => {
-        if (response.status == STATUS_CODE_CREATED) {
+        if (response.status === STATUS_CODE_CREATED) {
           handleSignUpSuccess(data.get("username"), data.get("password"));
+        } else {
+          setIsSignupSuccess(false);
+          navigate("#", { replace: true });
+          setLoading(false);
         }
       },
     );
