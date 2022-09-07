@@ -18,3 +18,22 @@ export async function createUser(params) {
 export async function userExists(params) {
   return UserModel.exists(params)
 }
+
+export async function updatePassword(_id, password) {
+  return UserModel.updateOne({ username: _id }, 
+    { 
+      $set: { password }
+    } 
+  )
+
+  // return UserModel.updateOne({ _id: user_id }, 
+  //   { 
+  //     $set: { password }
+  //   } 
+  // )
+}
+
+export async function deleteUser(_id) {
+  return UserModel.findByIdAndDelete(_id)
+}
+ 
