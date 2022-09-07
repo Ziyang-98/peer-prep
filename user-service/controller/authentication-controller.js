@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
-import UserModel from '../model/user-model.js'
 import jwt from "jsonwebtoken"
-import { ormUserExists as _userExists } from '../model/user-orm.js'
+import { ormGetUser as _getUser } from '../model/user-orm.js'
 const secret_token = '123457';
 export async function LoginAuth(req, res) {
     try {
@@ -15,7 +14,7 @@ export async function LoginAuth(req, res) {
           });
         }
         // Check if user exist in our database
-        const user = await UserModel.findOne({ username: username });
+        const user = await _getUser(username);
         
         if (!user) {
             return res.status(400).json({ message: "User does not exist in database." });

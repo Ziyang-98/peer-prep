@@ -19,3 +19,6 @@ export async function userExists(params) {
   return UserModel.exists(params)
 }
 
+export async function getUser(params) {
+  return UserModel.findOne(params)
+}
