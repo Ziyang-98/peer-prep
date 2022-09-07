@@ -58,18 +58,18 @@ const SignUpPage = () => {
             disabled={loading}
           />
 
-          {/* <Box sx={styles.buttons}> */}
-          <Button
-            loading={loading}
-            loadingPosition="start"
-            startIcon={<></>}
-            type="submit"
-            variant="contained"
-            sx={styles.signInButton}
-          >
-            Create Account
-          </Button>
-          {/* </Box> */}
+          <Box sx={styles.buttons}>
+            <Button
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<></>}
+              type="submit"
+              variant="contained"
+              sx={styles.signInButton}
+            >
+              Create Account
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Container>
