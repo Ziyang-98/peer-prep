@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAPICall from "api/index";
+import { signUpUser } from "api/index";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [isSignupSuccess, setIsSignupSuccess] = useState(true);
-  const { signUpUser } = useAPICall();
 
   const navigate = useNavigate();
 
@@ -18,17 +17,17 @@ const useSignUp = () => {
   };
 
   const handleSignup = async (event) => {
-    setLoading(true);
-    setIsSignupSuccess(false);
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    await signUpUser(data.get("username"), data.get("password")).catch(
-      (error) => {
-        setIsSignupSuccess(false);
-        console.error(error);
-      },
-    );
+    // setLoading(true);
+    // setIsSignupSuccess(false);
+    // event.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    console.log("hello");
+    // await signUpUser(data.get("username"), data.get("password")).catch(
+    //   (error) => {
+    //     setIsSignupSuccess(false);
+    //     console.error(error);
+    //   },
+    // );
   };
 
   return {
