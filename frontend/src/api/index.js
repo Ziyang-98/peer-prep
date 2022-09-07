@@ -15,15 +15,15 @@ export async function loginUser(username, password) {
 }
 
 export async function signUpUser(username, password) {
-  const response = await axios
-    .post(URL_USER_SVC, { username, password })
-    .catch((err) => {
-      if (err.response.status === STATUS_CODE_CONFLICT) {
-        console.log("This username already exists");
-      } else {
-        console.log("Please try again later");
-      }
-    });
+  const body = { username, password };
+
+  const response = await axios.post(URL_USER_SVC, body).catch((err) => {
+    if (err.response.status === STATUS_CODE_CONFLICT) {
+      console.log("This username already exists");
+    } else {
+      console.log("Please try again later");
+    }
+  });
 
   return response;
 }
