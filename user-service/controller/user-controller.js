@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 export async function createUser(req, res) {
     try {
         const { username, password } = req.body;
-        const userExists = await _userExists(username)
+        const userExists = await _userExists(username);
 
         if (username && password && !userExists) {
 
