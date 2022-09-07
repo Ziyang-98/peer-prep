@@ -3,6 +3,7 @@ import { blue, green, red } from "@mui/material/colors";
 export const useStyles = (success, failure, error) => ({
   dialogContent: {
     mt: 4,
+    padding: 0,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

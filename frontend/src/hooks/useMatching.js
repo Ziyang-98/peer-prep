@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { matchUser, deleteMatch } from "api";
+import { matchUser } from "api";
 import { URI_MATCHING_SVC } from "common/configs";
 import io from "socket.io-client";
 
@@ -68,7 +68,7 @@ const useMatching = ({ title }) => {
     socket.emit("matchFound", { room });
   };
 
-  const emitMatchWaiting = (socket, room, matchId) => {
+  const emitMatchWaiting = (socket, room) => {
     socket.emit("matchWaiting", { room });
 
     socket.on("room", ({ room }) => {
@@ -78,7 +78,6 @@ const useMatching = ({ title }) => {
 
     socket.on("failToMatch", ({ msg }) => {
       console.log("No Match found ", msg);
-      deleteMatch(matchId);
     });
   };
 
@@ -98,7 +97,7 @@ const useMatching = ({ title }) => {
       intervalRef.current = setInterval(performIntervalAction, 1000);
       matchUser(user, difficulty)
         .then((res) => {
-          const { id, room, isMatch } = res.data;
+          const { room, isMatch } = res.data;
           const socket = io.connect(URI_MATCHING_SVC);
           setSocket(socket);
 
@@ -106,7 +105,7 @@ const useMatching = ({ title }) => {
             emitMatchFound(socket, room);
             handleSuccess();
           } else {
-            emitMatchWaiting(socket, room, id);
+            emitMatchWaiting(socket, room);
           }
         })
         .catch((error) => {
