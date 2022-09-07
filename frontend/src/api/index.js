@@ -1,6 +1,9 @@
 import axios from "axios";
+
 import { URL_USER_SVC } from "common/configs";
 import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
+import { URL_MATCHING_SVC } from "common/configs";
+
 
 export async function loginUser(username, password) {
   const body = { username, password };
@@ -13,6 +16,7 @@ export async function loginUser(username, password) {
   return response;
 }
 
+
 export async function signUpUser(username, password) {
   const response = await axios
     .post(URL_USER_SVC, { username, password })
@@ -23,4 +27,16 @@ export async function signUpUser(username, password) {
         console.log("Please try again later");
       }
     });
+
+export async function matchUser(username, difficulty) {
+  const body = { username, difficulty };
+
+  const response = await axios.post(URL_MATCHING_SVC, body);
+  return response;
+}
+
+export async function deleteMatch(id) {
+  const response = await axios.delete(URL_MATCHING_SVC + `/${id}`);
+  return response;
+
 }
