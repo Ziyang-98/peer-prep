@@ -9,6 +9,7 @@ app.options('*', cors())
 
 import { createUser, changePassword, deleteUser } from './controller/user-controller.js';
 import { LoginAuth } from './controller/authentication-controller.js';
+import { authentication } from './middleware/authentication.js';
 
 const router = express.Router()
 
@@ -18,8 +19,8 @@ router.post('/', createUser)
 //login post http://localhost:8000/api/user/login
 router.post('/login', LoginAuth)
 
-router.post('/change-password', changePassword)
-router.post('/delete-user', deleteUser)
+router.post('/change-password', authentication, changePassword)
+router.post('/delete-user', authentication, deleteUser)
 
 app.use('/api/user', router).all((_, res) => {
     res.setHeader('content-type', 'application/json')
