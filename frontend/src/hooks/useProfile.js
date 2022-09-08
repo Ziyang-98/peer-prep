@@ -1,6 +1,11 @@
 import { deleteUser, changePassword } from 'api/index';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
 
 const useProfile = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+    
+    const navigate = useNavigate();
 
     const handleDeleteUser = async (event) => {
         await deleteUser()
@@ -10,6 +15,10 @@ const useProfile = () => {
             .catch((error) => {
                 console.log(error);
             });
+
+        removeCookie("token");
+        navigate("/login");
+        
     };
 
     const handleChangePassword = async (event) => {
