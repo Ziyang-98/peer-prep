@@ -20,17 +20,7 @@ export async function userExists(params) {
 }
 
 export async function updatePassword(_id, password) {
-  return UserModel.updateOne({ username: _id }, 
-    { 
-      $set: { password }
-    } 
-  )
-
-  // return UserModel.updateOne({ _id: user_id }, 
-  //   { 
-  //     $set: { password }
-  //   } 
-  // )
+  return UserModel.findByIdAndUpdate(_id , { password });
 }
 
 export async function deleteUser(_id) {

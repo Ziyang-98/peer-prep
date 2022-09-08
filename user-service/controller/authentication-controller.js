@@ -25,7 +25,7 @@ export async function LoginAuth(req, res) {
           // Create token
           console.log("Password and Username are correct and succcessful")
           const token = jwt.sign(
-              { user_id: user._id },
+              { userId: user._id },
               SECRET_TOKEN,
               { expiresIn: "3d" }
           );

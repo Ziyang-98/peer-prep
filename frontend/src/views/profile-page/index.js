@@ -1,44 +1,41 @@
 import React from 'react';
 import Box from "@mui/material/Box";
 import Button from "@mui/lab/LoadingButton";
+import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import { styles } from "./styles";
-// import useChangePassword from "hooks/"
+import useProfile from 'hooks/useProfile';
 
 const ProfilePage = () => {
-//   const { handleChangePassword } = useChangePassword();
+  const { handleDeleteUser, handleChangePassword } = useProfile();
 
   return (
-    <div>this is profile</div>
-    // <Box component="form" onSubmit={handleChangePassword} sx={styles.formContainter}>
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         name="password"
-    //         label="Password"
-    //         type="password"
-    //         id="password"
-    //         autoComplete="current-password"
-    //         disabled={loading}
-    //       />
+    <Container>
+      <Button onClick={handleDeleteUser}>Delete User</Button>
 
-    //       <Box sx={styles.buttons}>
-    //         <Button
-    //           loading={loading}
-    //           loadingPosition="start"
-    //           startIcon={<></>}
-    //           type="submit"
-    //           variant="contained"
-    //           sx={styles.signInButton}
-    //         >
-    //           Sign In
-    //         </Button>
-    //         <Link href="/signup" sx={styles.signUpLink}>
-    //           Create account
-    //         </Link>
-    //       </Box>
-    // </Box>
+      <Box component="form" onSubmit={handleChangePassword} sx={styles.formContainter}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+
+            <Box sx={styles.buttons}>
+              <Button
+                loadingPosition="start"
+                startIcon={<></>}
+                type="submit"
+                variant="contained">
+                Change Password
+              </Button>
+            </Box>
+      </Box>
+    </Container>
   )
 }
 

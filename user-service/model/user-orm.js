@@ -23,7 +23,6 @@ export async function ormUserExists(username) {
 
 export async function ormUpdatePassword(userId, password) {
     try {
-        //TODO: change to userId from jwt token
         const result = await updatePassword(userId, password);
         return result;
     } catch (err) {

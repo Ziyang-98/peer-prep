@@ -8,7 +8,7 @@ const useLogin = () => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
-  const [cookies, setCookie] = useCookies(["userData"]);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
 
@@ -20,8 +20,7 @@ const useLogin = () => {
     console.log("Logged in!");
     console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
-    // TODO: set JWT to cookie
-    setCookie("userData", token, { path: "/", maxAge: 60});
+    setCookie("token", token, { path: "/", maxAge: 300});
     
     navigate("/", { replace: true });
     setLoading(false);
