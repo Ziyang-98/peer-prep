@@ -3,6 +3,7 @@ import MainLayout from "layout/main";
 import SelectionContent from "views/selection-content";
 import SignInPage from "views/sign-in-page";
 import SignUpPage from "views/sign-up-page";
+import ProfilePage from "views/profile-page";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "common/theme.js";
@@ -16,6 +17,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<MainLayout />}>
                 <Route path="/" element={<SelectionContent />} />
+                <Route path="profile" element={<ProfilePage/>} />
               </Route>
 
               <Route path="/login" element={<SignInPage />} />

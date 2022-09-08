@@ -13,7 +13,7 @@ const useNavbarMenu = () => {
     setAnchorElUser(null);
   };
 
-  const handleRedirectToPofile = () => {
+  const handleRedirectToProfile = () => {
     navigate("/profile");
   };
 
@@ -28,7 +28,7 @@ const useNavbarMenu = () => {
       open: Boolean(anchorElUser),
       onClose: handleCloseUserMenu,
     },
-    handleRedirectToPofile,
+    handleRedirectToProfile,
     handleLogout,
   };
 };

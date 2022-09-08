@@ -17,7 +17,7 @@ const MainLayout = () => {
   const {
     handleOpenUserMenu,
     menuProps,
-    handleRedirectToPofile,
+    handleRedirectToProfile,
     handleLogout,
   } = useNavbarMenu();
 
@@ -45,7 +45,7 @@ const MainLayout = () => {
                 horizontal: "right",
               }}
             >
-              <MenuItem onClick={handleRedirectToPofile}>Profile</MenuItem>
+              <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
               <MenuItem onClick={handleLogout}>Log out</MenuItem>
             </Menu>
           </Box>
