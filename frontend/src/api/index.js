@@ -1,15 +1,18 @@
 import axios from "axios";
+import { URL_LOGIN } from "common/configs";
 import { URL_MATCHING_SVC } from "common/configs";
 
 export async function loginUser(username, password) {
   const body = { username, password };
-  const response = await new Promise((resolve) => {
-    console.log(
-      `Creating user with username: ${body.username} and password: ${body.password}`,
-    );
-    setTimeout(() => resolve({ user: username, jwt: "test jwt" }), 3000);
-  });
-  return response;
+  const res = await axios.post(URL_LOGIN, body);
+
+  // const response = await new Promise((resolve) => {
+  //   console.log(
+  //     `Logging in user with username: ${body.username} and password: ${body.password}`,
+  //   );
+  //   setTimeout(() => resolve({ user: username, jwt: "test jwt" }), 3000);
+  // });
+  return res;
 }
 
 export async function matchUser(username, difficulty) {

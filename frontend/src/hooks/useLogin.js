@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
+import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
 
 const useLogin = () => {
   const [user, setUser] = useState("");
@@ -18,7 +19,8 @@ const useLogin = () => {
     console.log(`User: ${user}, JWT: ${jwt}`);
     setUser(user);
     // TODO: set JWT to cookie
-    navigate("#", { replace: true });
+    
+    navigate("/", { replace: true });
     setLoading(false);
   };
 
@@ -28,9 +30,9 @@ const useLogin = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     await loginUser(data.get("username"), data.get("password"))
-      .then((response) => {
-        const { user, jwt } = response;
-        handleLoginSuccess(user, jwt);
+      .then((res) => {
+        const { user, token } = res.data;
+        handleLoginSuccess(user, token);
       })
       .catch((error) => {
         setIsInvalidLogin(true);

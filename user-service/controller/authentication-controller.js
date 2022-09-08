@@ -30,7 +30,7 @@ export async function LoginAuth(req, res) {
           );
     
           // user
-          return res.status(200).json({ token, user });
+          return res.status(200).json({ user, token });
         } else {
             return res.status(400).send({ message: "Invalid credentials." });
         }
