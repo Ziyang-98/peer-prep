@@ -27,7 +27,7 @@ export async function ormUpdatePassword(userId, password) {
         const result = await updatePassword(userId, password);
         return result;
     } catch (err) {
-        console.log('ERROR: Could not check if user exists');
+        console.log('ERROR: Could not update password');
         return { err };
     }
 }

@@ -43,11 +43,23 @@ export async function changePassword(req, res) {
         if (resp.err) {
             return res.status(400).json({message: 'Could not update password!'});
         } else {
-            console.log(`Changed ${username}'s password successfully!`)
+            console.log(`Changed ${username}'s password successfully!`);
             return res.status(201).json({message: 'Password changed successfully!'});
         }
 
     } catch (err) {
         return res.status(500).json({message: 'Server errror, failed to change password!'});
+    }
+}
+
+export async function deleteUser(req, res) {
+    try {
+        const { userId } = req.body;
+        const user = await _deleteUser(userId);
+
+        return res.status(201).json({message: 'User deleted successfully!'});
+
+    } catch (err) {
+        return res.status(500).json({message: 'Database failure when deleting user!'});
     }
 }

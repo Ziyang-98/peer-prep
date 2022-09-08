@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(cors()) // config cors so that front-end can use
 app.options('*', cors())
 
-import { createUser, changePassword } from './controller/user-controller.js';
+import { createUser, changePassword, deleteUser } from './controller/user-controller.js';
 import { LoginAuth } from './controller/authentication-controller.js';
 
 const router = express.Router()
@@ -19,6 +19,7 @@ router.post('/', createUser)
 router.post('/login', LoginAuth)
 
 router.post('/change-password', changePassword)
+router.post('/delete-user', deleteUser)
 
 app.use('/api/user', router).all((_, res) => {
     res.setHeader('content-type', 'application/json')
