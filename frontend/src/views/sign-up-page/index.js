@@ -1,103 +1,79 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useState } from "react";
-import axios from "axios";
-import { URL_USER_SVC } from "common/configs";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
-import { Link } from "react-router-dom";
+import React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/lab/LoadingButton";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
+import { styles } from "./styles";
+import useSignUp from "hooks/useSignUp";
 
-function SignupPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogTitle, setDialogTitle] = useState("");
-  const [dialogMsg, setDialogMsg] = useState("");
-  const [isSignupSuccess, setIsSignupSuccess] = useState(false);
-
-  const handleSignup = async () => {
-    setIsSignupSuccess(false);
-    const res = await axios
-      .post(URL_USER_SVC, { username, password })
-      .catch((err) => {
-        if (err.response.status === STATUS_CODE_CONFLICT) {
-          setErrorDialog("This username already exists");
-        } else {
-          setErrorDialog("Please try again later");
-        }
-      });
-    if (res && res.status === STATUS_CODE_CREATED) {
-      setSuccessDialog("Account successfully created");
-      setIsSignupSuccess(true);
-    }
-  };
-
-  const closeDialog = () => setIsDialogOpen(false);
-
-  const setSuccessDialog = (msg) => {
-    setIsDialogOpen(true);
-    setDialogTitle("Success");
-    setDialogMsg(msg);
-  };
-
-  const setErrorDialog = (msg) => {
-    setIsDialogOpen(true);
-    setDialogTitle("Error");
-    setDialogMsg(msg);
-  };
+const SignUpPage = () => {
+  const { handleSignUp, loading, isSignupFailure } = useSignUp();
 
   return (
-    <Box display={"flex"} flexDirection={"column"} width={"30%"}>
-      <Typography variant={"h3"} marginBottom={"2rem"}>
-        Sign Up
-      </Typography>
-      <TextField
-        label="Username"
-        variant="standard"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        sx={{ marginBottom: "1rem" }}
-        autoFocus
-      />
-      <TextField
-        label="Password"
-        variant="standard"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        sx={{ marginBottom: "2rem" }}
-      />
-      <Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"}>
-        <Button variant={"outlined"} onClick={handleSignup}>
-          Sign up
-        </Button>
-      </Box>
+    <Container component="main" maxWidth="xs" sx={styles.page}>
+      <CssBaseline />
+      <Box sx={styles.mainContainer}>
+        <Avatar sx={styles.icon}>
+          <LockOutlinedIcon />
+        </Avatar>
 
-      <Dialog open={isDialogOpen} onClose={closeDialog}>
-        <DialogTitle>{dialogTitle}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{dialogMsg}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {isSignupSuccess ? (
-            <Button component={Link} to="/login">
-              Log in
+        <Typography component="h1" variant="h4">
+          Create Account
+        </Typography>
+        {isSignupFailure && (
+          <Alert sx={styles.invalidAlert} severity="error">
+            Incorrect username or password
+          </Alert>
+        )}
+        <Box
+          component="form"
+          onSubmit={handleSignUp}
+          sx={styles.formContainter}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+            disabled={loading}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            disabled={loading}
+          />
+
+          <Box sx={styles.buttons}>
+            <Button
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<></>}
+              type="submit"
+              variant="contained"
+              sx={styles.signInButton}
+            >
+              Create Account
             </Button>
-          ) : (
-            <Button onClick={closeDialog}>Done</Button>
-          )}
-        </DialogActions>
-      </Dialog>
-    </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
-}
+};
 
-export default SignupPage;
+export default SignUpPage;

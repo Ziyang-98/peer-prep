@@ -11,7 +11,12 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Box display={"flex"} flexDirection={"column"} sx={{ height: "100vh" }}>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          sx={{ height: "100vh" }}
+          bgcolor="primary.main"
+        >
           <Router>
             <Routes>
               <Route exact path="/" element={<MainLayout />}>
