@@ -12,7 +12,7 @@ import { styles } from "./styles";
 import useSignUp from "hooks/useSignUp";
 
 const SignUpPage = () => {
-  const { handleSignUp, loading, setIsSignupFailure } = useSignUp();
+  const { handleSignUp, loading, isSignupFailure } = useSignUp();
 
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
@@ -25,7 +25,7 @@ const SignUpPage = () => {
         <Typography component="h1" variant="h4">
           Create Account
         </Typography>
-        {setIsSignupFailure && (
+        {isSignupFailure && (
           <Alert sx={styles.invalidAlert} severity="error">
             Incorrect username or password
           </Alert>

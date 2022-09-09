@@ -31,13 +31,6 @@ const useSignUp = () => {
         }
       },
     );
-
-    // await signUpUser(data.get("username"), data.get("password")).catch(
-    //   (error) => {
-    //     setIsSignupSuccess(false);
-    //     console.error(error);
-    //   },
-    // );
   };
 
   return {
