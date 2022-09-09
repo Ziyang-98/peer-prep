@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
 import { useCookies } from 'react-cookie';
 
 const useLogin = () => {
@@ -39,6 +38,7 @@ const useLogin = () => {
       .catch((error) => {
         setIsInvalidLogin(true);
         console.error(error);
+        setLoading(false);
       });
   };
 

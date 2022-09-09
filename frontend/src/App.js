@@ -7,6 +7,7 @@ import ProfilePage from "views/profile-page";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "common/theme.js";
+import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {
   return (
@@ -15,9 +16,11 @@ function App() {
         <Box display={"flex"} flexDirection={"column"} sx={{ height: "100vh" }}>
           <Router>
             <Routes>
-              <Route exact path="/" element={<MainLayout />}>
-                <Route path="/" element={<SelectionContent />} />
-                <Route path="profile" element={<ProfilePage/>} />
+              <Route element={<ProtectedRoute/>}>
+                <Route exact path="/" element={<MainLayout />}>
+                  <Route path="/" element={<SelectionContent />} />
+                  <Route path="profile" element={<ProfilePage/>} />
+                </Route>
               </Route>
 
               <Route path="/login" element={<SignInPage />} />
