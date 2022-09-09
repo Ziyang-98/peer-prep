@@ -5,7 +5,7 @@ import { STATUS_CODE_CREATED } from "common/constants";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
-  const [isSignupSuccess, setIsSignupSuccess] = useState(true);
+  const [isSignupFailure, setIsSignupFailure] = useState(false);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const useSignUp = () => {
         if (response.status === STATUS_CODE_CREATED) {
           handleSignUpSuccess(data.get("username"), data.get("password"));
         } else {
-          setIsSignupSuccess(false);
+          setIsSignupFailure(true);
           navigate("#", { replace: true });
           setLoading(false);
         }
@@ -43,7 +43,7 @@ const useSignUp = () => {
   return {
     handleSignUp,
     loading,
-    isSignupSuccess,
+    isSignupFailure,
   };
 };
 
