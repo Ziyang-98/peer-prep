@@ -39,6 +39,5 @@ export const styles = {
   signUpLink: {
     flexGrow: 1,
     color: "black",
-    textDecoration: "underline",
   },
 };
