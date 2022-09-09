@@ -68,7 +68,7 @@ const SignInPage = () => {
             </Button>
           </Box>
         </Box>
-        <Typography component="subtitle1">
+        <Typography component="Subtitle1">
           Dont have account? Create account{" "}
           <Link href="/signup" sx={styles.signUpLink}>
             here
