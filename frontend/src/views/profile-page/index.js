@@ -15,7 +15,7 @@ const ProfilePage = () => {
       isSuccessPasswordChange } = useProfile();
 
   return (
-    <Container>
+    <Container sx={styles.container}>
       {isInvalidDeleteUser && (
           <Alert sx={styles.invalidAlert} severity="error">
             Failed to delete user
@@ -34,7 +34,14 @@ const ProfilePage = () => {
           </Alert>
       )}
 
-      <Button onClick={handleDeleteUser}>Delete User</Button>
+      <Box sx={styles.buttons}>
+        <Button loadingPosition="start"
+          startIcon={<></>}
+          type="submit"
+          variant="contained"
+          onClick={handleDeleteUser}>Delete User</Button>
+      </Box>
+      
 
       <Box component="form" onSubmit={handleChangePassword} sx={styles.formContainter}>
             <TextField
@@ -57,6 +64,8 @@ const ProfilePage = () => {
                 Change Password
               </Button>
             </Box>
+
+            
       </Box>
 
     </Container>
