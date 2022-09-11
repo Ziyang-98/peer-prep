@@ -19,6 +19,7 @@ const MainLayout = () => {
     menuProps,
     handleRedirectToProfile,
     handleLogout,
+    getUserInitial,
   } = useNavbarMenu();
 
   return (
@@ -30,7 +31,7 @@ const MainLayout = () => {
           </Typography>
           <Box>
             <IconButton onClick={handleOpenUserMenu}>
-              <Avatar sx={styles.avatar}>T</Avatar>
+              <Avatar sx={styles.avatar}>{getUserInitial()}</Avatar>
             </IconButton>
             <Menu
               id="menu-appbar"

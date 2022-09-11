@@ -21,7 +21,7 @@ const useLogin = () => {
     console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
     setCookie("token", token, { path: "/", maxAge: 300 });
-    setCookie("user", user, { path: "/", maxAge: 300 });
+    setCookie("username", user.username, { path: "/", maxAge: 300 });
 
     navigate("/", { replace: true });
     setLoading(false);

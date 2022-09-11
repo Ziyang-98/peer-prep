@@ -26,6 +26,10 @@ const useNavbarMenu = () => {
     navigate("/login");
   };
 
+  const getUserInitial = () => {
+    return cookies.username.charAt(0).toUpperCase();
+  };
+
   return {
     handleOpenUserMenu,
     menuProps: {
@@ -35,6 +39,7 @@ const useNavbarMenu = () => {
     },
     handleRedirectToProfile,
     handleLogout,
+    getUserInitial,
   };
 };
 

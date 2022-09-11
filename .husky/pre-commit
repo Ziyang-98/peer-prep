@@ -3,4 +3,4 @@
 
 printf "Running pre commit hook\n"
 cd frontend && npm run lint --fix && npm run prettier:fix
-printf "\nPlease fix lint warnings/error and check if there is any uncommited files, then commit the changes again\n"
+printf "\nPlease fix lint warnings/error and check if there are any uncommited files, then commit the changes again\n"
