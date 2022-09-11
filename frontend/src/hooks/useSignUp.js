@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "api/index";
 import { STATUS_CODE_CREATED } from "common/constants";
