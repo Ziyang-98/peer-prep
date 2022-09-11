@@ -26,7 +26,7 @@ const DifficultyCard = ({ difficulty }) => {
   );
 
   return (
-    <Card {...cardProps}>
+    <Card {...cardProps} sx={styles.card}>
       <CardActionArea onClick={() => handleCardClick(difficulty.title)}>
         <CardContent>
           <Box sx={styles.cardContent}>

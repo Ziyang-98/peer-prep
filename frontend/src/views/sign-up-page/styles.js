@@ -7,7 +7,7 @@ export const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    bgcolor: "primary.dark",
+    bgcolor: "primary.mainColor",
     boxShadow: 24,
     borderRadius: "10px",
     height: "80%",
@@ -15,7 +15,7 @@ export const styles = {
   },
   icon: {
     m: 1,
-    bgcolor: "primary.main",
+    bgcolor: "secondary.light",
     color: "black",
   },
   invalidAlert: {
@@ -32,12 +32,12 @@ export const styles = {
     alignItems: "flex-end",
     flexWrap: "wrap",
   },
-  signInButton: {
+  signUpButton: {
     flexGrow: 1,
     color: "black",
-  },
-  signUpLink: {
-    flexGrow: 1,
-    color: "black",
+    bgcolor: "primary.light",
+    "&:hover": {
+      bgcolor: "secondary.light",
+    },
   },
 };

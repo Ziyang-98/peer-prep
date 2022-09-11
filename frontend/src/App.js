@@ -17,14 +17,14 @@ function App() {
           display={"flex"}
           flexDirection={"column"}
           sx={{ height: "100vh" }}
-          bgcolor="primary.main"
+          bgcolor="secondary.light"
         >
           <Router>
             <Routes>
-              <Route element={<ProtectedRoute/>}>
+              <Route element={<ProtectedRoute />}>
                 <Route exact path="/" element={<MainLayout />}>
                   <Route path="/" element={<SelectionContent />} />
-                  <Route path="profile" element={<ProfilePage/>} />
+                  <Route path="profile" element={<ProfilePage />} />
                 </Route>
               </Route>
 

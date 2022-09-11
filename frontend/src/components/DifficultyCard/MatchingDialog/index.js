@@ -3,7 +3,10 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import Box from "@mui/material/Box";
+
 import MatchingDialogContent from "../MatchingDialogContent";
+import { styles } from "./styles";
 
 const MatchingDialog = ({
   difficulty,
@@ -18,13 +21,24 @@ const MatchingDialog = ({
 }) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth={"sm"} fullWidth>
-      <DialogTitle>Find a match for Difficulty: {difficulty.title}</DialogTitle>
-      <MatchingDialogContent
-        {...{ timer, success, failure, loading, error, handleMatchButtonClick }}
-      />
-      <DialogActions>
-        <Button onClick={handleClose}>Close</Button>
-      </DialogActions>
+      <Box sx={styles.dialog}>
+        <DialogTitle>
+          Find a match for Difficulty: {difficulty.title}
+        </DialogTitle>
+        <MatchingDialogContent
+          {...{
+            timer,
+            success,
+            failure,
+            loading,
+            error,
+            handleMatchButtonClick,
+          }}
+        />
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Box>
     </Dialog>
   );
 };

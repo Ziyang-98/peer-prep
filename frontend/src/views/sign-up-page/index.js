@@ -65,7 +65,7 @@ const SignUpPage = () => {
               startIcon={<></>}
               type="submit"
               variant="contained"
-              sx={styles.signInButton}
+              sx={styles.signUpButton}
             >
               Create Account
             </Button>

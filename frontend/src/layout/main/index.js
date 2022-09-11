@@ -23,7 +23,7 @@ const MainLayout = () => {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={styles.navBar}>
         <Toolbar>
           <Typography variant="h6" component="a" href="/" sx={styles.appTitle}>
             PeerPrep

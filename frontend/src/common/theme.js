@@ -6,16 +6,18 @@ export const theme = createTheme({
   },
 
   palette: {
-    primary: {
-      main: "#ecf09c",
-      light: "#88f2e3",
-      dark: "#08c9ae",
-      contrastText: "#fff",
-    },
     secondary: {
-      main: "#e1132e",
-      light: "#f7989b",
-      dark: "#c60019",
+      main: "#ecf09c",
+      light: "#fafbe7",
+      dark: "#dde457",
+      contrastText: "#000",
+    },
+    primary: {
+      // Setting primary as black so that components such as textfield remain black
+      main: "#454545",
+      mainColor: "#a09cf0",
+      light: "#e9e7fc",
+      dark: "#6257d3",
       contrastText: "#000",
     },
     warning: {
