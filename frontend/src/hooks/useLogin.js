@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
+import { useCookies } from 'react-cookie';
 
 const useLogin = () => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
 
@@ -13,12 +15,13 @@ const useLogin = () => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const handleLoginSuccess = (user, jwt) => {
+  const handleLoginSuccess = (user, token) => {
     console.log("Logged in!");
-    console.log(`User: ${user}, JWT: ${jwt}`);
+    console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
-    // TODO: set JWT to cookie
-    navigate("#", { replace: true });
+    setCookie("token", token, { path: "/", maxAge: 300});
+    
+    navigate("/", { replace: true });
     setLoading(false);
   };
 
@@ -28,13 +31,14 @@ const useLogin = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     await loginUser(data.get("username"), data.get("password"))
-      .then((response) => {
-        const { user, jwt } = response;
-        handleLoginSuccess(user, jwt);
+      .then((res) => {
+        const { user, token } = res.data;
+        handleLoginSuccess(user, token);
       })
       .catch((error) => {
         setIsInvalidLogin(true);
         console.error(error);
+        setLoading(false);
       });
   };
 

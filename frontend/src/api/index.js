@@ -1,16 +1,25 @@
 import axios from "axios";
-import { URL_USER_SVC } from "common/configs";
+import { URL_LOGIN, URL_MATCHING_SVC, URL_DELETE_USER, URL_CHANGE_PASSWORD, URL_USER_SVC } from "common/configs";
 import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
-import { URL_MATCHING_SVC } from "common/configs";
 
 export async function loginUser(username, password) {
   const body = { username, password };
-  const response = await new Promise((resolve) => {
-    console.log(
-      `Creating user with username: ${body.username} and password: ${body.password}`,
-    );
-    setTimeout(() => resolve({ user: username, jwt: "test jwt" }), 3000);
-  });
+
+  const response = await axios.post(URL_LOGIN, body);
+  return response;
+}
+
+export async function deleteUser() {
+  const body = {};
+
+  const response = await axios.post(URL_DELETE_USER, body, {withCredentials: true});
+  return response;
+}
+
+export async function changePassword(password) {
+  const body = { password };
+
+  const response = await axios.post(URL_CHANGE_PASSWORD, body, {withCredentials: true});
   return response;
 }
 
@@ -39,3 +48,4 @@ export async function deleteMatch(id) {
   const response = await axios.delete(URL_MATCHING_SVC + `/${id}`);
   return response;
 }
+

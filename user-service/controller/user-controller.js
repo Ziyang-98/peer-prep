@@ -1,4 +1,5 @@
-import { ormCreateUser as _createUser, ormUserExists as _userExists } from '../model/user-orm.js'
+import { ormCreateUser as _createUser, ormUserExists as _userExists, ormUpdatePassword as _updatePassword, ormDeleteUser as _deleteUser } from '../model/user-orm.js'
+import { SALT_ROUNDS } from "../common/constants.js";
 import bcrypt from 'bcrypt';
 
 export async function createUser(req, res) {
@@ -8,9 +9,7 @@ export async function createUser(req, res) {
 
         if (username && password && !userExists) {
 
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
-            
+            const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
             const resp = await _createUser(username, hashedPassword);
 
             if (resp.err) {
@@ -31,3 +30,34 @@ export async function createUser(req, res) {
     }
 }
 
+export async function changePassword(req, res) {
+    try {
+        const { password } = req.body;
+        const userId = req.userId;
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+        const resp = await _updatePassword(userId, hashedPassword);
+
+        if (resp.err) {
+            return res.status(400).json({message: 'Could not update password!'});
+        } else {
+            console.log(`Changed ${userId}'s password successfully!`);
+            return res.status(201).json({message: 'Password changed successfully!'});
+        }
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: 'Server errror, failed to change password!'});
+    }
+}
+
+export async function deleteUser(req, res) {
+    try {
+        const userId  = req.userId;
+        const user = await _deleteUser(userId);
+        console.log(`${userId} has been deleted`);
+        return res.status(201).json({message: 'User deleted successfully!'});
+
+    } catch (err) {
+        return res.status(500).json({message: 'Database failure when deleting user!'});
+    }
+}

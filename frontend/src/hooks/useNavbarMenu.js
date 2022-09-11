@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const useNavbarMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -13,11 +15,12 @@ const useNavbarMenu = () => {
     setAnchorElUser(null);
   };
 
-  const handleRedirectToPofile = () => {
+  const handleRedirectToProfile = () => {
     navigate("/profile");
   };
 
   const handleLogout = () => {
+    removeCookie("token");
     navigate("/login");
   };
 
@@ -28,7 +31,7 @@ const useNavbarMenu = () => {
       open: Boolean(anchorElUser),
       onClose: handleCloseUserMenu,
     },
-    handleRedirectToPofile,
+    handleRedirectToProfile,
     handleLogout,
   };
 };

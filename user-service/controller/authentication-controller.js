@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 import { ormGetUser as _getUser } from '../model/user-orm.js'
-const secret_token = '123457';
+import { SECRET_TOKEN } from "../common/constants.js";
+
 export async function LoginAuth(req, res) {
     try {
         // Get user input
@@ -24,13 +25,13 @@ export async function LoginAuth(req, res) {
           // Create token
           console.log("Password and Username are correct and succcessful")
           const token = jwt.sign(
-              { user_id: user._id },
-              secret_token,
+              { userId: user._id },
+              SECRET_TOKEN,
               { expiresIn: "3d" }
           );
     
           // user
-          return res.status(200).json({ token, user });
+          return res.status(200).json({ user, token });
         } else {
             return res.status(400).send({ message: "Invalid credentials." });
         }

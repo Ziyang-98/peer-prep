@@ -19,6 +19,14 @@ export async function userExists(params) {
   return UserModel.exists(params)
 }
 
+export async function updatePassword(_id, password) {
+  return UserModel.findByIdAndUpdate(_id , { password });
+}
+
+export async function deleteUser(_id) {
+  return UserModel.findByIdAndDelete(_id)
+}
+ 
 export async function getUser(params) {
   return UserModel.findOne(params)
 }
