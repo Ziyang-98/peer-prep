@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 import { ormGetUser as _getUser } from '../model/user-orm.js'
-import { SECRET_TOKEN } from "../common/constants.js";
-import {STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST, STATUS_CODE_SERVER_ERROR} from "../../frontend/src/common/constants.js";
+import { SECRET_TOKEN ,STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST, STATUS_CODE_SERVER_ERROR} from "../common/constants.js";
 
 export async function LoginAuth(req, res) {
     try {

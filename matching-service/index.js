@@ -1,4 +1,4 @@
-import {STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST} from "../frontend/src/common/constants.js";
+import {STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST} from "../frontend/src/common/constants";
 
 const {
   createMatch,

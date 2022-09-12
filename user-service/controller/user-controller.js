@@ -1,7 +1,6 @@
 import { ormCreateUser as _createUser, ormUserExists as _userExists, ormUpdatePassword as _updatePassword, ormDeleteUser as _deleteUser } from '../model/user-orm.js'
-import { SALT_ROUNDS } from "../common/constants.js";
+import { SALT_ROUNDS, STATUS_CODE_CREATED, STATUS_CODE_BAD_REQUEST, STATUS_CODE_SERVER_ERROR } from "../common/constants.js";
 import bcrypt from 'bcrypt';
-import {STATUS_CODE_CREATED, STATUS_CODE_BAD_REQUEST,STATUS_CODE_SERVER_ERROR} from "../../frontend/src/common/constants.js";
 export async function createUser(req, res) {
     try {
         const { username, password } = req.body;
