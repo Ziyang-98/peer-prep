@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 const useLogin = () => {
   const [user, setUser] = useState("");
@@ -19,8 +19,8 @@ const useLogin = () => {
     console.log("Logged in!");
     console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
-    setCookie("token", token, { path: "/", maxAge: 300});
-    
+    setCookie("token", token, { path: "/", maxAge: 300 });
+
     navigate("/", { replace: true });
     setLoading(false);
   };

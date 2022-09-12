@@ -21,10 +21,10 @@ function App() {
         >
           <Router>
             <Routes>
-              <Route element={<ProtectedRoute/>}>
+              <Route element={<ProtectedRoute />}>
                 <Route exact path="/" element={<MainLayout />}>
                   <Route path="/" element={<SelectionContent />} />
-                  <Route path="profile" element={<ProfilePage/>} />
+                  <Route path="profile" element={<ProfilePage />} />
                 </Route>
               </Route>
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 const useNavbarMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
