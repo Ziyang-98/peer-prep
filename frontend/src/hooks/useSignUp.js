@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "api/index";
-import { STATUS_CODE_CREATED } from "common/constants";
+import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [isSignupFailure, setIsSignupFailure] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -18,25 +19,36 @@ const useSignUp = () => {
 
   const handleSignUp = async (event) => {
     setLoading(true);
+    setIsSignupFailure(false);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await signUpUser(data.get("username"), data.get("password")).then(
-      (response) => {
+    await signUpUser(data.get("username"), data.get("password"))
+      .then((response) => {
         if (response.status === STATUS_CODE_CREATED) {
           handleSignUpSuccess(data.get("username"), data.get("password"));
-        } else {
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === STATUS_CODE_CONFLICT) {
+          console.error(error);
           setIsSignupFailure(true);
-          navigate("#", { replace: true });
+          setErrorMessage(error.response.data.message);
+          setLoading(false);
+        } else {
+          console.error(error);
+          console.log("database failure");
+          setIsSignupFailure(true);
+          setErrorMessage(error.response.data.message);
           setLoading(false);
         }
-      },
-    );
+      });
   };
 
   return {
     handleSignUp,
     loading,
     isSignupFailure,
+    errorMessage,
   };
 };
 
