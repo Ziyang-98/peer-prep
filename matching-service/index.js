@@ -1,3 +1,5 @@
+import {STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST} from "../frontend/src/common/constants.js";
+
 const {
   createMatch,
   findMatchWith,
@@ -34,7 +36,7 @@ app.delete("/match/:id", async (req, res) => {
     res.json({ msg: "No match is deleted" });
   } else {
     res
-      .status(200)
+      .status(STATUS_CODE_SUCCESS)
       .json({ msg: `Match ${req.params.id} deleted successfully!` });
   }
 });
@@ -46,7 +48,7 @@ app.post("/match", async (req, res) => {
 
   if (matchWhereUsername) {
     return res
-      .status(400)
+      .status(STATUS_CODE_BAD_REQUEST)
       .json({ msg: "Cannot have multiple matches at the same time!" });
   }
 
@@ -55,11 +57,11 @@ app.post("/match", async (req, res) => {
   if (match) {
     const room = match.room;
     await match.destroy();
-    res.status(200).json({ msg: "Match found!", room, isMatch: true });
+    res.status(STATUS_CODE_SUCCESS).json({ msg: "Match found!", room, isMatch: true });
   } else {
     const { id, room } = await createMatch(difficulty, username);
     res
-      .status(200)
+      .status(STATUS_CODE_SUCCESS)
       .json({ msg: "Finding a match for you!", id, room, isMatch: false });
   }
 });
