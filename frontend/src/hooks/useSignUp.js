@@ -29,7 +29,7 @@ const useSignUp = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status == STATUS_CODE_CONFLICT) {
+        if (error.response.status === STATUS_CODE_CONFLICT) {
           console.error(error);
           setIsSignupFailure(true);
           setErrorMessage(error.response.data.message);
