@@ -6,7 +6,6 @@ export async function createUser(req, res) {
     try {
         const { username, password } = req.body;
         const userExists = await _userExists(username);
-
         if (username && password && !userExists) {
 
             const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -21,6 +20,7 @@ export async function createUser(req, res) {
         } else if (!username || !password) {
             return res.status(400).json({message: 'Username and/or Password are missing!'});
         } else if (userExists) {
+            console.log("Usernmae exists. Cannot create account")
             return res.status(400).json({message: 'Username is already used!'})
         } else {
             return res.status(400).json({message: 'System failed to create new user!'})
