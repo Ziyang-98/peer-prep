@@ -12,7 +12,13 @@ import { styles } from "./styles";
 import useSignUp from "hooks/useSignUp";
 
 const SignUpPage = () => {
-  const { handleSignUp, loading, isSignupFailure, errorMessage } = useSignUp();
+  const {
+    handleSignUp,
+    loading,
+    isSignupFailure,
+    errorMessage,
+    isSignupSuccess,
+  } = useSignUp();
 
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
