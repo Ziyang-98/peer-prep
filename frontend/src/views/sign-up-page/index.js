@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import { styles } from "./styles";
 import useSignUp from "hooks/useSignUp";
+import SuccessSignInDialog from "components/SignUpSuccessDialog";
 
 const SignUpPage = () => {
   const {
@@ -36,6 +37,7 @@ const SignUpPage = () => {
             {errorMessage}
           </Alert>
         )}
+        {SuccessSignInDialog(isSignupSuccess)}
         <Box
           component="form"
           onSubmit={handleSignUp}
@@ -63,7 +65,6 @@ const SignUpPage = () => {
             autoComplete="current-password"
             disabled={loading}
           />
-
           <Box sx={styles.buttons}>
             <Button
               loading={loading}
