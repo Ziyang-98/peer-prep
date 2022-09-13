@@ -1,16 +1,19 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/lab/LoadingButton";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
-import { styles } from "./styles";
 import useSignUp from "hooks/useSignUp";
 import SuccessSignInDialog from "components/SignUpSuccessDialog";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+
+import { styles } from "./styles";
 
 const SignUpPage = () => {
   const {
@@ -21,10 +24,23 @@ const SignUpPage = () => {
     isSignupSuccess,
   } = useSignUp();
 
+  const navigate = useNavigate();
+
+  const onBackButtonClick = () => {
+    navigate("/login");
+  };
+
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
-      <CssBaseline />
       <Box sx={styles.mainContainer}>
+        <IconButton
+          sx={styles.backButton}
+          size="large"
+          variant="outlined"
+          onClick={onBackButtonClick}
+        >
+          <ArrowBackIcon />
+        </IconButton>
         <Avatar sx={styles.icon}>
           <LockOutlinedIcon />
         </Avatar>

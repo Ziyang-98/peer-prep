@@ -3,6 +3,7 @@ export const styles = {
     height: "100%",
   },
   mainContainer: {
+    position: "relative",
     mt: "20%",
     display: "flex",
     flexDirection: "column",
@@ -12,6 +13,11 @@ export const styles = {
     borderRadius: "10px",
     height: "80%",
     justifyContent: "space-evenly",
+  },
+  backButton: {
+    position: "absolute",
+    left: 5,
+    top: 5,
   },
   icon: {
     m: 1,

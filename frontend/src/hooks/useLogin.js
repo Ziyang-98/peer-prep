@@ -17,8 +17,6 @@ const useLogin = () => {
   }, [user]);
 
   const handleLoginSuccess = (user, token) => {
-    console.log("Logged in!");
-    console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
     setCookie("token", token, { path: "/", maxAge: 300 });
     setCookie("username", user.username, { path: "/", maxAge: 300 });
