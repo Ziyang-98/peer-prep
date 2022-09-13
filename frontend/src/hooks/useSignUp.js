@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "api/index";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
+import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED, STATUS_CODE_BAD_REQUEST } from "common/constants";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const useSignUp = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status === STATUS_CODE_CONFLICT) {
+        if (error.response.status === STATUS_CODE_BAD_REQUEST) {
           console.error(error);
           setIsSignupFailure(true);
           setErrorMessage(error.response.data.message);
