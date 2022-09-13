@@ -23,7 +23,7 @@ export async function LoginAuth(req, res) {
         // Authorisation success
         if (user && (await bcrypt.compare(password, user.password))) {
           // Create token
-          console.log("Password and Username are correct and succcessful")
+          console.log("Password and Username are correct and succcessful");
           const token = jwt.sign(
               { userId: user._id },
               SECRET_TOKEN,
@@ -31,7 +31,7 @@ export async function LoginAuth(req, res) {
           );
     
           // user
-          return res.status(200).json({ user, token });
+          return res.status(200).json({ username, token });
         } else {
             return res.status(400).send({ message: "Invalid credentials." });
         }
