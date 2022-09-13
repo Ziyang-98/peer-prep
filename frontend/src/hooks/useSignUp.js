@@ -15,7 +15,6 @@ const useSignUp = () => {
     console.log("Signed Up!");
     console.log(`User: ${user}, Password: ${password}`);
     setIsSignupSuccess(true);
-    navigate("#", { replace: true });
     setLoading(false);
   };
 
@@ -40,7 +39,7 @@ const useSignUp = () => {
           console.error(error);
           console.log("Check whether user service is running");
           setIsSignupFailure(true);
-          setErrorMessage("Backend is not running!");
+          setErrorMessage("Encountered issues connecting to the server");
           setLoading(false);
         }
       });
