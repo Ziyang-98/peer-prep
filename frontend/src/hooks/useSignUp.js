@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "api/index";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
+import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED, STATUS_CODE_BAD_REQUEST } from "common/constants";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [isSignupFailure, setIsSignupFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSignupSuccess, setIsSignupSuccess] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignUpSuccess = (user, password) => {
     console.log("Signed Up!");
     console.log(`User: ${user}, Password: ${password}`);
-    navigate("#", { replace: true });
+    setIsSignupSuccess(true);
     setLoading(false);
   };
 
@@ -29,16 +30,16 @@ const useSignUp = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status === STATUS_CODE_CONFLICT) {
+        if (error.response.status === STATUS_CODE_BAD_REQUEST) {
           console.error(error);
           setIsSignupFailure(true);
           setErrorMessage(error.response.data.message);
           setLoading(false);
         } else {
           console.error(error);
-          console.log("database failure");
+          console.log("Check whether user service is running");
           setIsSignupFailure(true);
-          setErrorMessage(error.response.data.message);
+          setErrorMessage("Encountered issues connecting to the server");
           setLoading(false);
         }
       });
@@ -49,6 +50,7 @@ const useSignUp = () => {
     loading,
     isSignupFailure,
     errorMessage,
+    isSignupSuccess,
   };
 };
 
