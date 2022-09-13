@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 const useNavbarMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const handleOpenUserMenu = (event) => {
@@ -21,7 +22,12 @@ const useNavbarMenu = () => {
 
   const handleLogout = () => {
     removeCookie("token");
+    removeCookie("user");
     navigate("/login");
+  };
+
+  const getUserInitial = () => {
+    return cookies.username.charAt(0).toUpperCase();
   };
 
   return {
@@ -33,6 +39,7 @@ const useNavbarMenu = () => {
     },
     handleRedirectToProfile,
     handleLogout,
+    getUserInitial,
   };
 };
 

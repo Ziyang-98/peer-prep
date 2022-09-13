@@ -43,6 +43,7 @@ const ProfilePage = () => {
           type="submit"
           variant="contained"
           onClick={handleDeleteUser}
+          sx={styles.button}
         >
           Delete User
         </Button>
@@ -70,6 +71,7 @@ const ProfilePage = () => {
             startIcon={<></>}
             type="submit"
             variant="contained"
+            sx={styles.button}
           >
             Change Password
           </Button>

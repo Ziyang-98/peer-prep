@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -9,7 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { styles } from "./styles";
 
 export default function SuccessSignInDialog(isSignupSuccess) {
-  const [open, setOpen] = useState(true);
   const navigate = useNavigate();
 
   const handleCloseDialog = () => {

@@ -19,18 +19,19 @@ const MainLayout = () => {
     menuProps,
     handleRedirectToProfile,
     handleLogout,
+    getUserInitial,
   } = useNavbarMenu();
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={styles.navBar}>
         <Toolbar>
           <Typography variant="h6" component="a" href="/" sx={styles.appTitle}>
             PeerPrep
           </Typography>
           <Box>
             <IconButton onClick={handleOpenUserMenu}>
-              <Avatar sx={styles.avatar}>T</Avatar>
+              <Avatar sx={styles.avatar}>{getUserInitial()}</Avatar>
             </IconButton>
             <Menu
               id="menu-appbar"

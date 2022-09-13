@@ -10,4 +10,7 @@ export const styles = {
     alignItems: "flex-end",
     flexWrap: "wrap",
   },
+  button: {
+    bgcolor: "primary.mainColor",
+  },
 };

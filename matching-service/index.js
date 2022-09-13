@@ -1,10 +1,11 @@
-import {STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST} from "../frontend/src/common/constants";
-
 const {
   createMatch,
   findMatchWith,
   deleteMatchWithId,
 } = require("./utils/orm");
+
+const STATUS_CODE_SUCCESS = 200;
+const STATUS_CODE_BAD_REQUEST = 400;
 
 // Express
 const express = require("express");
@@ -57,7 +58,9 @@ app.post("/match", async (req, res) => {
   if (match) {
     const room = match.room;
     await match.destroy();
-    res.status(STATUS_CODE_SUCCESS).json({ msg: "Match found!", room, isMatch: true });
+    res
+      .status(STATUS_CODE_SUCCESS)
+      .json({ msg: "Match found!", room, isMatch: true });
   } else {
     const { id, room } = await createMatch(difficulty, username);
     res

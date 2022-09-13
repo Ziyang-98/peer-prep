@@ -7,6 +7,7 @@ const useLogin = () => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
@@ -16,10 +17,9 @@ const useLogin = () => {
   }, [user]);
 
   const handleLoginSuccess = (user, token) => {
-    console.log("Logged in!");
-    console.log(`User: ${user}, JWT: ${token}`);
     setUser(user);
     setCookie("token", token, { path: "/", maxAge: 300 });
+    setCookie("username", user.username, { path: "/", maxAge: 300 });
 
     navigate("/", { replace: true });
     setLoading(false);
