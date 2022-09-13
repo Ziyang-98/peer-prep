@@ -17,7 +17,8 @@ const matchSchema = mongoose.Schema({
   },
   room: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   }
 }, {
   timestamps: true
