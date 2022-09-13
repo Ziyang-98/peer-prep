@@ -7,13 +7,14 @@ const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [isSignupFailure, setIsSignupFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSignupSuccess, setIsSignupSuccess] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignUpSuccess = (user, password) => {
     console.log("Signed Up!");
     console.log(`User: ${user}, Password: ${password}`);
-    navigate("#", { replace: true });
+    setIsSignupSuccess(true);
     setLoading(false);
   };
 
@@ -36,9 +37,9 @@ const useSignUp = () => {
           setLoading(false);
         } else {
           console.error(error);
-          console.log("database failure");
+          console.log("Check whether user service is running");
           setIsSignupFailure(true);
-          setErrorMessage(error.response.data.message);
+          setErrorMessage("Encountered issues connecting to the server");
           setLoading(false);
         }
       });
@@ -49,6 +50,7 @@ const useSignUp = () => {
     loading,
     isSignupFailure,
     errorMessage,
+    isSignupSuccess,
   };
 };
 
