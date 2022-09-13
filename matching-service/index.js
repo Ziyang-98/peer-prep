@@ -4,6 +4,9 @@ const {
   deleteMatchWithId,
 } = require("./utils/orm");
 
+const STATUS_CODE_SUCCESS = 200;
+const STATUS_CODE_BAD_REQUEST = 400;
+
 // Express
 const express = require("express");
 const cors = require("cors");
@@ -34,7 +37,7 @@ app.delete("/match/:id", async (req, res) => {
     res.json({ msg: "No match is deleted" });
   } else {
     res
-      .status(200)
+      .status(STATUS_CODE_SUCCESS)
       .json({ msg: `Match ${req.params.id} deleted successfully!` });
   }
 });
@@ -46,7 +49,7 @@ app.post("/match", async (req, res) => {
 
   if (matchWhereUsername) {
     return res
-      .status(400)
+      .status(STATUS_CODE_BAD_REQUEST)
       .json({ msg: "Cannot have multiple matches at the same time!" });
   }
 
@@ -55,11 +58,13 @@ app.post("/match", async (req, res) => {
   if (match) {
     const room = match.room;
     await match.destroy();
-    res.status(200).json({ msg: "Match found!", room, isMatch: true });
+    res
+      .status(STATUS_CODE_SUCCESS)
+      .json({ msg: "Match found!", room, isMatch: true });
   } else {
     const { id, room } = await createMatch(difficulty, username);
     res
-      .status(200)
+      .status(STATUS_CODE_SUCCESS)
       .json({ msg: "Finding a match for you!", id, room, isMatch: false });
   }
 });

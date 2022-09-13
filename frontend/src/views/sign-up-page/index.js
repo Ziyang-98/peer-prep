@@ -10,9 +10,16 @@ import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import { styles } from "./styles";
 import useSignUp from "hooks/useSignUp";
+import SuccessSignInDialog from "components/SignUpSuccessDialog";
 
 const SignUpPage = () => {
-  const { handleSignUp, loading, isSignupFailure } = useSignUp();
+  const {
+    handleSignUp,
+    loading,
+    isSignupFailure,
+    errorMessage,
+    isSignupSuccess,
+  } = useSignUp();
 
   return (
     <Container component="main" maxWidth="xs" sx={styles.page}>
@@ -27,9 +34,10 @@ const SignUpPage = () => {
         </Typography>
         {isSignupFailure && (
           <Alert sx={styles.invalidAlert} severity="error">
-            Incorrect username or password
+            {errorMessage}
           </Alert>
         )}
+        {SuccessSignInDialog(isSignupSuccess)}
         <Box
           component="form"
           onSubmit={handleSignUp}
@@ -57,7 +65,6 @@ const SignUpPage = () => {
             autoComplete="current-password"
             disabled={loading}
           />
-
           <Box sx={styles.buttons}>
             <Button
               loading={loading}

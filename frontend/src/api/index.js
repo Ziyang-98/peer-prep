@@ -6,7 +6,6 @@ import {
   URL_CHANGE_PASSWORD,
   URL_USER_SVC,
 } from "common/configs";
-import { STATUS_CODE_CONFLICT } from "common/constants";
 
 export async function loginUser(username, password) {
   const body = { username, password };
@@ -36,13 +35,7 @@ export async function changePassword(password) {
 export async function signUpUser(username, password) {
   const body = { username, password };
 
-  const response = await axios.post(URL_USER_SVC, body).catch((err) => {
-    if (err.response.status === STATUS_CODE_CONFLICT) {
-      console.log("This username already exists");
-    } else {
-      console.log("Please try again later");
-    }
-  });
+  const response = await axios.post(URL_USER_SVC, body);
 
   return response;
 }
