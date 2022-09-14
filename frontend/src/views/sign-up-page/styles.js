@@ -3,19 +3,25 @@ export const styles = {
     height: "100%",
   },
   mainContainer: {
+    position: "relative",
     mt: "20%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    bgcolor: "primary.dark",
+    bgcolor: "primary.mainColor",
     boxShadow: 24,
     borderRadius: "10px",
     height: "80%",
     justifyContent: "space-evenly",
   },
+  backButton: {
+    position: "absolute",
+    left: 5,
+    top: 5,
+  },
   icon: {
     m: 1,
-    bgcolor: "primary.main",
+    bgcolor: "secondary.light",
     color: "black",
   },
   invalidAlert: {
@@ -32,12 +38,12 @@ export const styles = {
     alignItems: "flex-end",
     flexWrap: "wrap",
   },
-  signInButton: {
+  signUpButton: {
     flexGrow: 1,
     color: "black",
-  },
-  signUpLink: {
-    flexGrow: 1,
-    color: "black",
+    bgcolor: "primary.light",
+    "&:hover": {
+      bgcolor: "secondary.light",
+    },
   },
 };

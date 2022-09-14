@@ -1,4 +1,7 @@
 export const styles = {
+  navBar: {
+    bgcolor: "primary.mainColor",
+  },
   appTitle: {
     ml: "2%",
     flexGrow: 1,
@@ -10,6 +13,6 @@ export const styles = {
     textDecoration: "none",
   },
   avatar: {
-    bgcolor: "#8169BB",
+    bgcolor: "primary.dark",
   },
 };

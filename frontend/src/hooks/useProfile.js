@@ -2,9 +2,9 @@ import { useState } from "react";
 import { deleteUser, changePassword } from "api/index";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import SelectInput from "@mui/material/Select/SelectInput";
 
 const useProfile = () => {
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [isInvalidPasswordChange, setIsInvalidPasswordChange] = useState(false);
   const [isInvalidDeleteUser, setIsInvalidDeleteUser] = useState(false);

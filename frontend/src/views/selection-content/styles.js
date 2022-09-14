@@ -9,9 +9,4 @@ export const styles = {
   title: {
     mb: 10,
   },
-  cardContent: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-  },
 };

@@ -53,6 +53,7 @@ const SignInPage = () => {
             id="password"
             autoComplete="current-password"
             disabled={loading}
+            sx={styles.textField}
           />
 
           <Box sx={styles.buttons}>
@@ -68,7 +69,7 @@ const SignInPage = () => {
             </Button>
           </Box>
         </Box>
-        <Typography component="Subtitle1">
+        <Typography variant="subtitle1">
           Dont have account? Create account{" "}
           <Link href="/signup" sx={styles.signUpLink}>
             here

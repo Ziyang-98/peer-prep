@@ -15,14 +15,14 @@ export const useStyles = (success, failure, error) => ({
 
     ...(!success &&
       !failure && {
-        bgcolor: blue[500],
+        bgcolor: "primary.dark",
         "&:hover": {
-          bgcolor: blue[300],
+          bgcolor: "primary.mainColor",
         },
       }),
 
     ...((failure || error) && {
-      bgcolor: red[500],
+      bgcolor: red[400],
       "&:hover": {
         bgcolor: red[200],
       },
@@ -34,7 +34,7 @@ export const useStyles = (success, failure, error) => ({
   },
   buttonHolder: { m: 1, position: "relative" },
   circularProgress: {
-    color: blue[200],
+    color: blue[300],
     position: "absolute",
     zIndex: 1,
     top: -6,

@@ -6,7 +6,6 @@ import {
   URL_CHANGE_PASSWORD,
   URL_USER_SVC,
 } from "common/configs";
-import { STATUS_CODE_CONFLICT, STATUS_CODE_CREATED } from "common/constants";
 
 export async function loginUser(username, password) {
   const body = { username, password };

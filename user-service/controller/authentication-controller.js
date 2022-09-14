@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 import { ormGetUser as _getUser } from '../model/user-orm.js'
-import { SECRET_TOKEN } from "../common/constants.js";
+import { SECRET_TOKEN ,STATUS_CODE_SUCCESS, STATUS_CODE_BAD_REQUEST, STATUS_CODE_SERVER_ERROR} from "../common/constants.js";
 
 export async function LoginAuth(req, res) {
     try {
@@ -10,7 +10,7 @@ export async function LoginAuth(req, res) {
     
         // Validate user input
         if (!(username && password)) {
-          return res.status(400).send({ 
+          return res.status(STATUS_CODE_BAD_REQUEST).send({ 
             message: "Missing Fields" 
           });
         }
@@ -18,12 +18,12 @@ export async function LoginAuth(req, res) {
         const user = await _getUser(username);
         
         if (!user) {
-            return res.status(400).json({ message: "User does not exist in database." });
+            return res.status(STATUS_CODE_BAD_REQUEST).json({ message: "User does not exist in database." });
         }
         // Authorisation success
         if (user && (await bcrypt.compare(password, user.password))) {
           // Create token
-          console.log("Password and Username are correct and succcessful")
+          console.log("Password and Username are correct and succcessful");
           const token = jwt.sign(
               { userId: user._id },
               SECRET_TOKEN,
@@ -31,13 +31,13 @@ export async function LoginAuth(req, res) {
           );
     
           // user
-          return res.status(200).json({ user, token });
+          return res.status(STATUS_CODE_SUCCESS).json({ username, token });
         } else {
-            return res.status(400).send({ message: "Invalid credentials." });
+            return res.status(STATUS_CODE_BAD_REQUEST).send({ message: "Invalid credentials." });
         }
     } catch (err) {
         console.log(err);
-        return res.status(500)
+        return res.status(STATUS_CODE_SERVER_ERROR)
     }
 }
 

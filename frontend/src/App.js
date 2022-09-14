@@ -17,7 +17,7 @@ function App() {
           display={"flex"}
           flexDirection={"column"}
           sx={{ height: "100vh" }}
-          bgcolor="primary.main"
+          bgcolor="secondary.light"
         >
           <Router>
             <Routes>
