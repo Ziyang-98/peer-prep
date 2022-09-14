@@ -40,8 +40,8 @@ export async function signUpUser(username, password) {
   return response;
 }
 
-export async function matchUser(username, difficulty) {
-  const body = { username, difficulty };
+export async function matchUser(user, difficulty) {
+  const body = { user, difficulty };
 
   const response = await axios.post(URL_MATCHING_SVC, body);
   return response;
