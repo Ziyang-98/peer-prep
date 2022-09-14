@@ -2,6 +2,9 @@ const Match = require('../model/matchModel')
 const asyncHandler = require('express-async-handler')
 const { v4 } = require('uuid')
 
+const STATUS_CODE_SUCCESS = 200
+const STATUS_CODE_BAD_REQUEST = 400
+
 // Description: Create a match
 // Route: POST /api/matchService/match
 // Access: Private
@@ -10,7 +13,7 @@ const createMatch = asyncHandler(async (req, res) => {
 
   // Check input
   if (!difficulty || !user) {
-    res.status(400)
+    res.status(STATUS_CODE_BAD_REQUEST)
     throw new Error('Please add all fields!')
   }
 
@@ -18,7 +21,7 @@ const createMatch = asyncHandler(async (req, res) => {
   const matchWithSameUserExists = await Match.findOne({ user })
 
   if (matchWithSameUserExists) {
-    res.status(400)
+    res.status(STATUS_CODE_BAD_REQUEST)
     throw new Error('Cannot have multiple waiting matches at the same time!')
   }
 
@@ -29,15 +32,15 @@ const createMatch = asyncHandler(async (req, res) => {
     const { room } = match
 
     await match.remove()
-    res.status(200).json({ room, isMatch: true })
+    res.status(STATUS_CODE_SUCCESS).json({ room, isMatch: true })
   } else {
     const { id, room } = await Match.create({
       user,
       difficulty,
-      room: generateRoom(difficulty)
+      room: generateRoom(difficulty),
     })
 
-    res.status(200).json({ id, room, isMatch: false })
+    res.status(STATUS_CODE_SUCCESS).json({ id, room, isMatch: false })
   }
 })
 
@@ -49,18 +52,18 @@ const deleteMatch = async (req, res) => {
   const match = await Match.findById(id)
 
   if (!match) {
-    res.status(400)
+    res.status(STATUS_CODE_BAD_REQUEST)
     throw new Error('Match not found!')
   }
 
   await match.remove()
 
-  res.status(200).json({ id })
+  res.status(STATUS_CODE_SUCCESS).json({ id })
 }
 
 const generateRoom = (difficulty) => `match-${difficulty}-${v4()}`
 
 module.exports = {
   createMatch,
-  deleteMatch
+  deleteMatch,
 }
