@@ -33,7 +33,7 @@ const MatchingDialogContent = ({
   return (
     <DialogContent>
       <DialogContentText sx={styles.contentText}>
-        Note that you can only be matching once per difficulty!
+        Note that you can only be matching in one difficulty at any time!
       </DialogContentText>
       <Box sx={styles.dialogContent}>
         <Box sx={styles.buttonHolder}>
