@@ -1,10 +1,14 @@
+const { deleteMatchForSocket } = require('../controller/matchController')
+
 const timeoutTable = new Map()
 
 const setRoomTimeout = (room, socket) => {
   const timeoutId = setTimeout(() => {
-    this.deleteMatch(socket)
+    deleteMatchForSocket(socket)
     socket.leave(room)
-    socket.emit('failToMatch', { msg: "Sorry! We can't find a match at this time." })
+    socket.emit('failToMatch', {
+      msg: "Sorry! We can't find a match at this time.",
+    })
   }, 30000)
   timeoutTable.set(room, timeoutId)
 }
@@ -16,5 +20,5 @@ const clearRoomTimeout = (room) => {
 
 module.exports = {
   setRoomTimeout,
-  clearRoomTimeout
+  clearRoomTimeout,
 }

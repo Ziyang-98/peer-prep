@@ -62,9 +62,25 @@ const deleteMatch = async (req, res) => {
   res.status(STATUS_CODE_SUCCESS).json({ id })
 }
 
+const deleteMatchForSocket = async (socket) => {
+  for (const room of socket.rooms.values()) {
+    const roomSplit = room.split('-')
+
+    if (roomSplit[0] === 'match') {
+      const match = await Match.findOne({ room })
+
+      if (match) {
+        await match.remove()
+        return
+      }
+    }
+  }
+}
+
 const generateRoom = (difficulty) => `match-${difficulty}-${v4()}`
 
 module.exports = {
   createMatch,
   deleteMatch,
+  deleteMatchForSocket,
 }
