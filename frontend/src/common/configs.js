@@ -13,6 +13,6 @@ export const URL_CHANGE_PASSWORD = URL_USER_SVC + PREFIX_CHANGE_PASSWORD;
 export const URI_MATCHING_SVC =
   process.env.URI_MATCHING_SVC || "http://localhost:8001";
 
-const PREFIX_MATCH_SVC = "/match";
+const PREFIX_MATCH_SVC = "/api/matchService/match";
 
 export const URL_MATCHING_SVC = URI_MATCHING_SVC + PREFIX_MATCH_SVC;
