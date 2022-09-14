@@ -2,7 +2,7 @@
 
 - NODE_ENV=development
 - PORT=8001
-- MONGO_URI=mongodb+srv://user3219:user3219@cluster0.fesq8vy.mongodb.net/MatchingService?retryWrites=true&w=majority
+- MONGO_URI=mongo uri connecting to MatchingService database
 
 # To start development server
 
