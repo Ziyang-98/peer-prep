@@ -1,6 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,9 +10,9 @@ import CheckIcon from "@mui/icons-material/Check";
 import Grow from "@mui/material/Grow";
 import { useStyles } from "./useStyles";
 
-const DialogContentText = ({ text, state, styles }) => (
+const DialogContentGrowText = ({ text, state, styles }) => (
   <Grow in={state} {...(state ? { timeout: 2000 } : {})}>
-    <Typography variant="subtitle1" sx={styles.failureText}>
+    <Typography variant="subtitle1" sx={styles.growText}>
       {text}
     </Typography>
   </Grow>
@@ -30,6 +32,9 @@ const MatchingDialogContent = ({
 
   return (
     <DialogContent>
+      <DialogContentText sx={styles.contentText}>
+        Note that you can only be matching once per difficulty!
+      </DialogContentText>
       <Box sx={styles.dialogContent}>
         <Box sx={styles.buttonHolder}>
           <IconButton
@@ -66,28 +71,28 @@ const MatchingDialogContent = ({
         </Box>
 
         {initState && (
-          <DialogContentText
+          <DialogContentGrowText
             text={"Click to start finding a match!"}
             state={initState}
             styles={styles}
           />
         )}
         {loading && (
-          <DialogContentText
+          <DialogContentGrowText
             text={"Once matched, you will be redirected to a room."}
             state={loading}
             styles={styles}
           />
         )}
         {success && (
-          <DialogContentText
+          <DialogContentGrowText
             text={"Matched found! Redirecting to room..."}
             state={success}
             styles={styles}
           />
         )}
         {failure && (
-          <DialogContentText
+          <DialogContentGrowText
             text={
               "Click to search for match again, or try selecting another difficulty?"
             }
@@ -96,7 +101,7 @@ const MatchingDialogContent = ({
           />
         )}
         {error && (
-          <DialogContentText
+          <DialogContentGrowText
             text={"Encountered issues when matching, please try again later!"}
             state={error}
             styles={styles}

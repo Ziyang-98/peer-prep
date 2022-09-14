@@ -32,7 +32,7 @@ export const useStyles = (success, failure, error) => ({
       bgcolor: green[500],
     },
   },
-  buttonHolder: { m: 1, position: "relative" },
+  buttonHolder: { m: 0, position: "relative" },
   circularProgress: {
     color: blue[300],
     position: "absolute",
@@ -45,7 +45,8 @@ export const useStyles = (success, failure, error) => ({
     fontFamily: "monospace",
     fontWeight: 100,
   },
-  failureText: {
+  contentText: { display: "flex", justifyContent: "center", mt: 2 },
+  growText: {
     mt: 2,
     textAlign: "center",
   },

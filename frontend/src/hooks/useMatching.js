@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { matchUser } from "api";
 import { URI_MATCHING_SVC } from "common/configs";
 import io from "socket.io-client";
+import { useCookies } from "react-cookie";
 
 const TIMER_COUNTDOWN = 30;
 
@@ -13,6 +14,8 @@ const useMatching = ({ title }) => {
   const [timer, setTimer] = useState(TIMER_COUNTDOWN);
 
   const [socket, setSocket] = useState(null);
+
+  const [cookies] = useCookies(["token"]);
 
   let intervalRef = useRef();
 
@@ -88,8 +91,12 @@ const useMatching = ({ title }) => {
   };
 
   const handleMatchButtonClick = () => {
-    // TODO: Change to get user from cookie/localStorage
-    const user = "user" + Math.random(100);
+    const user = cookies.username;
+
+    if (!user) {
+      console.error("No username found");
+    }
+
     const difficulty = title;
     if (!loading) {
       hardReset();
