@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
 import { useCookies } from "react-cookie";
 
 const useLogin = () => {
-  const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
   // eslint-disable-next-line no-unused-vars
@@ -12,14 +11,9 @@ const useLogin = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
-
-  const handleLoginSuccess = (user, token) => {
-    setUser(user);
+  const handleLoginSuccess = (username, token) => {
     setCookie("token", token, { path: "/", maxAge: 300 });
-    setCookie("username", user.username, { path: "/", maxAge: 300 });
+    setCookie("username", username, { path: "/", maxAge: 300 });
 
     navigate("/", { replace: true });
     setLoading(false);
@@ -32,8 +26,8 @@ const useLogin = () => {
     const data = new FormData(event.currentTarget);
     await loginUser(data.get("username"), data.get("password"))
       .then((res) => {
-        const { user, token } = res.data;
-        handleLoginSuccess(user, token);
+        const { username, token } = res.data;
+        handleLoginSuccess(username, token);
       })
       .catch((error) => {
         setIsInvalidLogin(true);
