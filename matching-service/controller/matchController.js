@@ -1,9 +1,10 @@
 const Match = require('../model/matchModel')
 const asyncHandler = require('express-async-handler')
 const { v4 } = require('uuid')
-
-const STATUS_CODE_SUCCESS = 200
-const STATUS_CODE_BAD_REQUEST = 400
+const {
+  STATUS_CODE_SUCCESS,
+  STATUS_CODE_BAD_REQUEST,
+} = require('../utils/constants')
 
 // Description: Create a match
 // Route: POST /api/matchService/match
