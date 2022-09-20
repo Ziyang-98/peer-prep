@@ -48,9 +48,31 @@ test("renders hard dialog correctly", async () => {
   expect(screen.getByText("Match")).toBeInTheDocument();
 });
 
-test("starts matching correctly", async () => {
+test("starts matching correctly for easy", async () => {
   render(<SelectionContent />);
   const difficulty = "Easy";
+  await userEvent.click(screen.getByText(difficulty));
+  await userEvent.click(screen.getByText("Match"));
+
+  expect(
+    screen.getByText("Once matched, you will be redirected to a room."),
+  ).toBeInTheDocument();
+});
+
+test("starts matching correctly for medium", async () => {
+  render(<SelectionContent />);
+  const difficulty = "Medium";
+  await userEvent.click(screen.getByText(difficulty));
+  await userEvent.click(screen.getByText("Match"));
+
+  expect(
+    screen.getByText("Once matched, you will be redirected to a room."),
+  ).toBeInTheDocument();
+});
+
+test("starts matching correctly for hard", async () => {
+  render(<SelectionContent />);
+  const difficulty = "Hard";
   await userEvent.click(screen.getByText(difficulty));
   await userEvent.click(screen.getByText("Match"));
 
