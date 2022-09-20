@@ -38,6 +38,7 @@ const MatchingDialogContent = ({
       <Box sx={styles.dialogContent}>
         <Box sx={styles.buttonHolder}>
           <IconButton
+            role="matching-button"
             sx={styles.matchingButton}
             onClick={handleMatchButtonClick}
             disabled={success}
