@@ -1,10 +1,13 @@
-const Match = require('../model/matchModel')
 const asyncHandler = require('express-async-handler')
 const { v4 } = require('uuid')
+
+const Match = require('../model/matchModel')
 const {
   STATUS_CODE_SUCCESS,
   STATUS_CODE_BAD_REQUEST,
 } = require('../utils/constants')
+
+const generateRoom = (difficulty) => `match-${difficulty}-${v4()}`
 
 // Description: Create a match
 // Route: POST /api/matchService/match
@@ -49,7 +52,7 @@ const createMatch = asyncHandler(async (req, res) => {
 // Route: DELETE /api/matchService/match/:id
 // Access: Private
 const deleteMatch = async (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   const match = await Match.findById(id)
 
   if (!match) {
@@ -63,21 +66,20 @@ const deleteMatch = async (req, res) => {
 }
 
 const deleteMatchForSocket = async (socket) => {
+  const promises = []
+
   for (const room of socket.rooms.values()) {
     const roomSplit = room.split('-')
 
     if (roomSplit[0] === 'match') {
-      const match = await Match.findOne({ room })
-
-      if (match) {
-        await match.remove()
-        return
-      }
+      promises.push(Match.findOne({ room }))
     }
   }
-}
 
-const generateRoom = (difficulty) => `match-${difficulty}-${v4()}`
+  Promise.any(promises)
+    .then((match) => match.remove())
+    .catch((err) => console.log(err)) // Not sure why it still throws AggregateError even if there is one resolved promise
+}
 
 module.exports = {
   createMatch,

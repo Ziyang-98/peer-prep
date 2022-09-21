@@ -1,9 +1,10 @@
 const express = require('express')
 const cors = require('cors')
-const { errorHandler } = require('./middleware/errorMiddleware')
-require('dotenv').config()
-const connectDB = require('./config/db')
 const { createServer } = require('http')
+require('dotenv').config()
+
+const { errorHandler } = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
 const connectSocket = require('./config/socket')
 
 // Database
