@@ -4,6 +4,8 @@
     "husky": "^8.0.0"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup": "npm install --prefix frontend && npm install --prefix matching-service && npm install --prefix user-service",
+    "test": "npm test --prefix matching-service"
   }
 }
