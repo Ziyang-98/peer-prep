@@ -6,9 +6,6 @@ const connectDB = require('./config/db')
 const { createServer } = require('http')
 const connectSocket = require('./config/socket')
 
-// Database
-connectDB()
-
 // Express
 const app = express()
 app.use(express.urlencoded({ extended: true }))
@@ -29,9 +26,14 @@ app.use(errorHandler)
 const httpServer = createServer(app)
 const PORT = process.env.PORT || 8001
 
-httpServer.listen(PORT, () => {
-  console.log(`listening on ${PORT}`)
-})
+async function start() {
+  await connectDB()
+  httpServer.listen(PORT, () => {
+    console.log(`listening on ${PORT}`)
+  })
+  connectSocket(httpServer, { cors: true })
+}
 
-// Socket.io server
-connectSocket(httpServer, { cors: true })
+start()
+
+module.exports = httpServer
