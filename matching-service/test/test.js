@@ -40,14 +40,14 @@ describe('Matches', () => {
     it('should return isMatch false and create a new match in db', (done) => {
       chai
         .request(httpServer)
-        .post(MATCH_API + '/')
+        .post(`${MATCH_API}/`)
         .send({ difficulty: 'easy', user: 'name' })
         .end((err, res) => {
           res.should.have.status(STATUS_CODE_SUCCESS)
           res.body.should.be.an('object')
           res.body.should.have.property('isMatch', false)
           res.body.should.have.property('room').that.is.a('string')
-          Match.findById(res.body.id, (err, match) => {
+          Match.findById(res.body.id, (error, match) => {
             match.should.be.an('object')
             match.should.have.property('id').that.is.a('string')
             matchId = match._id
@@ -59,7 +59,7 @@ describe('Matches', () => {
     it('should return isMatch true and dont create a new match in db', (done) => {
       chai
         .request(httpServer)
-        .post(MATCH_API + '/')
+        .post(`${MATCH_API}/`)
         .send({ difficulty: 'hard', user: 'name2' })
         .end((err, res) => {
           res.should.have.status(STATUS_CODE_SUCCESS)
@@ -74,7 +74,7 @@ describe('Matches', () => {
     it('should return error if the user already exists in the db', (done) => {
       chai
         .request(httpServer)
-        .post(MATCH_API + '/')
+        .post(`${MATCH_API}/`)
         .send({ difficulty: 'medium', user: USER })
         .end((err, res) => {
           res.should.have.status(STATUS_CODE_BAD_REQUEST)
@@ -85,7 +85,7 @@ describe('Matches', () => {
     it('should return error for invalid fields', (done) => {
       chai
         .request(httpServer)
-        .post(MATCH_API + '/')
+        .post(`${MATCH_API}/`)
         .send({})
         .end((err, res) => {
           res.should.have.status(STATUS_CODE_BAD_REQUEST)

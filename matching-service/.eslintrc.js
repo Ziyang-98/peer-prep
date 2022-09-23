@@ -3,6 +3,7 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
+    mocha: true,
   },
   extends: ['airbnb-base', 'prettier', 'plugin:node/recommended'],
   parserOptions: {
@@ -22,5 +23,12 @@ module.exports = {
     'no-underscore-dangle': 'warn',
     'object-shorthand': 'warn',
     'no-restricted-syntax': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'node/no-unpublished-require': [
+      'error',
+      {
+        allowModules: ['chai', 'chai-http'],
+      },
+    ],
   },
 }
