@@ -12,8 +12,9 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username, token) => {
-    setCookie("token", token, { path: "/", maxAge: 300 });
-    setCookie("username", username, { path: "/", maxAge: 300 });
+    const tokenAge = process.env.REACT_APP_TOKEN_AGE || 3600;
+    setCookie("token", token, { path: "/", maxAge: tokenAge });
+    setCookie("username", username, { path: "/", maxAge: tokenAge });
 
     navigate("/", { replace: true });
     setLoading(false);
