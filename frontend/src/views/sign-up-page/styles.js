@@ -8,7 +8,7 @@ export const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    bgcolor: "primary.mainColor",
+    bgcolor: "primary.lessLight",
     boxShadow: 24,
     borderRadius: "10px",
     height: "80%",
