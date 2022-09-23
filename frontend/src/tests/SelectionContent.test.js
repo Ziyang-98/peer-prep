@@ -3,12 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import SelectionContent from "views/selection-content";
 
-it("renders correctly", () => {
+it("renders correctly", async () => {
   const tree = renderer.create(<SelectionContent />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it("renders text in cards correctly", () => {
+it("renders text in cards correctly", async () => {
   render(<SelectionContent />);
   expect(screen.getByText("Easy")).toBeInTheDocument();
   expect(screen.getByText("Medium")).toBeInTheDocument();
