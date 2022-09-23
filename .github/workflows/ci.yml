@@ -31,10 +31,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_NODE_ENV: 'development'
-          envkey_MONGO_URI: ${{ secrets.MONGO_URI }}
       - run: npm ci
       - run: npm test
