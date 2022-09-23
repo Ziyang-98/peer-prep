@@ -1,8 +1,6 @@
-const { Server } = require("socket.io");
+const { Server } = require('socket.io')
 const { setRoomTimeout, clearRoomTimeout } = require('../utils/timeoutHelper')
 const { deleteMatchForSocket } = require('../controller/matchController')
-
-const Match = require('../model/matchModel')
 
 const connectSocket = (httpServer, options) => {
   const io = new Server(httpServer, options)
