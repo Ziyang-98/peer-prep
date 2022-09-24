@@ -6,6 +6,6 @@
   "scripts": {
     "prepare": "husky install",
     "setup": "npm install --prefix frontend && npm install --prefix matching-service && npm install --prefix user-service",
-    "test": "npm test --prefix matching-service"
+    "test": "npm test --prefix matching-service && npm test --prefix user-service"
   }
 }

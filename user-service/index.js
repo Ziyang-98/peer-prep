@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { URI_FRONTEND } from "./common/config.js";
+import { URI_FRONTEND, PREFIX_LOGIN, PREFIX_DELETE, PREFIX_CHANGE_PASSWORD } from "./common/config.js";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }))
@@ -20,11 +20,11 @@ const router = express.Router()
 router.get('/', (_, res) => res.send('Hello World from user-service'))
 router.post('/', createUser)
 //login post http://localhost:8000/api/user/login
-router.post('/login', LoginAuth)
-router.post('/change-password', authentication, changePassword)
-router.post('/delete-user', authentication, deleteUser)
+router.post(PREFIX_LOGIN, LoginAuth)
+router.post(PREFIX_CHANGE_PASSWORD, authentication, changePassword)
+router.post(PREFIX_DELETE, authentication, deleteUser)
 
-app.use('/api/user', router).all((_, res) => {
+app.use(PREFIX_USER_SVC, router).all((_, res) => {
     res.setHeader('content-type', 'application/json')
     res.setHeader('Access-Control-Allow-Origin', '*')
 })
