@@ -16,3 +16,5 @@ export const URI_MATCHING_SVC =
 const PREFIX_MATCH_SVC = "/api/matchService/match";
 
 export const URL_MATCHING_SVC = URI_MATCHING_SVC + PREFIX_MATCH_SVC;
+
+export const TOKEN_AGE = process.env.TOKEN_AGE || 3600;

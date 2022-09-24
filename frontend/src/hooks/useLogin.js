@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "api/index";
 import { useCookies } from "react-cookie";
+import { TOKEN_AGE } from "../common/configs";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -11,10 +12,9 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username, token) => {
-    const tokenAge = process.env.REACT_APP_TOKEN_AGE || 3600;
-    console.log(tokenAge);
-    setCookie("token", token, { path: "/", maxAge: tokenAge });
-    setCookie("username", username, { path: "/", maxAge: tokenAge });
+    console.log(TOKEN_AGE);
+    setCookie("token", token, { path: "/", maxAge: TOKEN_AGE });
+    setCookie("username", username, { path: "/", maxAge: TOKEN_AGE });
 
     navigate("/", { replace: true });
     setLoading(false);
