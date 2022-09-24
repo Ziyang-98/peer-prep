@@ -16,7 +16,7 @@ it("renders sign in correctly", () => {
   expect(tree).toMatchSnapshot();
 });
 
-test("renders sign in page correctly", async () => {
+test("renders sign in header correctly", () => {
   render(
     <Router location={"/"}>
       <Routes>
@@ -30,4 +30,52 @@ test("renders sign in page correctly", async () => {
       name: /sign in/i,
     }),
   ).toHaveTextContent("Sign In");
+});
+
+test("renders username textbox correctly", () => {
+  render(
+    <Router location={"/"}>
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+      </Routes>
+    </Router>,
+  );
+
+  expect(
+    screen.getByRole("textbox", {
+      name: /username/i,
+    }),
+  ).toBeInTheDocument();
+});
+
+test("renders sign in button correctly", () => {
+  render(
+    <Router location={"/"}>
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+      </Routes>
+    </Router>,
+  );
+
+  expect(
+    screen.getByRole("button", {
+      name: /Sign In/i,
+    }),
+  ).toBeInTheDocument();
+});
+
+test("renders create account link correctly", () => {
+  render(
+    <Router location={"/"}>
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+      </Routes>
+    </Router>,
+  );
+
+  expect(
+    screen.getByRole("link", {
+      name: /here/i,
+    }),
+  ).toBeInTheDocument();
 });
