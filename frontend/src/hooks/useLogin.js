@@ -8,11 +8,11 @@ const useLogin = () => {
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies(["token"]);
-
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username, token) => {
     const tokenAge = process.env.REACT_APP_TOKEN_AGE || 3600;
+    console.log(tokenAge);
     setCookie("token", token, { path: "/", maxAge: tokenAge });
     setCookie("username", username, { path: "/", maxAge: tokenAge });
 
