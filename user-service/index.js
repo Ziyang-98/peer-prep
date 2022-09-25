@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { URI_FRONTEND, PREFIX_LOGIN, PREFIX_DELETE, PREFIX_CHANGE_PASSWORD } from "./common/config.js";
+import { URI_FRONTEND, PREFIX_LOGIN, PREFIX_DELETE, PREFIX_CHANGE_PASSWORD, PREFIX_USER_SVC } from "./common/config.js";
 
-const app = express();
+export const app = express();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors({credentials: true, origin: URI_FRONTEND})) // config cors so that front-end can use
