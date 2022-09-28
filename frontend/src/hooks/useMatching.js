@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { matchUser } from "api";
 import { URI_MATCHING_SVC } from "common/configs";
 import io from "socket.io-client";
@@ -16,6 +17,8 @@ const useMatching = ({ title }) => {
   const [socket, setSocket] = useState(null);
 
   const [cookies] = useCookies(["token"]);
+
+  const navigate = useNavigate();
 
   let intervalRef = useRef();
 
@@ -42,10 +45,12 @@ const useMatching = ({ title }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSuccess = () => {
+  const handleSuccess = (room) => {
     setSuccess(true);
     stopLoading();
-    // TODO: Redirect user to collab page
+    setTimeout(() => {
+      navigate(`/room?roomId=${room}`, { replace: true });
+    }, 2000);
   };
 
   const handleFailure = () => {
@@ -76,7 +81,7 @@ const useMatching = ({ title }) => {
 
     socket.on("room", ({ room }) => {
       console.log("Match found while matching: ", room);
-      handleSuccess();
+      handleSuccess(room);
     });
 
     socket.on("failToMatch", ({ msg }) => {
@@ -110,7 +115,7 @@ const useMatching = ({ title }) => {
 
           if (isMatch) {
             emitMatchFound(socket, room);
-            handleSuccess();
+            handleSuccess(room);
           } else {
             emitMatchWaiting(socket, room);
           }
