@@ -1,18 +1,18 @@
 export const styles = {
   mainContainer: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
+    width: "100%",
     height: "90vh",
   },
-  questionContainer: {
+  split: {
+    display: "flex",
     height: "90%",
-    width: "45%",
-    bgcolor: "#f9f9f9",
+    width: "90%",
   },
-  editorContainer: {
-    height: "90%",
-    width: "45%",
+
+  panel: {
     bgcolor: "#f9f9f9",
   },
 };

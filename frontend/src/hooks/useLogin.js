@@ -12,8 +12,8 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username, token) => {
-    setCookie("token", token, { path: "/", maxAge: 300 });
-    setCookie("username", username, { path: "/", maxAge: 300 });
+    setCookie("token", token, { path: "/", maxAge: 10000 });
+    setCookie("username", username, { path: "/", maxAge: 10000 });
 
     navigate("/", { replace: true });
     setLoading(false);
