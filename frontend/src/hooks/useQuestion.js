@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 const useQuestion = (handleOpenNotification) => {
-  // Feel free to update this
-  const [questionObject, setQuestionObject] = useState(null);
+  // Feel free to update this to useState
+  const questionObject = null;
 
   // TODO: Add logic to get question from backend and return question info
 
