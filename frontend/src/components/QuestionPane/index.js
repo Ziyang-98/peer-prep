@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuestionPane = () => {
+const QuestionPane = ({ questionObject }) => {
   return <div>Question Pane</div>;
 };
 

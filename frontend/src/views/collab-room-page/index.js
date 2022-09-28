@@ -19,11 +19,13 @@ const CollabRoomPage = () => {
 
   const { editorProps } = useCollabEditor(handleOpenNotification);
 
+  const { questionObject } = useCollabEditor(handleOpenNotification);
+
   return (
     <Box sx={styles.mainContainer}>
       <Split direction={"horizontal"} style={styles.split}>
         <Box sx={styles.panel}>
-          <QuestionPane />
+          <QuestionPane questionObject={questionObject} />
         </Box>
         <Box sx={styles.panel}>
           <Editor editorProps={editorProps} />
