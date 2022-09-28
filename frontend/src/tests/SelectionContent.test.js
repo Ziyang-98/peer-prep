@@ -1,7 +1,7 @@
 import renderer from "react-test-renderer";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import SelectionContent from "views/selection-content";
+import SelectionContent from "views/selection-page";
 
 it("renders correctly", async () => {
   const tree = renderer.create(<SelectionContent />).toJSON();

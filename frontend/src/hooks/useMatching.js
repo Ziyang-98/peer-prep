@@ -80,12 +80,11 @@ const useMatching = ({ title }) => {
     socket.emit("matchWaiting", { room });
 
     socket.on("room", ({ room }) => {
-      console.log("Match found while matching: ", room);
       handleSuccess(room);
     });
 
     socket.on("failToMatch", ({ msg }) => {
-      console.log("No Match found ", msg);
+      console.error("No Match found ", msg);
     });
   };
 
