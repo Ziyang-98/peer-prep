@@ -37,4 +37,5 @@ async function start() {
 
 start()
 
+// For testing purposes
 module.exports = httpServer
