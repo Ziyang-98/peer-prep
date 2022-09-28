@@ -14,5 +14,6 @@ export const styles = {
 
   panel: {
     bgcolor: "#f9f9f9",
+    overflow: "auto",
   },
 };
