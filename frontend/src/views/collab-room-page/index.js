@@ -7,7 +7,7 @@ import Notification from "components/Notification";
 
 import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
-
+import useQuestion from "hooks/useQuestion";
 import { styles } from "./styles";
 
 // For draggable gutter styles
@@ -19,7 +19,7 @@ const CollabRoomPage = () => {
 
   const { editorProps } = useCollabEditor(handleOpenNotification);
 
-  const { questionObject } = useCollabEditor(handleOpenNotification);
+  const { questionObject } = useQuestion(handleOpenNotification);
 
   return (
     <Box sx={styles.mainContainer}>

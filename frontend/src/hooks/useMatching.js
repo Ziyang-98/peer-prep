@@ -47,9 +47,7 @@ const useMatching = ({ title }) => {
 
   const handleNavigate = (room, difficulty) => {
     setTimeout(() => {
-      navigate(`/room?roomId=${room}&difficulty=${difficulty}`, {
-        replace: true,
-      });
+      navigate(`/room?roomId=${room}&difficulty=${difficulty}`);
     }, 2000);
   };
 
