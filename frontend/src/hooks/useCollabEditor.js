@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getNewLines } from "common/utils";
 import { URI_COLLAB_SVC } from "common/configs";
 import { useLocation } from "react-router-dom";
@@ -11,11 +11,9 @@ const DEFAULT_EDITOR_VALUE = "# Enter your answer here" + DEFAULT_NO_OF_LINES;
 
 const useCollabEditor = (handleOpenNotification) => {
   const [editorValue, setEditorValue] = useState(DEFAULT_EDITOR_VALUE);
+  const [users, setUsers] = useState([]);
   const [socket, setSocket] = useState(null);
-
   const [cookies] = useCookies(["token"]);
-
-  const socketSet = useRef(false);
 
   const search = useLocation().search;
   const roomId = new URLSearchParams(search).get("roomId");
@@ -30,12 +28,8 @@ const useCollabEditor = (handleOpenNotification) => {
   // Example usage: handleOpenNotification("Encounter issues finding room!", 4000, "error")
 
   useEffect(() => {
-    if (socketSet.current) return;
-    socketSet.current = true;
-
-    console.log("using effect");
     const socket = io.connect(URI_COLLAB_SVC);
-
+    setSocket(socket);
     socket.on("connect", function () {
       const user = cookies.username;
 
@@ -44,14 +38,13 @@ const useCollabEditor = (handleOpenNotification) => {
         handleOpenNotification("No username found!", 3000, "error");
       }
       socket.emit("joinRoom", { roomId, user });
+    });
 
-      socket.on("usersInRoom", ({ usersInRoom }) => {
-        console.log(usersInRoom);
-      });
+    socket.on("usersInRoom", ({ usersInRoom }) => {
+      setUsers(usersInRoom);
     });
 
     // Error Handlers
-
     socket.on("connect_error", (err) => {
       handleOpenNotification(
         "Encountered issues connecting to server!",
@@ -60,21 +53,30 @@ const useCollabEditor = (handleOpenNotification) => {
       );
     });
 
-    socket.on("disconnect", function () {
+    socket.on("disconnect", () => {
       handleOpenNotification("Lost connection to the server!", 3000, "error");
     });
+
+    socket.on("userDisconnect", ({ user }) => {
+      handleOpenNotification(`${user} has disconnected!`, 3000, "warning");
+    });
+
+    socket.on("codeUpdated", ({ code }) => {
+      setEditorValue(code);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleEditorChange = useCallback((value, viewUpdate) => {
-    console.log("value:", value);
-    setEditorValue(value);
-  }, []);
+  const handleEditorChange = (value, viewUpdate) => {
+    socket.emit("codeChanged", { code: value });
+  };
 
   return {
     editorProps: {
       value: editorValue,
       onChange: handleEditorChange,
     },
+    users,
   };
 };
 
