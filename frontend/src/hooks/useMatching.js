@@ -45,12 +45,18 @@ const useMatching = ({ title }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSuccess = (room) => {
+  const handleNavigate = (room, difficulty) => {
+    setTimeout(() => {
+      navigate(`/room?roomId=${room}&difficulty=${difficulty}`, {
+        replace: true,
+      });
+    }, 2000);
+  };
+
+  const handleSuccess = (room, difficulty) => {
     setSuccess(true);
     stopLoading();
-    setTimeout(() => {
-      navigate(`/room?roomId=${room}`, { replace: true });
-    }, 2000);
+    handleNavigate(room, difficulty);
   };
 
   const handleFailure = () => {
@@ -76,11 +82,11 @@ const useMatching = ({ title }) => {
     socket.emit("matchFound", { room });
   };
 
-  const emitMatchWaiting = (socket, room) => {
+  const emitMatchWaiting = (socket, room, difficulty) => {
     socket.emit("matchWaiting", { room });
 
     socket.on("room", ({ room }) => {
-      handleSuccess(room);
+      handleSuccess(room, difficulty);
     });
 
     socket.on("failToMatch", ({ msg }) => {
@@ -114,9 +120,9 @@ const useMatching = ({ title }) => {
 
           if (isMatch) {
             emitMatchFound(socket, room);
-            handleSuccess(room);
+            handleSuccess(room, difficulty);
           } else {
-            emitMatchWaiting(socket, room);
+            emitMatchWaiting(socket, room, difficulty);
           }
         })
         .catch((error) => {
