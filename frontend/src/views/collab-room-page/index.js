@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Split from "react-split";
 import QuestionPane from "components/QuestionPane";
+import UsersDisplay from "components/UsersDisplay";
 import Editor from "components/Editor";
 import Notification from "components/Notification";
 
@@ -28,6 +29,7 @@ const CollabRoomPage = () => {
           <QuestionPane questionObject={questionObject} />
         </Box>
         <Box sx={styles.panel}>
+          <UsersDisplay />
           <Editor editorProps={editorProps} />
         </Box>
       </Split>
