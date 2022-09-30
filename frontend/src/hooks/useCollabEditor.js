@@ -9,9 +9,13 @@ const DEFAULT_NO_OF_LINES = getNewLines(20);
 
 const DEFAULT_EDITOR_VALUE = "# Enter your answer here" + DEFAULT_NO_OF_LINES;
 
+const filterPartner = (users, currUsername) => {
+  return users.filter((username) => currUsername !== username)[0] ?? "";
+};
+
 const useCollabEditor = (handleOpenNotification) => {
   const [editorValue, setEditorValue] = useState(DEFAULT_EDITOR_VALUE);
-  const [users, setUsers] = useState([]);
+  const [partner, setPartner] = useState("");
   const [socket, setSocket] = useState(null);
   const [cookies] = useCookies(["token"]);
 
@@ -25,14 +29,14 @@ const useCollabEditor = (handleOpenNotification) => {
       const user = cookies.username;
 
       if (!user) {
-        console.error("No username found");
         handleOpenNotification("No username found!", 3000, "error");
       }
       socket.emit("joinRoom", { roomId, user });
     });
 
     socket.on("usersInRoom", ({ usersInRoom }) => {
-      setUsers(usersInRoom);
+      const partner = filterPartner(usersInRoom, cookies.username);
+      setPartner(partner);
     });
 
     // Error Handlers
@@ -61,7 +65,6 @@ const useCollabEditor = (handleOpenNotification) => {
 
   const handleEditorChange = useCallback(
     (value, viewUpdate) => {
-      console.log(viewUpdate);
       if (viewUpdate.docChanged && viewUpdate.selectionSet)
         socket.emit("codeChanged", { code: value });
     },
@@ -73,7 +76,7 @@ const useCollabEditor = (handleOpenNotification) => {
       value: editorValue,
       onChange: handleEditorChange,
     },
-    users,
+    partner,
   };
 };
 

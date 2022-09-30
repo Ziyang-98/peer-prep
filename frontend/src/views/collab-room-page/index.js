@@ -18,7 +18,7 @@ const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
-  const { editorProps } = useCollabEditor(handleOpenNotification);
+  const { editorProps, partner } = useCollabEditor(handleOpenNotification);
 
   const { questionObject } = useQuestion(handleOpenNotification);
 
@@ -29,7 +29,7 @@ const CollabRoomPage = () => {
           <QuestionPane questionObject={questionObject} />
         </Box>
         <Box sx={styles.panel}>
-          <UsersDisplay />
+          <UsersDisplay activePartner={partner} />
           <Editor editorProps={editorProps} />
         </Box>
       </Split>
