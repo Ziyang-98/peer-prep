@@ -12,7 +12,6 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username, token) => {
-    console.log(TOKEN_AGE);
     setCookie("token", token, { path: "/", maxAge: TOKEN_AGE });
     setCookie("username", username, { path: "/", maxAge: TOKEN_AGE });
 
