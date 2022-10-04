@@ -2,50 +2,69 @@ import { useState } from "react";
 import { deleteUser, changePassword } from "api/index";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { STATUS_CODE_BAD_REQUEST, STATUS_CODE_SUCCESS } from "common/constants";
 
 const useProfile = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const [isInvalidPasswordChange, setIsInvalidPasswordChange] = useState(false);
-  const [isInvalidDeleteUser, setIsInvalidDeleteUser] = useState(false);
-  const [isSuccessPasswordChange, setIsSuccessPasswordChange] = useState(false);
+  const [isInvalidAction, setIsInvalidAction] = useState(false);
+  const [isSuccessAction, setIsSuccessAction] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleDeleteUser = async (event) => {
     await deleteUser()
       .then((res) => {
-        console.log(res);
-        removeCookie("token");
-        navigate("/login");
+        if (res.status === STATUS_CODE_SUCCESS) {
+          removeCookie("token");
+          navigate("/login");
+        }
       })
       .catch((error) => {
-        setIsInvalidDeleteUser(true);
+        setIsInvalidAction(true);
+        setIsSuccessAction(false);
         console.log(error);
+        if (error.response.status === STATUS_CODE_BAD_REQUEST) {
+          setErrorMessage(error.response.data.message)
+        } else {
+          setErrorMessage("Encountered issues connecting to the server");
+        }
       });
   };
 
   const handleChangePassword = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
+
     await changePassword(data.get("password"))
       .then((res) => {
-        setIsSuccessPasswordChange(true);
-        console.log(res);
+        if (res.status === STATUS_CODE_SUCCESS) {
+          setIsSuccessAction(true);
+          setIsInvalidAction(false);
+          setSuccessMessage(res.data.message);
+        }
       })
       .catch((error) => {
-        setIsInvalidPasswordChange(true);
+        setIsInvalidAction(true);
+        setIsSuccessAction(false);
         console.log(error);
+        if (error.response.status === STATUS_CODE_BAD_REQUEST) {
+          setErrorMessage(error.response.data.message)
+        } else {
+          setErrorMessage("Encountered issues connecting to the server");
+        }
       });
   };
 
   return {
     handleDeleteUser,
     handleChangePassword,
-    isInvalidPasswordChange,
-    isInvalidDeleteUser,
-    isSuccessPasswordChange,
+    isInvalidAction,
+    isSuccessAction,
+    errorMessage,
+    successMessage,
   };
 };
 
