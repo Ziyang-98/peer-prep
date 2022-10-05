@@ -1,6 +1,8 @@
 const { createClient } = require('redis')
 
-const redisClient = createClient()
+const redisClient = createClient({
+  url: process.env.REDIS_URL || 'redis://localhost:6379',
+})
 
 const connectCache = async () => {
   try {
