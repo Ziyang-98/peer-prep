@@ -11,28 +11,23 @@ const ProfilePage = () => {
   const {
     handleDeleteUser,
     handleChangePassword,
-    isInvalidPasswordChange,
-    isInvalidDeleteUser,
-    isSuccessPasswordChange,
+    isInvalidAction,
+    isSuccessAction,
+    errorMessage,
+    successMessage,
   } = useProfile();
 
   return (
     <Container sx={styles.container}>
-      {isInvalidDeleteUser && (
+      {isInvalidAction && (
         <Alert sx={styles.invalidAlert} severity="error">
-          Failed to delete user
+          {errorMessage}
         </Alert>
       )}
 
-      {isSuccessPasswordChange && (
+      {isSuccessAction && (
         <Alert sx={styles.invalidAlert} severity="success">
-          Password successfully changed
-        </Alert>
-      )}
-
-      {isInvalidPasswordChange && (
-        <Alert sx={styles.invalidAlert} severity="error">
-          Failed to change password
+          {successMessage}
         </Alert>
       )}
 
