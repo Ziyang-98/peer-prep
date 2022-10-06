@@ -19,7 +19,7 @@ const difficulties = [
   },
 ];
 
-const SelectionContent = () => {
+const SelectionPage = () => {
   return (
     <Box sx={styles.mainContainer}>
       <Typography variant="h5" sx={styles.title}>
@@ -38,4 +38,4 @@ const SelectionContent = () => {
   );
 };
 
-export default SelectionContent;
+export default SelectionPage;
