@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_TOKEN } from "../common/constants.js";
 
 export function authentication (req, res, next) {
+    console.log(req)
     const token = req.cookies.token;
 
     if (!token){
