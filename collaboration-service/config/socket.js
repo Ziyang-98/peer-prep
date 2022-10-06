@@ -31,6 +31,7 @@ const connectSocket = (httpServer, options) => {
       const usersInRoom = await redisClient.lRange(key, 0, -1)
 
       socket.join(roomId)
+      socket.to(roomId).emit('userConnected', { user })
       io.in(roomId).emit('usersInRoom', { usersInRoom })
     })
 
