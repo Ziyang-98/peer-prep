@@ -9,6 +9,11 @@ const connectSocket = (httpServer, options) => {
     console.log('a user connected')
 
     socket.on('joinRoom', async ({ roomId, user }) => {
+      if (!roomId) {
+        socket.emit('error', { message: 'roomId is missing!' })
+        return
+      }
+
       const key = `${roomId}:users`
 
       await redisClient.lPush(key, user)
@@ -24,18 +29,20 @@ const connectSocket = (httpServer, options) => {
       console.log('a user disconnected')
 
       const { roomId, user } = await redisClient.hGetAll(socket.id)
-      const key = `${roomId}:users`
+      if (roomId && user) {
+        const key = `${roomId}:users`
 
-      await redisClient.lRem(key, 0, user)
+        await redisClient.lRem(key, 0, user)
 
-      const usersInRoom = await redisClient.lRange(key, 0, -1)
+        const usersInRoom = await redisClient.lRange(key, 0, -1)
 
-      if (!usersInRoom.length) {
-        await redisClient.del(key)
+        if (!usersInRoom.length) {
+          await redisClient.del(key)
+        }
+
+        io.in(roomId).emit('userDisconnect', { user })
+        io.in(roomId).emit('usersInRoom', { usersInRoom })
       }
-
-      io.in(roomId).emit('userDisconnect', { user })
-      io.in(roomId).emit('usersInRoom', { usersInRoom })
     })
 
     socket.on('codeChanged', async ({ code }) => {
