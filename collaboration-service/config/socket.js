@@ -16,6 +16,15 @@ const connectSocket = (httpServer, options) => {
 
       const key = `${roomId}:users`
 
+      const listLen = await redisClient.lLen(key)
+
+      if (listLen >= 2) {
+        socket.emit('error', {
+          message: 'You cant join the room as it is already full!',
+        })
+        return
+      }
+
       await redisClient.lPush(key, user)
       await redisClient.hSet(socket.id, { roomId, user }) // For removal of user, when user disconnect
 
