@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "layout/main";
-import SelectionContent from "views/selection-content";
 import SignInPage from "views/sign-in-page";
 import SignUpPage from "views/sign-up-page";
+import SelectionPage from "views/selection-page";
+import CollabRoomPage from "views/collab-room-page";
+
 import ProfilePage from "views/profile-page";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -23,8 +25,9 @@ function App() {
             <Routes>
               <Route element={<ProtectedRoute />}>
                 <Route exact path="/" element={<MainLayout />}>
-                  <Route path="/" element={<SelectionContent />} />
+                  <Route path="/" element={<SelectionPage />} />
                   <Route path="profile" element={<ProfilePage />} />
+                  <Route path="room" element={<CollabRoomPage />} />
                 </Route>
               </Route>
 
