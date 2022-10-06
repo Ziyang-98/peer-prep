@@ -77,7 +77,11 @@ const deleteMatchForSocket = async (socket) => {
   }
 
   Promise.any(promises)
-    .then((match) => match.remove())
+    .then((match) => {
+      if (match) {
+        match.remove()
+      }
+    })
     .catch((err) => console.log(err)) // Not sure why it still throws AggregateError even if there is one resolved promise
 }
 
