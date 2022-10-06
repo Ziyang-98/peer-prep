@@ -24,8 +24,8 @@ const MainLayout = () => {
 
   return (
     <Box>
-      <AppBar position="static" sx={styles.navBar}>
-        <Toolbar>
+      <AppBar position="static">
+        <Toolbar sx={styles.navBar}>
           <Typography variant="h6" component="a" href="/" sx={styles.appTitle}>
             PeerPrep
           </Typography>

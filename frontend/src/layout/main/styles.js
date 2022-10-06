@@ -1,10 +1,13 @@
 export const styles = {
   navBar: {
     bgcolor: "primary.mainColor",
+    display: "flex",
+    justifyContent: "space-between",
   },
   appTitle: {
     ml: "2%",
-    flexGrow: 1,
+    // flexGrow: 1,
+    // width: "100%",
     display: { md: "flex" },
     fontFamily: "monospace",
     fontWeight: 100,
