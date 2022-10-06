@@ -62,8 +62,6 @@ test("renders create account button correctly", () => {
       name: /Create Account/i,
     }),
   ).toBeInTheDocument();
-
-  screen.logTestingPlaygroundURL();
 });
 
 test("renders back button correctly", () => {
@@ -80,6 +78,4 @@ test("renders back button correctly", () => {
       name: "",
     }),
   ).toBeInTheDocument();
-
-  screen.logTestingPlaygroundURL();
 });

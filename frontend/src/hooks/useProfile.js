@@ -27,7 +27,7 @@ const useProfile = () => {
         setIsSuccessAction(false);
         console.log(error);
         if (error.response.status === STATUS_CODE_BAD_REQUEST) {
-          setErrorMessage(error.response.data.message)
+          setErrorMessage(error.response.data.message);
         } else {
           setErrorMessage("Encountered issues connecting to the server");
         }
@@ -51,7 +51,7 @@ const useProfile = () => {
         setIsSuccessAction(false);
         console.log(error);
         if (error.response.status === STATUS_CODE_BAD_REQUEST) {
-          setErrorMessage(error.response.data.message)
+          setErrorMessage(error.response.data.message);
         } else {
           setErrorMessage("Encountered issues connecting to the server");
         }
