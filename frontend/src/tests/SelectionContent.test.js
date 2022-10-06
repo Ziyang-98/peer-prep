@@ -1,22 +1,31 @@
 import renderer from "react-test-renderer";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import SelectionContent from "views/selection-content";
+import SelectionContent from "views/selection-page";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-it("renders correctly", () => {
-  const tree = renderer.create(<SelectionContent />).toJSON();
+const SelectionContentRoute = (
+  <Router>
+    <Routes>
+      <Route path="/" element={<SelectionContent />} />
+    </Routes>
+  </Router>
+);
+
+it("renders correctly", async () => {
+  const tree = renderer.create(SelectionContentRoute).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it("renders text in cards correctly", () => {
-  render(<SelectionContent />);
+it("renders text in cards correctly", async () => {
+  render(SelectionContentRoute);
   expect(screen.getByText("Easy")).toBeInTheDocument();
   expect(screen.getByText("Medium")).toBeInTheDocument();
   expect(screen.getByText("Hard")).toBeInTheDocument();
 });
 
 test("renders easy dialog correctly", async () => {
-  render(<SelectionContent />);
+  render(SelectionContentRoute);
   const difficulty = "Easy";
   await userEvent.click(screen.getByText(difficulty));
 
@@ -27,7 +36,7 @@ test("renders easy dialog correctly", async () => {
 });
 
 test("renders medium dialog correctly", async () => {
-  render(<SelectionContent />);
+  render(SelectionContentRoute);
   const difficulty = "Medium";
   await userEvent.click(screen.getByText(difficulty));
 
@@ -38,7 +47,7 @@ test("renders medium dialog correctly", async () => {
 });
 
 test("renders hard dialog correctly", async () => {
-  render(<SelectionContent />);
+  render(SelectionContentRoute);
   const difficulty = "Hard";
   await userEvent.click(screen.getByText(difficulty));
 
@@ -46,37 +55,4 @@ test("renders hard dialog correctly", async () => {
     screen.getByText(`Find a match for Difficulty: ${difficulty}`),
   ).toBeInTheDocument();
   expect(screen.getByText("Match")).toBeInTheDocument();
-});
-
-test("starts matching correctly for easy", async () => {
-  render(<SelectionContent />);
-  const difficulty = "Easy";
-  await userEvent.click(screen.getByText(difficulty));
-  await userEvent.click(screen.getByText("Match"));
-
-  expect(
-    screen.getByText("Once matched, you will be redirected to a room."),
-  ).toBeInTheDocument();
-});
-
-test("starts matching correctly for medium", async () => {
-  render(<SelectionContent />);
-  const difficulty = "Medium";
-  await userEvent.click(screen.getByText(difficulty));
-  await userEvent.click(screen.getByText("Match"));
-
-  expect(
-    screen.getByText("Once matched, you will be redirected to a room."),
-  ).toBeInTheDocument();
-});
-
-test("starts matching correctly for hard", async () => {
-  render(<SelectionContent />);
-  const difficulty = "Hard";
-  await userEvent.click(screen.getByText(difficulty));
-  await userEvent.click(screen.getByText("Match"));
-
-  expect(
-    screen.getByText("Once matched, you will be redirected to a room."),
-  ).toBeInTheDocument();
 });
