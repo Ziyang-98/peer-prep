@@ -5,6 +5,6 @@ const {
 
 const router = express.Router()
 
-router.get('/random/:difficulty', getRandomQuestionOfDifficulty)
+router.get('/random/:roomId', getRandomQuestionOfDifficulty)
 
 module.exports = router
