@@ -161,36 +161,23 @@ describe('Fail Login wrong password', function() {
 });
 
 describe("changePassword", ()=> {
-  // let userId = null
 
-  // before((done) => {
+  // it ('should change password successfully', (done) => {
   //   chai.request(app)
-  //   .post(`${PREFIX_USER_SVC}/`)
-  //   .send(dummyData[1])
-  //   .end((err, res) => {
-  //     UserModel.findOne({ username : dummyData[1].username}, (err, user) => {
-  //       userId = user._id
-  //       done()
-  //     })
-  //   })
-  // });
-
-  it ('should change password successfully', (done) => {
-    chai.request(app)
-      .post(API_CHANGE_PASSWORD)
-      .set('userId', globalId)
-      .set('cookies', {token: globalToken})
-      .send(dummyData[1].password)
-      .end((err, res) => {
-        console.log(res);
-        res.should.have.status(STATUS_CODE_CREATED)
-        res.body.message.should.equal(`Password changed successfully!`)
+  //     .post(API_CHANGE_PASSWORD)
+  //     .set('userId', globalId)
+  //     .set('cookies', {token: globalToken})
+  //     .send(dummyData[1].password)
+  //     .end((err, res) => {
+  //       console.log(res);
+  //       res.should.have.status(STATUS_CODE_CREATED)
+  //       res.body.message.should.equal(`Password changed successfully!`)
       
-        UserModel.findOne({ username : dummyData[1].username}, (err, user) => {
-          bcrypt.compare(dummyData[1].password, user.password).should.equal(true)
-          done()
-        })
-      }).timeout(10000);
-  })
+  //       UserModel.findOne({ username : dummyData[1].username}, (err, user) => {
+  //         bcrypt.compare(dummyData[1].password, user.password).should.equal(true)
+  //         done()
+  //       })
+  //     }).timeout(10000);
+  // })
 });
  
