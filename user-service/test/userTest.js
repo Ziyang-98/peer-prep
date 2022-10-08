@@ -3,8 +3,8 @@ import chaiHttp from 'chai-http';
 import UserModel from '../model/user-model.js';
 import {dummyData} from '../data/userData.js';
 import {app} from '../index.js';
-import jwt from "jsonwebtoken"
-import { authentication } from '../middleware/authentication.js';
+import jwt from "jsonwebtoken";
+
 import {
     STATUS_CODE_SUCCESS,
     STATUS_CODE_BAD_REQUEST,
@@ -14,8 +14,6 @@ import {
 import { 
     PREFIX_USER_SVC,
     API_LOGIN,
-    API_DELETE_USER,
-    API_CHANGE_PASSWORD, 
 } from '../common/config.js';
 
 
@@ -25,19 +23,12 @@ const assert = chai.assert;
 chai.use(chaiHttp)
 chai.should()
 
-let globalToken = null;
-let globalId = null;
-
 before(async () => {
   await UserModel.deleteMany();
 })
 
 describe("createUser", () => {
   let userId = null;
-
-  after(async () => {
-    await UserModel.findByIdAndDelete(userId)
-  })
 
   it ('should create a new user successfully', (done) => {
     chai.request(app)
@@ -78,14 +69,12 @@ describe("createUser", () => {
         done()
       }).timeout(10000);
   })
+
+  after(() => {
+    UserModel.findByIdAndDelete(userId)
+  })
+
 });
-
-
-
-describe("deleteUser", ()=> {
-
-});
-
 
 describe('Login and Auth', function() {
 
@@ -110,12 +99,10 @@ describe('Login and Auth', function() {
             result.body.username.should.equal(dummyData[2].username);
             let testToken = result.body.token;
             //below checks the validation of the token
-            globalToken =  testToken;
             const tokenData = jwt.verify(testToken, SECRET_TOKEN);
   
             UserModel.findById(tokenData.userId, (err, user) => {
               user.should.have.property('username').that.is.equal(dummyData[2].username);
-              globalId = user._id;
             });
             done();
         });
@@ -160,24 +147,3 @@ describe('Fail Login wrong password', function() {
     }).timeout(10000);
 });
 
-describe("changePassword", ()=> {
-
-  // it ('should change password successfully', (done) => {
-  //   chai.request(app)
-  //     .post(API_CHANGE_PASSWORD)
-  //     .set('userId', globalId)
-  //     .set('cookies', {token: globalToken})
-  //     .send(dummyData[1].password)
-  //     .end((err, res) => {
-  //       console.log(res);
-  //       res.should.have.status(STATUS_CODE_CREATED)
-  //       res.body.message.should.equal(`Password changed successfully!`)
-      
-  //       UserModel.findOne({ username : dummyData[1].username}, (err, user) => {
-  //         bcrypt.compare(dummyData[1].password, user.password).should.equal(true)
-  //         done()
-  //       })
-  //     }).timeout(10000);
-  // })
-});
- 
