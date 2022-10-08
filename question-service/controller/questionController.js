@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const { LeetCode } = require('leetcode-query')
 
+const { redisClient } = require('../config/cache')
+
 const leetcode = new LeetCode()
 
 function getRandomNumber(total) {
@@ -61,13 +63,25 @@ const getRandomQuestionOfDifficulty = asyncHandler(async (req, res) => {
     throw new Error('No roomId is given!')
   }
 
-  const difficulty = extractDifficulty(roomId)
   let problem = null
+  const key = `${roomId}:question`
 
-  // To prevent sending premium leetcode question, which the content is not accessible
-  while (!problem?.content) {
-    // eslint-disable-next-line no-await-in-loop
-    problem = await getRandomProblem(difficulty)
+  const problemJsonString = await redisClient.get(key)
+
+  if (problemJsonString) {
+    // Cache hit
+    problem = JSON.parse(problemJsonString)
+  } else {
+    // Cache miss
+    const difficulty = extractDifficulty(roomId)
+
+    // To prevent sending premium leetcode question, which the content is not accessible
+    while (!problem?.content) {
+      // eslint-disable-next-line no-await-in-loop
+      problem = await getRandomProblem(difficulty)
+    }
+
+    await redisClient.set(key, JSON.stringify(problem))
   }
 
   res.status(200).json({
