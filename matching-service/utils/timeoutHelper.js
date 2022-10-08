@@ -11,6 +11,11 @@ const setRoomTimeout = (room, socket) => {
     })
   }, 30000)
   timeoutTable.set(room, timeoutId)
+
+  // automatic delete the entry in timeoutTable after 30 seconds is up with a 10 seconds delay
+  setTimeout(() => {
+    timeoutTable.delete(room)
+  }, 40000)
 }
 
 const clearRoomTimeout = (room) => {
