@@ -1,6 +1,26 @@
+import { getQuestion } from "api";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 const useQuestion = (handleOpenNotification) => {
   // Feel free to update this to useState
-  const questionObject = null;
+  const [questionObject, setQuestionObject] = useState(
+    "There is no question yet",
+  );
+
+  const search = useLocation().search;
+  const roomId = new URLSearchParams(search).get("roomId");
+  const difficulty = new URLSearchParams(search).get("difficulty");
+
+  getQuestion(difficulty)
+    .then((res) => {
+      console.log(res);
+      const { content } = res.data;
+      // setQuestionObject(content);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   // TODO: Add logic to get question from backend and return question info
 

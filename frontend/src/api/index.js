@@ -5,6 +5,7 @@ import {
   URL_DELETE_USER,
   URL_CHANGE_PASSWORD,
   URL_USER_SVC,
+  URL_QUESTION_SVC,
 } from "common/configs";
 
 export async function loginUser(username, password) {
@@ -49,5 +50,10 @@ export async function matchUser(user, difficulty) {
 
 export async function deleteMatch(id) {
   const response = await axios.delete(URL_MATCHING_SVC + `/${id}`);
+  return response;
+}
+
+export async function getQuestion(difficulty) {
+  const response = await axios.get(URL_QUESTION_SVC + `/${difficulty}`);
   return response;
 }

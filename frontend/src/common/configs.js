@@ -24,4 +24,6 @@ export const TOKEN_AGE = process.env.TOKEN_AGE || 3600;
 export const URI_QUESTION_SVC =
   process.env.URI_QUESTION_SVC || "http://localhost:8003";
 
-const PREFIX_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;
+const PREFIX_QUESTION_SVC = "/api/questionService/question/random";
+
+export const URL_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;
