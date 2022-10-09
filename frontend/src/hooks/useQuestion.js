@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 
 const useQuestion = (handleOpenNotification) => {
   // Feel free to update this to useState
-  const [questionObject, setQuestionObject] = useState(
-    "There is no question yet",
-  );
+  const [questionObject, setQuestionObject] = useState("Loading question...");
+
+  const [questionName, setQuestionName] = useState("");
 
   const search = useLocation().search;
   const roomId = new URLSearchParams(search).get("roomId");
@@ -15,10 +15,12 @@ const useQuestion = (handleOpenNotification) => {
 
   getQuestion(roomId)
     .then((res) => {
-      const { content } = res.data;
+      const { content, title } = res.data;
+      setQuestionName(title);
       setQuestionObject(content);
     })
     .catch((error) => {
+      handleOpenNotification("Failed to fetch question!", 3000, "error");
       console.error(error);
     });
 
@@ -31,7 +33,7 @@ const useQuestion = (handleOpenNotification) => {
   // - type: type of notification ("success" || "error")
   // Example usage: handleOpenNotification("Encounter issues retriveing questions!", 4000, "error")
 
-  return { questionObject };
+  return { questionObject, questionName };
 };
 
 export default useQuestion;

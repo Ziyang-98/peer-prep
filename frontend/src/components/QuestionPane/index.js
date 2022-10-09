@@ -1,16 +1,20 @@
+import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 import DOMPurify from "dompurify";
 import { styles } from "./styles";
 
-const QuestionPane = ({ questionObject }) => {
+const QuestionPane = ({ questionName, questionObject }) => {
   var sanitisedHTML = DOMPurify.sanitize(questionObject);
 
   return (
     <Box sx={styles.container}>
-      <div
-        style={styles.text}
-        dangerouslySetInnerHTML={{ __html: sanitisedHTML }}
-      />
+      <Box sx={styles.title}>{questionName}</Box>
+      <Box sx={styles.text}>
+        <div
+          style={styles.text}
+          dangerouslySetInnerHTML={{ __html: sanitisedHTML }}
+        />
+      </Box>
     </Box>
   );
 };
