@@ -53,7 +53,7 @@ export async function deleteMatch(id) {
   return response;
 }
 
-export async function getQuestion(difficulty) {
-  const response = await axios.get(URL_QUESTION_SVC + `/${difficulty}`);
+export async function getQuestion(roomId) {
+  const response = await axios.get(URL_QUESTION_SVC + `/${roomId}`);
   return response;
 }

@@ -10,13 +10,13 @@ const useQuestion = (handleOpenNotification) => {
 
   const search = useLocation().search;
   const roomId = new URLSearchParams(search).get("roomId");
+  console.log(roomId);
   const difficulty = new URLSearchParams(search).get("difficulty");
 
-  getQuestion(difficulty)
+  getQuestion(roomId)
     .then((res) => {
-      console.log(res);
       const { content } = res.data;
-      // setQuestionObject(content);
+      setQuestionObject(content);
     })
     .catch((error) => {
       console.error(error);
