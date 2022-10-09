@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const { LeetCode } = require('leetcode-query')
 
+const { redisClient } = require('../config/cache')
+
 const leetcode = new LeetCode()
 
 function getRandomNumber(total) {
@@ -16,6 +18,7 @@ async function getTotalNumOfQuestionsByDifficulty(difficulty) {
   return total
 }
 
+// Getting all questions and randomly pick one is too slow, so we do this instead
 async function getTitleSlugOfRandomQuestion(difficulty) {
   const total = await getTotalNumOfQuestionsByDifficulty(difficulty)
   const { questions } = await leetcode.problems({
@@ -33,22 +36,52 @@ async function getTitleSlugOfRandomQuestion(difficulty) {
   return titleSlug
 }
 
-// Description: Get a random question by difficulty
-// Route: GET /api/questionService/question
-// Access: Public
-const getRandomQuestionOfDifficulty = asyncHandler(async (req, res) => {
-  const { difficulty } = req.params
-
-  if (!difficulty) {
-    throw new Error('No difficulty is specified!')
-  }
-
-  // Getting all questions and randomly pick one is too slow, so we do this instead
+async function getRandomProblem(difficulty) {
   const titleSlug = await getTitleSlugOfRandomQuestion(difficulty)
   const problem = await leetcode.problem(titleSlug)
 
-  if (!problem) {
-    throw new Error('Cannot find problem!')
+  return problem
+}
+
+function extractDifficulty(roomId) {
+  const split = roomId.split('-')
+
+  if (split.length !== 3) {
+    throw new Error('This is not a valid roomId')
+  }
+
+  return split[1]
+}
+
+// Description: Get a random question for the room
+// Route: GET /api/questionService/question/random/:roomId
+// Access: Public
+const getRandomQuestionOfDifficulty = asyncHandler(async (req, res) => {
+  const { roomId } = req.params
+
+  if (!roomId) {
+    throw new Error('No roomId is given!')
+  }
+
+  let problem = null
+  const key = `${roomId}:question`
+
+  const problemJsonString = await redisClient.get(key)
+
+  if (problemJsonString) {
+    // Cache hit
+    problem = JSON.parse(problemJsonString)
+  } else {
+    // Cache miss
+    const difficulty = extractDifficulty(roomId)
+
+    // To prevent sending premium leetcode question, which the content is not accessible
+    while (!problem?.content) {
+      // eslint-disable-next-line no-await-in-loop
+      problem = await getRandomProblem(difficulty)
+    }
+
+    await redisClient.set(key, JSON.stringify(problem))
   }
 
   res.status(200).json({
