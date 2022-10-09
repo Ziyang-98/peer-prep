@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import { URI_FRONTEND } from './common/config.js'
+import { URI_FRONTEND , PREFIX_LOGIN, PREFIX_CHANGE_PASSWORD, PREFIX_DELETE} from './common/config.js'
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
