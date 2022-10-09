@@ -1,21 +1,18 @@
-const { deleteMatchForSocket } = require('../controller/matchController')
-
 const timeoutTable = new Map()
 
 const setRoomTimeout = (room, socket) => {
   const timeoutId = setTimeout(() => {
-    deleteMatchForSocket(socket)
     socket.leave(room)
-    socket.emit('failToMatch', {
-      msg: "Sorry! We can't find a match at this time.",
+    socket.emit('timesUp', {
+      message: 'Time is up! 30 minutes have passed!',
     })
-  }, 30000)
+  }, 1800000)
   timeoutTable.set(room, timeoutId)
 
-  // automatic delete the entry in timeoutTable after 30 seconds is up with a 10 seconds delay
+  // automatic delete the entry in timeoutTable after 30 mins is up with a 10 seconds delay
   setTimeout(() => {
     timeoutTable.delete(room)
-  }, 40000)
+  }, 1810000)
 }
 
 const clearRoomTimeout = (room) => {
