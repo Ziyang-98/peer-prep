@@ -19,22 +19,32 @@ try {
     if (username && password && !userExists) {
       const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
       const resp = await _createUser(username, hashedPassword)
-            if (resp.err) {
-                console.log("Failed to create a new user!");
-                return res.status(STATUS_CODE_BAD_REQUEST).json({message: 'Could not create a new user!'});
-            } else {
-                console.log(`Created new user ${username} successfully!`)
-                return res.status(STATUS_CODE_CREATED).json({message: `Created new user ${username} successfully!`});
-            }
-        } else if (!username || !password) {
-            console.log("Username and/or Password are missing!")
-            return res.status(STATUS_CODE_BAD_REQUEST).json({message: 'Username and/or Password are missing!'});
-        } else if (userExists) {
-            console.log("Username exists. Cannot create account")
-            return res.status(STATUS_CODE_BAD_REQUEST).json({message: 'Username is already used!'})
-        } else {
-            return res.status(STATUS_CODE_BAD_REQUEST).json({message: 'System failed to create new user!'})
-        }
+      if (resp.err) {
+        console.log('Failed to create a new user!')
+        return res
+          .status(STATUS_CODE_BAD_REQUEST)
+          .json({ message: 'Could not create a new user!' })
+      } else {
+        console.log(`Created new user ${username} successfully!`)
+        return res
+          .status(STATUS_CODE_CREATED)
+          .json({ message: `Created new user ${username} successfully!` })
+      }
+    } else if (!username || !password) {
+      console.log('Username and/or Password are missing!')
+      return res
+        .status(STATUS_CODE_BAD_REQUEST)
+        .json({ message: 'Username and/or Password are missing!' })
+    } else if (userExists) {
+      console.log('Usernmae exists. Cannot create account')
+      return res
+        .status(STATUS_CODE_BAD_REQUEST)
+        .json({ message: 'Username is already used!' })
+    } else {
+      return res
+        .status(STATUS_CODE_BAD_REQUEST)
+        .json({ message: 'System failed to create new user!' })
+    }
   } catch (err) {
     return res
       .status(STATUS_CODE_SERVER_ERROR)
