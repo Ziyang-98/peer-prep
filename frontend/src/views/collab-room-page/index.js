@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Split from "react-split";
+import RoomTimer from "components/RoomTimer";
 import QuestionPane from "components/QuestionPane";
 import UsersDisplay from "components/UsersDisplay";
 import Editor from "components/Editor";
@@ -18,12 +19,13 @@ const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
-  const { editorProps, users } = useCollabEditor(handleOpenNotification);
+  const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
 
   const { questionObject } = useQuestion(handleOpenNotification);
 
   return (
     <Box sx={styles.mainContainer}>
+      <RoomTimer timeInMs={timer} />
       <Split direction={"horizontal"} style={styles.split}>
         <Box sx={styles.panel}>
           <QuestionPane questionObject={questionObject} />

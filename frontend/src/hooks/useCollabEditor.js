@@ -14,6 +14,7 @@ const useCollabEditor = (handleOpenNotification) => {
   const [editorValue, setEditorValue] = useState(DEFAULT_EDITOR_VALUE);
   const [users, setUsers] = useState("");
   const [socket, setSocket] = useState(null);
+  const [timer, setTimer] = useState(null);
 
   const [cookies] = useCookies(["token"]);
 
@@ -40,6 +41,10 @@ const useCollabEditor = (handleOpenNotification) => {
 
     socket.on("codeUpdated", ({ code }) => {
       setEditorValue(code);
+    });
+
+    socket.on("sendTime", ({ time }) => {
+      setTimer(time);
     });
 
     socket.on("timesUp", () => {
@@ -93,6 +98,7 @@ const useCollabEditor = (handleOpenNotification) => {
       onChange: handleEditorChange,
     },
     users,
+    timer,
   };
 };
 
