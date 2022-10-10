@@ -22,7 +22,7 @@ app.use('/api/questionService/question', require('./routes/questionRoutes'))
 app.use(errorHandler)
 
 // Redis Cache
-connectCache()
+// connectCache()
 
 // HTTP Server
 const httpServer = createServer(app)
