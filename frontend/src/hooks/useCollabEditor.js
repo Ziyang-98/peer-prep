@@ -39,6 +39,10 @@ const useCollabEditor = (handleOpenNotification) => {
       setPartner(partner);
     });
 
+    socket.on("codeUpdated", ({ code }) => {
+      setEditorValue(code);
+    });
+
     // Error Handlers
     socket.on("connect_error", (err) => {
       handleOpenNotification(
@@ -48,16 +52,16 @@ const useCollabEditor = (handleOpenNotification) => {
       );
     });
 
+    socket.on("error", ({ message }) => {
+      handleOpenNotification(message, 3000, "error");
+    });
+
     socket.on("disconnect", () => {
       handleOpenNotification("Lost connection to the server!", 3000, "error");
     });
 
     socket.on("userDisconnect", ({ user }) => {
       handleOpenNotification(`${user} has disconnected!`, 3000, "warning");
-    });
-
-    socket.on("codeUpdated", ({ code }) => {
-      setEditorValue(code);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
