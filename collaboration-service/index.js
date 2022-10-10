@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const { createServer } = require('http')
+require('dotenv').config()
 
 const { errorHandler } = require('./middleware/errorMiddleware')
 const { connectCache } = require('./config/cache')
@@ -17,7 +18,6 @@ app.options('*', cors())
 app.get('/', (req, res) => {
   res.send({ message: 'Welcome to Collaboration Service!' })
 })
-app.use('/api/collaborationService/room', require('./routes/roomRoutes'))
 
 // Error handling
 app.use(errorHandler)
@@ -27,7 +27,7 @@ connectCache()
 
 // HTTP Server
 const httpServer = createServer(app)
-const PORT = 8002
+const PORT = process.env.PORT || 8002
 
 httpServer.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
