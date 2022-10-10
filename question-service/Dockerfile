@@ -16,6 +16,7 @@ RUN npm install
 COPY . .
 
 ENV PORT=8003
+ENV REDIS_URL=redis://redis:6379
 
 EXPOSE ${PORT}
 CMD [ "node", "index.js" ]
