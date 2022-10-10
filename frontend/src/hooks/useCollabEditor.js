@@ -36,11 +36,15 @@ const useCollabEditor = (handleOpenNotification) => {
     });
 
     socket.on("usersInRoom", ({ usersInRoom }) => {
-      setUsers(usersInRoom.join(","));
+      setUsers(usersInRoom.join("  ,  "));
     });
 
     socket.on("codeUpdated", ({ code }) => {
       setEditorValue(code);
+    });
+
+    socket.on("userConnected", ({ user }) => {
+      handleOpenNotification(`${user} has connected!`, 3000, "success");
     });
 
     socket.on("sendTime", ({ time }) => {
