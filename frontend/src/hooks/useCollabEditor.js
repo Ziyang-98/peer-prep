@@ -28,7 +28,6 @@ const useCollabEditor = (handleOpenNotification) => {
     setSocket(socket);
     socket.on("connect", function () {
       const user = cookies.username;
-      console.log(roomId);
       if (!user) {
         handleOpenNotification("No username found!", 3000, "error");
       } else {
@@ -61,7 +60,7 @@ const useCollabEditor = (handleOpenNotification) => {
 
       // TODO: Create end session page and navigate to end session page instead
       setTimeout(() => {
-        navigate(`/`);
+        navigate(`/endOfSession`);
       }, 3000);
     });
 
