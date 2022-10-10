@@ -3,6 +3,16 @@ const { Server } = require('socket.io')
 const { redisClient } = require('./cache')
 const { setRoomTimer, clearRoomTimer } = require('../utils/timeoutHelper')
 
+const getNewLines = (noOfLines) => {
+  let newLines = ''
+  for (let i = 1; i < noOfLines; i++) {
+    newLines += '\n'
+  }
+  return newLines
+}
+
+const DEFAULT_CODE = '# Enter your answer here'
+
 const connectSocket = (httpServer, options) => {
   const io = new Server(httpServer, options)
 
@@ -41,7 +51,7 @@ const connectSocket = (httpServer, options) => {
 
       if (!code && code !== '') {
         await redisClient.set(codeKey, '')
-        code = ''
+        code = DEFAULT_CODE + getNewLines(20)
       }
 
       socket.emit('codeUpdated', { code })

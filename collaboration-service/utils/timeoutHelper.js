@@ -18,9 +18,9 @@ const handleTimesUp = (roomId, io) => {
 const emitTimer = (roomId, io) => {
   let timer = timerTable.get(roomId)
 
-  // Reset timer to 30 mins
+  // Start timer at 30 mins
   if (timer === undefined) {
-    timer = 60000
+    timer = 1800000
   } else {
     timer -= 1000
   }
