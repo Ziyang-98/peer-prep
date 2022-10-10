@@ -1,7 +1,7 @@
 const { Server } = require('socket.io')
 
 const { redisClient } = require('./cache')
-const { setRoomTimeout, clearRoomTimeout } = require('../utils/timeoutHelper')
+const { setRoomTimer, clearRoomTimer } = require('../utils/timeoutHelper')
 
 const connectSocket = (httpServer, options) => {
   const io = new Server(httpServer, options)
@@ -20,7 +20,7 @@ const connectSocket = (httpServer, options) => {
 
       if (listLen >= 2) {
         socket.emit('error', {
-          message: 'You cant join the room as it is already full!',
+          message: "You can't join the room as it is already full!",
         })
         return
       }
@@ -46,9 +46,8 @@ const connectSocket = (httpServer, options) => {
 
       socket.emit('codeUpdated', { code })
       await redisClient.hSet(socket.id, { roomId, user }) // For removal of user, when user disconnect
-
       // Handle 30 minutes timer
-      setRoomTimeout(roomId, socket)
+      setRoomTimer(roomId, io)
     })
 
     socket.on('disconnect', async () => {
@@ -66,7 +65,7 @@ const connectSocket = (httpServer, options) => {
           await redisClient.del(key)
 
           // Housekeeping matter of timeout
-          clearRoomTimeout(roomId)
+          clearRoomTimer(roomId)
         }
 
         io.in(roomId).emit('userDisconnect', { user })

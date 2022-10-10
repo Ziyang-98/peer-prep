@@ -9,9 +9,11 @@ const RoomTimer = ({ timeInMs }) => {
   return (
     <Box sx={styles.container}>
       <Typography variant="h4">
-        {(getTimeInMins(timeInMs)
-          ? `${getTimeInMins(timeInMs)} mins`
-          : `${getTimeInSeconds(timeInMs)} secs`) + " left"}
+        {getTimeInMins(timeInMs)
+          ? `${getTimeInMins(timeInMs)} mins left`
+          : getTimeInSeconds(timeInMs) !== null
+          ? `${getTimeInSeconds(timeInMs)} secs left`
+          : "Timer not initiated"}
       </Typography>
     </Box>
   );

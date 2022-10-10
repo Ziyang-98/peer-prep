@@ -11,5 +11,5 @@ export const getTimeInMins = (ms) => {
 };
 
 export const getTimeInSeconds = (ms) => {
-  return Math.floor((ms / 1000) % 60);
+  return ms && Math.floor((ms / 1000) % 60);
 };

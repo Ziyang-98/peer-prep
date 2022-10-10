@@ -28,11 +28,12 @@ const useCollabEditor = (handleOpenNotification) => {
     setSocket(socket);
     socket.on("connect", function () {
       const user = cookies.username;
-
+      console.log(roomId);
       if (!user) {
         handleOpenNotification("No username found!", 3000, "error");
+      } else {
+        socket.emit("joinRoom", { roomId, user });
       }
-      socket.emit("joinRoom", { roomId, user });
     });
 
     socket.on("usersInRoom", ({ usersInRoom }) => {
@@ -47,8 +48,8 @@ const useCollabEditor = (handleOpenNotification) => {
       handleOpenNotification(`${user} has connected!`, 3000, "success");
     });
 
-    socket.on("sendTime", ({ time }) => {
-      setTimer(time);
+    socket.on("currentTime", ({ timer }) => {
+      setTimer(timer);
     });
 
     socket.on("timesUp", () => {
