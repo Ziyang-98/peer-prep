@@ -3,7 +3,6 @@ const cors = require('cors')
 const { createServer } = require('http')
 
 const { errorHandler } = require('./middleware/errorMiddleware')
-const { connectCache } = require('./config/cache')
 
 // Express
 const app = express()
@@ -20,9 +19,6 @@ app.use('/api/questionService/question', require('./routes/questionRoutes'))
 
 // Error handling
 app.use(errorHandler)
-
-// Redis Cache
-// connectCache()
 
 // HTTP Server
 const httpServer = createServer(app)

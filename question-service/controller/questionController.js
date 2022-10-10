@@ -1,8 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const { LeetCode } = require('leetcode-query')
 
-const { redisClient } = require('../config/cache')
-
 const leetcode = new LeetCode()
 
 function hash(str) {
