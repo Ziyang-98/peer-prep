@@ -23,13 +23,13 @@ const assert = chai.assert;
 chai.use(chaiHttp)
 chai.should()
 
-before(function () {
-  UserModel.deleteMany();
-});
+before(async function () {
+  await UserModel.deleteMany();
+})
 
 describe("createUser", () => {
   let userId = null;
-
+  
   it ('should create a new user successfully', (done) => {
     chai.request(app)
       .post(`${PREFIX_USER_SVC}/`)
@@ -45,7 +45,7 @@ describe("createUser", () => {
           userId = user._id
           done()
         })
-      })
+      }).timeout(10000);
   })
 
   it ('should fail to create a new user if password is missing', (done) => {
@@ -56,7 +56,7 @@ describe("createUser", () => {
         res.should.have.status(STATUS_CODE_BAD_REQUEST)
         res.body.message.should.equal('Username and/or Password are missing!')
         done()
-      })
+      }).timeout(10000);
   })
 
   it ('should fail to create a new user if user already exists', (done) => {
@@ -67,7 +67,7 @@ describe("createUser", () => {
         res.should.have.status(STATUS_CODE_BAD_REQUEST)
         res.body.message.should.equal('Username is already used!')
         done()
-      })
+      }).timeout(10000);
   })
 
   after(() => {
@@ -106,7 +106,7 @@ describe('Login and Auth', function() {
             });
             done();
         });
-    })
+    }).timeout(10000);
 });
 
 describe('Fail Login wrong password', function() {
@@ -120,7 +120,7 @@ describe('Fail Login wrong password', function() {
             result.body.message.should.equal('Invalid credentials.');
             done();
         });
-    })
+    }).timeout(10000);
 
     it('detects that the user does not exist in the database', function(done) {
         chai.request(app)
@@ -132,7 +132,7 @@ describe('Fail Login wrong password', function() {
             result.body.message.should.equal("User does not exist in database.");
             done();
         });
-    })
+    }).timeout(10000);
 
     it('detects one of the fields is missing', function(done) {
         chai.request(app)
@@ -144,6 +144,6 @@ describe('Fail Login wrong password', function() {
             result.body.message.should.equal("Missing Fields");
             done();
         });
-    })
+    }).timeout(10000);
 });
 
