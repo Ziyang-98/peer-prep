@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENV: 'TEST'
+      ENV: "TEST"
       SECRET_TOKEN: 1234567
       DB_TEST_URI: mongodb+srv://cs3219:cuqNBfdL5feF16Ik@cluster0.medxqln.mongodb.net/?retryWrites=true&w=majority
       
