@@ -10,8 +10,6 @@ const useQuestion = (handleOpenNotification) => {
 
   const search = useLocation().search;
   const roomId = new URLSearchParams(search).get("roomId");
-  console.log(roomId);
-  const difficulty = new URLSearchParams(search).get("difficulty");
 
   getQuestion(roomId)
     .then((res) => {
@@ -21,7 +19,6 @@ const useQuestion = (handleOpenNotification) => {
     })
     .catch((error) => {
       handleOpenNotification("Failed to fetch question!", 3000, "error");
-      console.error(error);
     });
 
   // TODO: Add logic to get question from backend and return question info
