@@ -23,9 +23,9 @@ const assert = chai.assert;
 chai.use(chaiHttp)
 chai.should()
 
-before(async () => {
-  await UserModel.deleteMany();
-})
+before(function () {
+  UserModel.deleteMany();
+});
 
 describe("createUser", () => {
   let userId = null;
