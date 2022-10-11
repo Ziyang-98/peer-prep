@@ -14,7 +14,7 @@ jobs:
     env:
       ENV: "TEST"
       SECRET_TOKEN: 1234567
-      DB_TEST_URI: mongodb+srv://user3219:user3219@cluster0.fesq8vy.mongodb.net/?retryWrites=true&w=majority
+      DB_TEST_URI: mongodb+srv://cs3219:cuqNBfdL5feF16Ik@cluster0.medxqln.mongodb.net/?retryWrites=true&w=majority
       
 
     defaults:
