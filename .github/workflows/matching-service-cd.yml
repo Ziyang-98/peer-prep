@@ -1,5 +1,3 @@
-# This workflow build and push a Docker container to Google Artifact Registry and deploy it on Cloud Run when a commit is pushed to the "main" branch
-
 name: Matching Service CD
 
 on:
@@ -10,54 +8,34 @@ on:
 
 env:
   PROJECT_ID: cs3219-365016
-  GAR_LOCATION: cs3219-repo
   SERVICE: matching-service
   REGION: east-asia1
 
 jobs:
   deploy:
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: 'read'
+      id-token: 'write'
 
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+          uses: actions/checkout@v2
 
-      - name: Google Auth
-        id: auth
-        uses: "google-github-actions/auth@v0"
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-      # BEGIN - Docker auth and build (NOTE: If you already have a container image, these Docker steps can be omitted)
-
-      # Authenticate Docker to Google Cloud Artifact Registry
-      - name: Docker Auth
-        id: docker-auth
-        uses: "docker/login-action@v1"
-        with:
-          username: "oauth2accesstoken"
-          password: "${{ steps.auth.outputs.access_token }}"
-          registry: "${{ env.GAR_LOCATION }}-docker.pkg.dev"
-
-      - name: Build and Push Container
-        run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
-
-      # END - Docker auth and build
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Deploy to Cloud Run
-        id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
-        with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          # NOTE: If using a pre-built image, update the image name here
-          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
+          id: deploy
+          uses: google-github-actions/deploy-cloudrun@v0
+          with:
+            service: ${{ env.SERVICE }}
+            region: ${{ env.REGION }}
+            # NOTE: If required, update to the appropriate source folder
+            source: ./matching-service
 
-      # If required, use the Cloud Run url output in later steps
-      - name: Show Output
-        run: echo ${{ steps.deploy.outputs.url }}
+      - name: 'Use output'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
