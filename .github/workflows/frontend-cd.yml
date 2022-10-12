@@ -14,8 +14,8 @@ jobs:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/frontend
 
     defaults:
-    run:
-      working-directory: ./frontend
+      run:
+        working-directory: frontend
 
     steps:
       - name: Login
