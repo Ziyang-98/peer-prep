@@ -9,7 +9,7 @@ on:
 env:
   PROJECT_ID: cs3219-365016
   SERVICE: matching-service
-  REGION: east-asia1
+  REGION: asia-east1
 
 jobs:
   deploy:
