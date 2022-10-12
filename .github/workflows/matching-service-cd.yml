@@ -13,10 +13,6 @@ jobs:
     env:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/matching-service
 
-    defaults:
-      run:
-        working-directory: matching-service
-
     steps:
       - id: Login
         uses: google-github-actions/auth@v0
@@ -38,5 +34,11 @@ jobs:
       - name: Push Docker image
         run: docker push $IMAGE_NAME
 
-      - name: Deploy Docker image
-        run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
+      - name: "Deploy to Cloud Run"
+        uses: "google-github-actions/deploy-cloudrun@v0"
+        with:
+          service: "${{ secrets.GCP_PROJECT_ID }}"
+          image: $IMAGE_NAME
+          region: east-asia1
+          source: ./matching-service
+          env_vars: 'NAME="Hello World"'
