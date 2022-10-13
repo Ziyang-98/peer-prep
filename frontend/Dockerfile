@@ -6,6 +6,8 @@ RUN npm install
 COPY . ./
 RUN npm run build
 
+ENV PORT 80
+
 # release step
 FROM nginx as release
 RUN rm /etc/nginx/conf.d/default.conf
