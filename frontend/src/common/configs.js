@@ -1,4 +1,4 @@
-const URI_USER_SVC = process.env.URI_USER_SVC;
+const URI_USER_SVC = "https://user-service-rob2padjya-de.a.run.app";
 
 const PREFIX_USER_SVC = "/api/user";
 const PREFIX_LOGIN = "/login";
@@ -13,8 +13,7 @@ export const URL_CHANGE_PASSWORD = URL_USER_SVC + PREFIX_CHANGE_PASSWORD;
 
 console.log(`url of user svc is: ${URL_USER_SVC}`);
 
-export const URI_MATCHING_SVC =
-  process.env.URI_MATCHING_SVC;
+export const URI_MATCHING_SVC = "https://matching-service-rob2padjya-de.a.run.app";
 
 const PREFIX_MATCH_SVC = "/api/matchService/match";
 
