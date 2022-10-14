@@ -1,1 +1,1 @@
-export const URI_FRONTEND = process.env.URI_FRONTEND;
+export const URI_FRONTEND = "https://frontend-rob2padjya-de.a.run.app";

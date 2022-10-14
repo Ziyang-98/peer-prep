@@ -8,7 +8,7 @@ on:
 
 env:
   PROJECT_ID: cs3219-365016
-  SERVICE: user-service
+  SERVICE: collaboration-service
   REGION: asia-east1
 
 jobs:
