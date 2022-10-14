@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import cookieParser from 'cookie-parser'
-import { URI_FRONTEND } from './common/config.js'
+import cookieParser from 'cookie-parser'  
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
