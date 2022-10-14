@@ -9,6 +9,7 @@ import {
 
 export async function loginUser(username, password) {
   const body = { username, password };
+  
 
   const response = await axios.post(URL_LOGIN, body);
   return response;
@@ -34,6 +35,7 @@ export async function changePassword(password) {
 
 export async function signUpUser(username, password) {
   const body = { username, password };
+  console.log(URL_USER_SVC);
 
   const response = await axios.post(URL_USER_SVC, body);
 
