@@ -1,11 +1,12 @@
 import express from 'express'
 import cors from 'cors'
-import cookieParser from 'cookie-parser'  
+import cookieParser from 'cookie-parser'
+import { URI_FRONTEND } from './common/config.js'
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors()) // config cors so that front-end can use
+app.use(cors({credentials: true, origin: URI_FRONTEND})) // config cors so that front-end can use
 app.options('*', cors())
 app.use(cookieParser())
 
