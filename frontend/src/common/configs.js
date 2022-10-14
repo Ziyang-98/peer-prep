@@ -1,4 +1,4 @@
-const URI_USER_SVC = process.env.URI_USER_SVC || "http://localhost:8000";
+const URI_USER_SVC = process.env.URI_USER_SVC;
 
 const PREFIX_USER_SVC = "/api/user";
 const PREFIX_LOGIN = "/login";
@@ -11,7 +11,7 @@ export const URL_DELETE_USER = URL_USER_SVC + PREFIX_DELETE;
 export const URL_CHANGE_PASSWORD = URL_USER_SVC + PREFIX_CHANGE_PASSWORD;
 
 export const URI_MATCHING_SVC =
-  process.env.URI_MATCHING_SVC || "http://localhost:8001";
+  process.env.URI_MATCHING_SVC;
 
 const PREFIX_MATCH_SVC = "/api/matchService/match";
 
