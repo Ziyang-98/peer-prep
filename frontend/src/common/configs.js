@@ -20,3 +20,10 @@ export const URL_MATCHING_SVC = URI_MATCHING_SVC + PREFIX_MATCH_SVC;
 export const URI_COLLAB_SVC =
   process.env.URI_COLLAB_SVC || "http://localhost:8002";
 export const TOKEN_AGE = process.env.TOKEN_AGE || 3600;
+
+export const URI_QUESTION_SVC =
+  process.env.URI_QUESTION_SVC || "http://localhost:8003";
+
+const PREFIX_QUESTION_SVC = "/api/questionService/question/random";
+
+export const URL_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;

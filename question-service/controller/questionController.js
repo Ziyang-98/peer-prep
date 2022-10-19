@@ -69,7 +69,7 @@ async function getRandomProblem(roomId, difficulty) {
 function extractDifficulty(roomId) {
   const split = roomId.split('-')
 
-  if (split.length !== 3) {
+  if (split.length < 3) {
     throw new Error('This is not a valid roomId')
   }
 
