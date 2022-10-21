@@ -13,13 +13,12 @@ import {
 } from '../common/constants.js'
 import bcrypt from 'bcryptjs'
 export async function createUser(req, res) {
-  try {
+try {
     const { username, password } = req.body
     const userExists = await _userExists(username)
     if (username && password && !userExists) {
       const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
       const resp = await _createUser(username, hashedPassword)
-
       if (resp.err) {
         console.log('Failed to create a new user!')
         return res

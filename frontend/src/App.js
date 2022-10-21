@@ -4,6 +4,7 @@ import SignInPage from "views/sign-in-page";
 import SignUpPage from "views/sign-up-page";
 import SelectionPage from "views/selection-page";
 import CollabRoomPage from "views/collab-room-page";
+import CollabRoomEndPage from "views/collab-room-end-page";
 
 import ProfilePage from "views/profile-page";
 import { Box } from "@mui/material";
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/" element={<SelectionPage />} />
                   <Route path="profile" element={<ProfilePage />} />
                   <Route path="room" element={<CollabRoomPage />} />
+                  <Route path="endOfSession" element={<CollabRoomEndPage />} />
                 </Route>
               </Route>
 

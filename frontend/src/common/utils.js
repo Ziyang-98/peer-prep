@@ -5,3 +5,11 @@ export const getNewLines = (noOfLines) => {
   }
   return newLines;
 };
+
+export const getTimeInMins = (ms) => {
+  return Math.floor((ms / 1000 / 60) << 0);
+};
+
+export const getTimeInSeconds = (ms) => {
+  return ms && Math.floor((ms / 1000) % 60);
+};
