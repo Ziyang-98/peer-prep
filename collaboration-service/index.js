@@ -11,7 +11,7 @@ const connectSocket = require('./config/socket')
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin: "https://frontend-rob2padjya-de.a.run.app"}))
 app.options('*', cors())
 
 // Routes
