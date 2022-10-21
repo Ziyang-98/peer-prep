@@ -15,6 +15,8 @@ const useLogin = () => {
     setCookie("token", token, { path: "/", maxAge: TOKEN_AGE });
     setCookie("username", username, { path: "/", maxAge: TOKEN_AGE });
 
+    console.log("cookies --> " + cookies);
+
     navigate("/", { replace: true });
     setLoading(false);
   };
