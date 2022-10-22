@@ -16,6 +16,7 @@ RUN npm install
 COPY . .
 
 ENV PORT=8003
+ENV MONGO_URI=mongodb+srv://user3219:user3219@cluster0.fesq8vy.mongodb.net/QuestionService?retryWrites=true&w=majority
 
 EXPOSE ${PORT}
 CMD [ "node", "index.js" ]
