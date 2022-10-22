@@ -32,4 +32,4 @@ const PORT = process.env.PORT || 8002
 httpServer.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
 // Socket Server
-connectSocket(httpServer, { cors: { origin: '*' }})
+connectSocket(httpServer, { cors: { origin: 'https://frontend-rob2padjya-de.a.run.app' }})
