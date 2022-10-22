@@ -17,7 +17,6 @@ COPY . .
 
 ENV NODE_ENV=development
 ENV PORT=8002
-ENV REDIS_URL=redis://redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com:10745
 
 EXPOSE ${PORT}
 CMD [ "node", "index.js" ]
