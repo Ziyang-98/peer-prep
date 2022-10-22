@@ -11,14 +11,8 @@ const connectSocket = require('./config/socket')
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors({origin: 'https://frontend-rob2padjya-de.a.run.app'}))
+app.use(cors())
 app.options('*', cors())
-
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
 
 // Routes
 app.get('/', (req, res) => {
@@ -38,4 +32,4 @@ const PORT = process.env.PORT || 8002
 httpServer.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
 // Socket Server
-connectSocket(httpServer, { cors: true })
+connectSocket(httpServer, { cors: { origin: '*' }})
