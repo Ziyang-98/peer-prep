@@ -38,4 +38,4 @@ const PORT = process.env.PORT || 8002
 httpServer.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
 // Socket Server
-connectSocket(httpServer, { cors: { origin: '*', methods: ["GET", "POST"]}})
+connectSocket(httpServer, { cors: true })
