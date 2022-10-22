@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(cors())
 app.options('*', cors())
 
+
 // Routes
 app.get('/', (req, res) => {
   res.send({ message: 'Welcome to Collaboration Service!' })
@@ -32,4 +33,4 @@ const PORT = process.env.PORT || 8002
 httpServer.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
 // Socket Server
-connectSocket(httpServer, { cors: { origin: 'https://frontend-rob2padjya-de.a.run.app' }})
+connectSocket(httpServer, { cors: { origin: '*', methods: ["GET", "POST"]}})

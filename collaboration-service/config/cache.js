@@ -1,7 +1,11 @@
 const { createClient } = require('redis')
 
 const redisClient = createClient({
-  url: process.env.REDIS_URL || 'redis://localhost:6379',
+  socket: {
+    host: 'redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com',
+    port: 10745
+  },
+  password: 'HwDKiJnZH8oceNGS6K76sakPj08mDldK'
 })
 
 const connectCache = async () => {
