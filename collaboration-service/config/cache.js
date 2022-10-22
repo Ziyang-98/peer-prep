@@ -1,7 +1,7 @@
 const { createClient } = require('redis')
 
 const redisClient = createClient({
-  url: 'redis://redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com:10745',
+  url: process.env.REDIS_URL || 'redis://localhost:6379',
 })
 
 const connectCache = async () => {
