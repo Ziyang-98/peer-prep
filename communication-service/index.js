@@ -1,18 +1,23 @@
 require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
+const socketio = require("socket.io");
 const app = express();
 const port = process.env.PORT || 8004
-const http = require('http').createServer(app);
+const chatServer = require('http').createServer(app);
+const adminName = 'Admin';
+const STATUS_CODE_SUCCESS  = 200;
+const  PREFIX_COMMUNICATION_SVC = '/api/communication/';
+const formatMessage = require('./utils/messages');
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers,
+} = require("./utils/chatUsers");
 
-const STATUS_CODE_SUCCESS  = 200
-const  PREFIX_COMMUNICATION_SVC = '/api/communication/'
-const io = require('socket.io')(http, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  },
-});
+
+const io = socketio(chatServer);
 
 app.use(cors());
 app.use(express.json());
@@ -30,29 +35,64 @@ app.get('/', (req, res) => {
 app.get(PREFIX_COMMUNICATION_SVC, (req, res) => 
   res.status(STATUS_CODE_SUCCESS).json({status: 'success', data: 'Chat microservice is working!'}));
 
+
+
+
 io.on('connection', socket => {
-  console.log(`you connected with id: ${socket.id}`);
-  socket.on('incoming-message', (message, sender, roomId) => {
-    console.log(`incoming message received: ${message}`)
-    console.log(`incoming message roomId: ${roomId}`)
-    console.log(`incoming message sender: ${sender}`)
-    if (roomId === "") {
-      console.log("missing room ID")
-    } else {
-      console.log("emitting")
-      io.emit(roomId, message)
-    }
+
+  socket.on('joinRoom', ({username, roomId}) => {
+    const user = userJoin(socket.id, username, roomId);
+    socket.join(user.roomId);
+    
+    socket.emit('message', formatMessage(adminName, `welcome ${user.username}`));
+
+    socket.broadcast.to(user.roomId).emit('messaage', formatMessage(adminName, `${user.username} has joined the chat`));
+    //console.log(`this is the room id on index side: ${user.roomId}`);
+    // send users and room info
+    io.to(user.roomId).emit("roomUsers", {
+      
+      roomId: user.roomId,
+      users: getRoomUsers(user.roomId),
+    });
+  });
+
+
+
+
+  //listen for chat message
+  socket.on('chatMessage', (msg) => {
+    const user = getCurrentUser(socket.id);
+
+    io.to(user.roomId).emit('message', formatMessage(user.username, msg));
   })
+
+
+  socket.on("disconnect", () => {
+    const user = userLeave(socket.id);
+
+    if (user) {
+      io.to(user.roomId).emit(
+        "message",
+        formatMessage(adminName, `${user.username} has left the chat`)
+      );
+
+      // send users and room info
+    io.to(user.roomId).emit("roomUsers", {
+      roomId: user.roomId,
+      users: getRoomUsers(user.roomId),
+    });
+    }
+  });
+});
+
+chatServer.listen(port, () => {
+  console.log(`Comms service listening to port ${port}`);
 })
 
-http.listen(port, () => {
-  console.log(`Message ms listening to port ${port}`);
-})
 
 
 
 
-
-module.exports = http;
+module.exports = chatServer;
 
 
