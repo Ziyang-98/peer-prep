@@ -32,12 +32,6 @@ app.get('/', (req, res) => {
   res.status(STATUS_CODE_SUCCESS).json({status: 'success', data: 'Chat Microservice is running.'})
 })
 
-app.get(PREFIX_COMMUNICATION_SVC, (req, res) => 
-  res.status(STATUS_CODE_SUCCESS).json({status: 'success', data: 'Chat microservice is working!'}));
-
-
-
-
 io.on('connection', socket => {
 
   socket.on('joinRoom', ({username, roomId}) => {
