@@ -89,6 +89,10 @@ const useCollabEditor = (handleOpenNotification) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleNavToEndSession = () => {
+    navigate(`/endOfSession`);
+  };
+
   const handleEditorChange = useCallback(
     (value, viewUpdate) => {
       if (viewUpdate.docChanged && viewUpdate.selectionSet)
@@ -104,6 +108,7 @@ const useCollabEditor = (handleOpenNotification) => {
     },
     users,
     timer,
+    handleNavToEndSession,
   };
 };
 
