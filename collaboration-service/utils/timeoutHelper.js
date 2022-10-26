@@ -8,39 +8,35 @@ const clearRoomTimer = (roomId) => {
   intervalIdTable.delete(roomId)
 }
 
-const emitTimer = (roomId, io) => {
+const emitTimer = (roomId) => {
   let timer = timerTable.get(roomId)
-
-  // Start timer at 30 mins
-  if (timer === undefined) {
-    timer = 10000
-  }
 
   if (timer > 0) {
     timer -= 1000
     timerTable.set(roomId, timer)
   }
-
-  io.to(roomId).emit('currentTime', {
-    timer,
-  })
 }
 
-const initTimer = (roomId, io) => {
+const initTimer = (roomId) => {
+  const intervalId = setInterval(() => {
+    emitTimer(roomId)
+  }, 1000)
+
+  intervalIdTable.set(roomId, intervalId)
+  // Start timer at 30 mins
+  timerTable.set(roomId, 10000)
+}
+
+const getRoomTimer = (roomId) => timerTable.get(roomId)
+
+const setRoomTimer = (roomId) => {
   if (!intervalIdTable.get(roomId)) {
-    const intervalId = setInterval(() => {
-      emitTimer(roomId, io)
-    }, 1000)
-
-    intervalIdTable.set(roomId, intervalId)
+    initTimer(roomId)
   }
-}
-
-const setRoomTimer = (roomId, io) => {
-  initTimer(roomId, io)
 }
 
 module.exports = {
   setRoomTimer,
   clearRoomTimer,
+  getRoomTimer,
 }

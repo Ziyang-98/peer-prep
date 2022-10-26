@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getNewLines } from "common/utils";
 import { URI_COLLAB_SVC } from "common/configs";
 import { useLocation } from "react-router-dom";
@@ -15,6 +15,26 @@ const useCollabEditor = (handleOpenNotification) => {
   const [users, setUsers] = useState("");
   const [socket, setSocket] = useState(null);
   const [timer, setTimer] = useState(null);
+
+  let intervalRef = useRef();
+
+  const stopTimer = () => {
+    clearInterval(intervalRef.current);
+    setTimer(0);
+  };
+
+  const intervalAction = (timer) => {
+    if (timer <= 0) {
+      stopTimer();
+      return 0;
+    } else {
+      return timer - 1000;
+    }
+  };
+
+  const performIntervalAction = () => {
+    setTimer((timer) => intervalAction(timer));
+  };
 
   const [cookies] = useCookies(["token"]);
 
@@ -47,6 +67,7 @@ const useCollabEditor = (handleOpenNotification) => {
 
     socket.on("currentTime", ({ timer }) => {
       setTimer(timer);
+      intervalRef.current = setInterval(performIntervalAction, 1000);
     });
 
     // Error Handlers

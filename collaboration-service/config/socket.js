@@ -1,7 +1,11 @@
 const { Server } = require('socket.io')
 
 const { redisClient } = require('./cache')
-const { setRoomTimer, clearRoomTimer } = require('../utils/timeoutHelper')
+const {
+  setRoomTimer,
+  clearRoomTimer,
+  getRoomTimer,
+} = require('../utils/timeoutHelper')
 
 const getNewLines = (noOfLines) => {
   let newLines = ''
@@ -57,7 +61,9 @@ const connectSocket = (httpServer, options) => {
       io.in(roomId).emit('codeUpdated', { code })
       await redisClient.hSet(socket.id, { roomId, user }) // For removal of user, when user disconnect
       // Handle 30 minutes timer
-      setRoomTimer(roomId, io)
+      setRoomTimer(roomId)
+      // Emit current time to client
+      socket.emit('currentTime', { timer: getRoomTimer(roomId) })
     })
 
     socket.on('disconnect', async () => {
@@ -70,10 +76,9 @@ const connectSocket = (httpServer, options) => {
         await redisClient.lRem(key, 0, user)
 
         const usersInRoom = await redisClient.lRange(key, 0, -1)
-
         if (!usersInRoom.length) {
           await redisClient.del(key)
-
+          console.log('Room deleted')
           // Housekeeping matter of timeout
           clearRoomTimer(roomId)
         }
