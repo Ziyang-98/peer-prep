@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const DEFAULT_NO_OF_LINES = getNewLines(20);
 
-const DEFAULT_EDITOR_VALUE = "# Enter your answer here" + DEFAULT_NO_OF_LINES;
+const DEFAULT_EDITOR_VALUE =
+  "# Loading Room for Collaboration......" + DEFAULT_NO_OF_LINES;
 
 const useCollabEditor = (handleOpenNotification) => {
   const [editorValue, setEditorValue] = useState(DEFAULT_EDITOR_VALUE);

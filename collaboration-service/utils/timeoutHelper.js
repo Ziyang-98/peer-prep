@@ -20,8 +20,8 @@ const emitTimer = (roomId, io) => {
 
   // Start timer at 30 mins
   if (timer === undefined) {
-    // timer = 60000
-    timer = 1800000
+    timer = 10000
+    // timer = 1800000
   } else {
     timer -= 1000
   }
