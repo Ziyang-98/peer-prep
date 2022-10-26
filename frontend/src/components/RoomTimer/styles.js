@@ -2,6 +2,7 @@ export const styles = {
   container: {
     display: "flex",
     justifyContent: "center",
-    marginBottom: "8px",
+    mt: "18px",
+    mb: "8px",
   },
 };

@@ -40,7 +40,11 @@ const CollabRoomPage = () => {
         </Box>
       </Split>
       <Box sx={styles.buttonHolder}>
-        <Button variant="contained" sx={styles.endSessionButton}>
+        <Button
+          variant="contained"
+          sx={styles.endSessionButton}
+          href="/endOfSession"
+        >
           End session
         </Button>
       </Box>

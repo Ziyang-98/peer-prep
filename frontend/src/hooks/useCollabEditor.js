@@ -4,7 +4,6 @@ import { URI_COLLAB_SVC } from "common/configs";
 import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 
 const DEFAULT_NO_OF_LINES = getNewLines(20);
 
@@ -18,8 +17,6 @@ const useCollabEditor = (handleOpenNotification) => {
   const [timer, setTimer] = useState(null);
 
   const [cookies] = useCookies(["token"]);
-
-  const navigate = useNavigate();
 
   const search = useLocation().search;
   const roomId = new URLSearchParams(search).get("roomId");
@@ -52,19 +49,6 @@ const useCollabEditor = (handleOpenNotification) => {
       setTimer(timer);
     });
 
-    socket.on("timesUp", () => {
-      handleOpenNotification(
-        `Times up! Redirecting to end page...`,
-        3000,
-        "warning",
-      );
-
-      // TODO: Create end session page and navigate to end session page instead
-      setTimeout(() => {
-        navigate(`/endOfSession`);
-      }, 3000);
-    });
-
     // Error Handlers
     socket.on("connect_error", (err) => {
       handleOpenNotification(
@@ -89,10 +73,6 @@ const useCollabEditor = (handleOpenNotification) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNavToEndSession = () => {
-    navigate(`/endOfSession`);
-  };
-
   const handleEditorChange = useCallback(
     (value, viewUpdate) => {
       if (viewUpdate.docChanged && viewUpdate.selectionSet)
@@ -108,7 +88,6 @@ const useCollabEditor = (handleOpenNotification) => {
     },
     users,
     timer,
-    handleNavToEndSession,
   };
 };
 

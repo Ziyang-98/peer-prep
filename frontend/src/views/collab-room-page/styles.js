@@ -23,7 +23,7 @@ export const styles = {
     flexDirection: "row-reverse",
   },
   endSessionButton: {
-    mt: "28px",
+    mt: "14px",
     bgcolor: "primary.mainColor",
     "&:hover": {
       bgcolor: "primary.dark",

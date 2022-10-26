@@ -8,31 +8,22 @@ const clearRoomTimer = (roomId) => {
   intervalIdTable.delete(roomId)
 }
 
-const handleTimesUp = (roomId, io) => {
-  clearRoomTimer(roomId)
-  io.to(roomId).emit('timesUp', {
-    message: 'Time is up! 30 minutes have passed!',
-  })
-}
-
 const emitTimer = (roomId, io) => {
   let timer = timerTable.get(roomId)
 
   // Start timer at 30 mins
   if (timer === undefined) {
     timer = 10000
-    // timer = 1800000
-  } else {
-    timer -= 1000
   }
-  if (timer < 0) {
-    handleTimesUp(roomId, io)
-  } else {
-    io.to(roomId).emit('currentTime', {
-      timer,
-    })
+
+  if (timer > 0) {
+    timer -= 1000
     timerTable.set(roomId, timer)
   }
+
+  io.to(roomId).emit('currentTime', {
+    timer,
+  })
 }
 
 const initTimer = (roomId, io) => {
