@@ -20,10 +20,13 @@ export const styles = {
   buttonHolder: {
     width: "90%",
     display: "flex",
-    flexDirection: "row-reverse",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mt: "14px",
   },
   endSessionButton: {
-    mt: "14px",
+    height: "40px",
     bgcolor: "primary.mainColor",
     "&:hover": {
       bgcolor: "primary.dark",
