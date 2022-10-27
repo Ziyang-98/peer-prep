@@ -7,7 +7,8 @@ import QuestionPane from "components/QuestionPane";
 import UsersDisplay from "components/UsersDisplay";
 import Editor from "components/Editor";
 import Notification from "components/Notification";
-import CollabChat from "components/CollabChat";
+import Chat from "components/Chat";
+import CollabChatButton from "components/CollabChatButton";
 
 import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
@@ -40,8 +41,9 @@ const CollabRoomPage = () => {
           <Editor editorProps={editorProps} />
         </Box>
       </Split>
-      <Box sx={styles.buttonHolder}>
-        <CollabChat />
+      <Box sx={styles.bottomActionHolder}>
+        <Chat />
+        <CollabChatButton />
         <Button
           variant="contained"
           sx={styles.endSessionButton}

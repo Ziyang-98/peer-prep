@@ -3,12 +3,12 @@ import Fab from "@mui/material/Fab";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { styles } from "./styles";
 
-const CollabChat = () => {
+const CollabChatButton = () => {
   return (
-    <Fab sx={styles.fab} aria-label="chat" color="primary.dark">
+    <Fab sx={styles.fab} aria-label="chat-button" color="primary.dark">
       <ChatBubbleIcon sx={styles.chatIcon} />
     </Fab>
   );
 };
 
-export default CollabChat;
+export default CollabChatButton;

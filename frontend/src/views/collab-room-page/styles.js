@@ -17,13 +17,14 @@ export const styles = {
     bgcolor: "#f9f9f9",
     overflow: "auto",
   },
-  buttonHolder: {
+  bottomActionHolder: {
     width: "90%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     mt: "14px",
+    position: "relative",
   },
   endSessionButton: {
     height: "40px",
