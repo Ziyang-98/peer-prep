@@ -30,6 +30,7 @@ const CollabRoomPage = () => {
   const {
     isChatOpen,
     messages,
+    noOfNewMessages,
     handleClickChat,
     handleOnType,
     handleSendMessage,
@@ -56,7 +57,10 @@ const CollabRoomPage = () => {
           handleOnType={handleOnType}
           handleSendMessage={handleSendMessage}
         />
-        <CollabChatButton handleClickChat={handleClickChat} />
+        <CollabChatButton
+          handleClickChat={handleClickChat}
+          noOfNewMessages={noOfNewMessages}
+        />
         <Button
           variant="contained"
           sx={styles.endSessionButton}

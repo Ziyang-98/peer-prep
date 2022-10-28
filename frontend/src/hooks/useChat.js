@@ -13,6 +13,7 @@ const useChat = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages] = useState(mockMessages);
   const [currMessage, setCurrMessage] = useState("");
+  const [noOfNewMessages, setNoOfNewMessages] = useState(0);
 
   const handleClickChat = () => {
     setIsChatOpen(!isChatOpen);
@@ -29,6 +30,7 @@ const useChat = () => {
   return {
     isChatOpen,
     messages,
+    noOfNewMessages,
     handleClickChat,
     handleOnType,
     handleSendMessage,

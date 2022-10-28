@@ -1,9 +1,10 @@
 import React from "react";
 import Fab from "@mui/material/Fab";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import Badge from "@mui/material/Badge";
 import { styles } from "./styles";
 
-const CollabChatButton = ({ handleClickChat }) => {
+const CollabChatButton = ({ handleClickChat, noOfNewMessages }) => {
   return (
     <Fab
       sx={styles.fab}
@@ -11,7 +12,9 @@ const CollabChatButton = ({ handleClickChat }) => {
       color="primary.dark"
       onClick={handleClickChat}
     >
-      <ChatBubbleIcon sx={styles.chatIcon} />
+      <Badge badgeContent={noOfNewMessages} color="error">
+        <ChatBubbleIcon sx={styles.chatIcon} />
+      </Badge>
     </Fab>
   );
 };
