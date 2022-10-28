@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Split from "react-split";
 import RoomTimer from "components/RoomTimer";
 import QuestionPane from "components/QuestionPane";
@@ -38,6 +39,15 @@ const CollabRoomPage = () => {
           <Editor editorProps={editorProps} />
         </Box>
       </Split>
+      <Box sx={styles.buttonHolder}>
+        <Button
+          variant="contained"
+          sx={styles.endSessionButton}
+          href="/endOfSession"
+        >
+          End session
+        </Button>
+      </Box>
       <Notification
         snackbarProps={snackbarProps}
         alertProps={alertProps}

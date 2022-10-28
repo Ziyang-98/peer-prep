@@ -17,4 +17,16 @@ export const styles = {
     bgcolor: "#f9f9f9",
     overflow: "auto",
   },
+  buttonHolder: {
+    width: "90%",
+    display: "flex",
+    flexDirection: "row-reverse",
+  },
+  endSessionButton: {
+    mt: "14px",
+    bgcolor: "primary.mainColor",
+    "&:hover": {
+      bgcolor: "primary.dark",
+    },
+  },
 };
