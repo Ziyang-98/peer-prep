@@ -27,3 +27,6 @@ export const URI_QUESTION_SVC =
 const PREFIX_QUESTION_SVC = "/api/questionService/question/random";
 
 export const URL_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;
+
+export const URI_COMMUNICATION_SVC =
+  process.env.URI_COMMUNICATION_SVC || "http://localhost:8004";

@@ -22,8 +22,8 @@ const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
         <Box aria-label="message-container" sx={styles.messageContainer}>
           <Typography variant="body1">Messages</Typography>
 
-          {messages.map((msg) => (
-            <TextMessage {...msg} key={Object.values(msg).join()} />
+          {messages.map((msg, index) => (
+            <TextMessage {...msg} key={index} />
           ))}
         </Box>
         <Box aria-label="type-container" sx={styles.typeContainer}>
