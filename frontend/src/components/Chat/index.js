@@ -7,7 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ButtonBase from "@mui/material/ButtonBase";
 import { styles } from "./styles";
 
-const Chat = ({ isChatOpen }) => {
+const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
   return (
     <Grow in={isChatOpen} style={styles.grow}>
       <Box aria-label="chat" sx={styles.chat}>
@@ -25,9 +25,10 @@ const Chat = ({ isChatOpen }) => {
             placeholder="Enter message here"
             autoComplete="off"
             inputProps={styles.input}
+            onChange={(event) => handleOnType(event.target.value)}
             multiline
           />
-          <ButtonBase sx={styles.sendButton}>
+          <ButtonBase sx={styles.sendButton} onClick={handleSendMessage}>
             <Box aria-label="send-message-button">
               <SendIcon />
             </Box>

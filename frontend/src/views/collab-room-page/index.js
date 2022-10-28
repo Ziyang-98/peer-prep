@@ -27,7 +27,13 @@ const CollabRoomPage = () => {
 
   const { questionObject, questionName } = useQuestion(handleOpenNotification);
 
-  const { isChatOpen, handleClickChat } = useChat();
+  const {
+    isChatOpen,
+    messages,
+    handleClickChat,
+    handleOnType,
+    handleSendMessage,
+  } = useChat();
   return (
     <Box sx={styles.mainContainer}>
       <RoomTimer timeInMs={timer} />
@@ -44,7 +50,12 @@ const CollabRoomPage = () => {
         </Box>
       </Split>
       <Box sx={styles.bottomActionHolder}>
-        <Chat isChatOpen={isChatOpen} />
+        <Chat
+          isChatOpen={isChatOpen}
+          messages={messages}
+          handleOnType={handleOnType}
+          handleSendMessage={handleSendMessage}
+        />
         <CollabChatButton handleClickChat={handleClickChat} />
         <Button
           variant="contained"
