@@ -15,7 +15,9 @@ app.use(
   cors({
     credentials: true,
     origin:
-      process.env.NODE_ENV === "production" ? "localhost" : "localhost:3000",
+      process.env.NODE_ENV === "production"
+        ? "http://localhost"
+        : "http://localhost:3000",
   })
 ); // config cors so that front-end can use
 app.options("*", cors());
