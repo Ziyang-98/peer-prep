@@ -5,6 +5,9 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SendIcon from "@mui/icons-material/Send";
 import ButtonBase from "@mui/material/ButtonBase";
+
+import TextMessage from "./TextMessage";
+
 import { styles } from "./styles";
 
 const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
@@ -17,7 +20,11 @@ const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
           </Typography>
         </Box>
         <Box aria-label="message-container" sx={styles.messageContainer}>
-          Messaage Container
+          <Typography variant="body1">Messages</Typography>
+
+          {messages.map((msg) => (
+            <TextMessage {...msg} key={Object.values(msg).join()} />
+          ))}
         </Box>
         <Box aria-label="type-container" sx={styles.typeContainer}>
           <InputBase
