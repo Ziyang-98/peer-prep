@@ -13,6 +13,7 @@ import CollabChatButton from "components/CollabChatButton";
 import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
 import useQuestion from "hooks/useQuestion";
+import useChat from "hooks/useChat";
 import { styles } from "./styles";
 
 // For draggable gutter styles
@@ -26,6 +27,7 @@ const CollabRoomPage = () => {
 
   const { questionObject, questionName } = useQuestion(handleOpenNotification);
 
+  const { isChatOpen, handleClickChat } = useChat();
   return (
     <Box sx={styles.mainContainer}>
       <RoomTimer timeInMs={timer} />
@@ -42,8 +44,8 @@ const CollabRoomPage = () => {
         </Box>
       </Split>
       <Box sx={styles.bottomActionHolder}>
-        <Chat />
-        <CollabChatButton />
+        <Chat isChatOpen={isChatOpen} />
+        <CollabChatButton handleClickChat={handleClickChat} />
         <Button
           variant="contained"
           sx={styles.endSessionButton}

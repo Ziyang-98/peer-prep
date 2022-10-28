@@ -1,15 +1,17 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Grow from "@mui/material/Grow";
 import { styles } from "./styles";
 
-const Chat = () => {
-  const showStub = true;
+const Chat = ({ isChatOpen }) => {
   return (
-    <Box sx={showStub ? styles.show : styles.hide}>
-      <Box aria-label="chat" sx={styles.chat}>
-        Hello World
+    <Grow in={isChatOpen} style={styles.grow}>
+      <Box sx={styles.show}>
+        <Box aria-label="chat" sx={styles.chat}>
+          Hello World
+        </Box>
       </Box>
-    </Box>
+    </Grow>
   );
 };
 
