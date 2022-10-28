@@ -6,10 +6,11 @@ export const styles = {
     flexDirection: "column",
     width: "100%",
     height: "90vh",
+    // paddingTop: "16px",
   },
   split: {
     display: "flex",
-    height: "90%",
+    height: "85%",
     width: "90%",
   },
 
@@ -23,7 +24,7 @@ export const styles = {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    mt: "14px",
+    mt: "20px",
     position: "relative",
   },
   endSessionButton: {

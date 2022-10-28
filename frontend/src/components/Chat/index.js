@@ -10,7 +10,14 @@ import TextMessage from "./TextMessage";
 
 import { styles } from "./styles";
 
-const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
+const Chat = ({
+  isChatOpen,
+  messages,
+  currMessage,
+  handleSendMessage,
+  handleEnterSendMessage,
+  handleOnType,
+}) => {
   return (
     <Grow in={isChatOpen} style={styles.grow}>
       <Box aria-label="chat" sx={styles.chat}>
@@ -32,7 +39,11 @@ const Chat = ({ isChatOpen, messages, handleOnType, handleSendMessage }) => {
             placeholder="Enter message here"
             autoComplete="off"
             inputProps={styles.input}
-            onChange={(event) => handleOnType(event.target.value)}
+            value={currMessage}
+            onKeyDown={handleEnterSendMessage}
+            onChange={(event) => {
+              handleOnType(event.target.value);
+            }}
             multiline
           />
           <ButtonBase sx={styles.sendButton} onClick={handleSendMessage}>

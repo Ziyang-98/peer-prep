@@ -7,8 +7,8 @@ import { useCookies } from "react-cookie";
 const useChat = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [currMessage, setCurrMessage] = useState("");
   const [noOfNewMessages, setNoOfNewMessages] = useState(0);
+  const [currMessage, setCurrentMessage] = useState("");
 
   const [socket, setSocket] = useState(null);
   const [cookies] = useCookies(["token"]);
@@ -63,12 +63,25 @@ const useChat = () => {
     setIsChatOpen(!isChatOpen);
   };
 
-  const handleOnType = (message) => {
-    setCurrMessage(message);
+  const handleResetCurrMessage = () => {
+    setCurrentMessage("");
   };
 
   const handleSendMessage = () => {
     socket.emit("chatMessage", currMessage);
+    handleResetCurrMessage();
+  };
+
+  const handleEnterSendMessage = (event) => {
+    // Enter key code
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage(event);
+    }
+  };
+
+  const handleOnType = (message) => {
+    setCurrentMessage(message);
   };
 
   const handleReceiveMessage = (msgObj) => {
@@ -82,8 +95,10 @@ const useChat = () => {
     messages,
     noOfNewMessages,
     handleClickChat,
-    handleOnType,
+    currMessage,
     handleSendMessage,
+    handleEnterSendMessage,
+    handleOnType,
   };
 };
 

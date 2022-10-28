@@ -32,8 +32,10 @@ const CollabRoomPage = () => {
     messages,
     noOfNewMessages,
     handleClickChat,
-    handleOnType,
+    currMessage,
     handleSendMessage,
+    handleEnterSendMessage,
+    handleOnType,
   } = useChat();
   return (
     <Box sx={styles.mainContainer}>
@@ -54,8 +56,10 @@ const CollabRoomPage = () => {
         <Chat
           isChatOpen={isChatOpen}
           messages={messages}
-          handleOnType={handleOnType}
+          currMessage={currMessage}
           handleSendMessage={handleSendMessage}
+          handleEnterSendMessage={handleEnterSendMessage}
+          handleOnType={handleOnType}
         />
         <CollabChatButton
           handleClickChat={handleClickChat}
