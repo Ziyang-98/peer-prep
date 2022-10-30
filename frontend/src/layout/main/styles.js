@@ -6,8 +6,6 @@ export const styles = {
   },
   appTitle: {
     ml: "2%",
-    // flexGrow: 1,
-    // width: "100%",
     display: { md: "flex" },
     fontFamily: "monospace",
     fontWeight: 100,
