@@ -20,6 +20,7 @@ const MainLayout = () => {
     handleRedirectToProfile,
     handleLogout,
     getUserInitial,
+    handleRedirectToHistory,
   } = useNavbarMenu();
 
   return (
@@ -47,6 +48,7 @@ const MainLayout = () => {
               }}
             >
               <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
+              <MenuItem onClick={handleRedirectToHistory}>History</MenuItem>
               <MenuItem onClick={handleLogout}>Log out</MenuItem>
             </Menu>
           </Box>
