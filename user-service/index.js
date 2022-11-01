@@ -46,6 +46,7 @@ router.post(PREFIX_DELETE, authentication, deleteUser);
 app.use("/api/user", router).all((_, res) => {
   res.setHeader("content-type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
 });
 
 app.listen(8000, () => console.log("user-service listening on port 8000"));

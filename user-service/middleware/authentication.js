@@ -3,6 +3,8 @@ import { SECRET_TOKEN } from "../common/constants.js";
 
 export function authentication (req, res, next) {
     const token = req.cookies.token;
+    console.log("hi");
+    console.log(req.headers['authorization']);
 
     if (!token){
         return res.status(401).json({ message: "You do not have access to this system!" });
