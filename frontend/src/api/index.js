@@ -18,10 +18,11 @@ export async function loginUser(username, password) {
 
 export async function deleteUser(cookies) {
   const body = {};
+  console.log(cookies);
 
   const response = await axios.post(URL_DELETE_USER, body, {
     headers: {
-      'Authorization': cookies
+      'Authorization': `Bearer ${cookies}`
     }
   });
   return response;
