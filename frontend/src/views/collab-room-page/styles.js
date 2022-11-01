@@ -6,10 +6,11 @@ export const styles = {
     flexDirection: "column",
     width: "100%",
     height: "90vh",
+    // paddingTop: "16px",
   },
   split: {
     display: "flex",
-    height: "90%",
+    height: "85%",
     width: "90%",
   },
 
@@ -17,13 +18,17 @@ export const styles = {
     bgcolor: "#f9f9f9",
     overflow: "auto",
   },
-  buttonHolder: {
+  bottomActionHolder: {
     width: "90%",
     display: "flex",
-    flexDirection: "row-reverse",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mt: "20px",
+    position: "relative",
   },
   endSessionButton: {
-    mt: "14px",
+    height: "40px",
     bgcolor: "primary.mainColor",
     "&:hover": {
       bgcolor: "primary.dark",

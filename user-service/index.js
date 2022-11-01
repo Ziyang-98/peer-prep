@@ -11,8 +11,15 @@ import {
 export const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // for dev env
-// app.use(cors({ credentials: true, origin: "http://localhost" })); // config cors so that front-end can use
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "http://localhost"
+        : "http://localhost:3000",
+  })
+); // config cors so that front-end can use
 app.options("*", cors());
 app.use(cookieParser());
 
