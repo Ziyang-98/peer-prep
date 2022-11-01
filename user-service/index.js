@@ -6,9 +6,10 @@ import { URI_FRONTEND , PREFIX_LOGIN, PREFIX_CHANGE_PASSWORD, PREFIX_DELETE} fro
 export const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors({credentials: true, origin: URI_FRONTEND})) // config cors so that front-end can use
 app.options('*', cors())
-app.use(cookieParser())
+
 
 import {
   createUser,
