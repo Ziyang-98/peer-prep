@@ -1,15 +1,19 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Split from "react-split";
 import RoomTimer from "components/RoomTimer";
 import QuestionPane from "components/QuestionPane";
 import UsersDisplay from "components/UsersDisplay";
 import Editor from "components/Editor";
 import Notification from "components/Notification";
+import Chat from "components/Chat";
+import CollabChatButton from "components/CollabChatButton";
 
 import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
 import useQuestion from "hooks/useQuestion";
+import useChat from "hooks/useChat";
 import { styles } from "./styles";
 
 // For draggable gutter styles
@@ -23,6 +27,16 @@ const CollabRoomPage = () => {
 
   const { questionObject, questionName } = useQuestion(handleOpenNotification);
 
+  const {
+    isChatOpen,
+    messages,
+    noOfNewMessages,
+    handleClickChat,
+    currMessage,
+    handleSendMessage,
+    handleEnterSendMessage,
+    handleOnType,
+  } = useChat();
   return (
     <Box sx={styles.mainContainer}>
       <RoomTimer timeInMs={timer} />
@@ -38,6 +52,27 @@ const CollabRoomPage = () => {
           <Editor editorProps={editorProps} />
         </Box>
       </Split>
+      <Box sx={styles.bottomActionHolder}>
+        <Chat
+          isChatOpen={isChatOpen}
+          messages={messages}
+          currMessage={currMessage}
+          handleSendMessage={handleSendMessage}
+          handleEnterSendMessage={handleEnterSendMessage}
+          handleOnType={handleOnType}
+        />
+        <CollabChatButton
+          handleClickChat={handleClickChat}
+          noOfNewMessages={noOfNewMessages}
+        />
+        <Button
+          variant="contained"
+          sx={styles.endSessionButton}
+          href="/endOfSession"
+        >
+          End session
+        </Button>
+      </Box>
       <Notification
         snackbarProps={snackbarProps}
         alertProps={alertProps}

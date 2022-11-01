@@ -42,7 +42,6 @@ export const styles = {
     position: "absolute",
     bottom: 5,
     right: 5,
-    // color: "secondary.dark",
     marginTop: 5,
     bgcolor: "primary.mainColor",
     "&:hover": {

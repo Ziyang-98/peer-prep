@@ -9,6 +9,7 @@ services:
     - matching-service
     - collaboration-service
     - question-service
+    - communication-service
   user-service:
     build: ./user-service
     ports:
@@ -29,3 +30,7 @@ services:
     build: ./question-service
     ports:
       - "8003:8003"
+  communication-service:
+    build: ./communication-service
+    ports:
+      - "8004:8004"

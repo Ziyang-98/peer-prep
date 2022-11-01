@@ -15,13 +15,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV ENV=PROD
-ENV DB_CLOUD_URI=mongodb+srv://user3219:user3219@cluster0.fesq8vy.mongodb.net/?retryWrites=true&w=majority
-ENV DB_LOCAL_URI=mongodb://localhost:27017/mydb
-ENV SECRET_TOKEN=kajsdlaj
-ENV URI_FRONTEND=https://frontend-rob2padjya-de.a.run.app
-ENV NODE_ENV=production
-ENV PORT=8000
+ENV NODE_ENV=development
+ENV PORT=8004
 
 EXPOSE ${PORT}
 CMD [ "node", "index.js" ]

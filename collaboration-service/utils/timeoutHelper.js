@@ -8,48 +8,35 @@ const clearRoomTimer = (roomId) => {
   intervalIdTable.delete(roomId)
 }
 
-const handleTimesUp = (roomId, io) => {
-  clearRoomTimer(roomId)
-  io.to(roomId).emit('timesUp', {
-    message: 'Time is up! 30 minutes have passed!',
-  })
-}
-
-const emitTimer = (roomId, io) => {
+const emitTimer = (roomId) => {
   let timer = timerTable.get(roomId)
 
-  // Start timer at 30 mins
-  if (timer === undefined) {
-    // timer = 60000
-    timer = 1800000
-  } else {
+  if (timer > 0) {
     timer -= 1000
-  }
-  if (timer < 0) {
-    handleTimesUp(roomId, io)
-  } else {
-    io.to(roomId).emit('currentTime', {
-      timer,
-    })
     timerTable.set(roomId, timer)
   }
 }
 
-const initTimer = (roomId, io) => {
-  if (!intervalIdTable.get(roomId)) {
-    const intervalId = setInterval(() => {
-      emitTimer(roomId, io)
-    }, 1000)
+const initTimer = (roomId) => {
+  const intervalId = setInterval(() => {
+    emitTimer(roomId)
+  }, 1000)
 
-    intervalIdTable.set(roomId, intervalId)
-  }
+  intervalIdTable.set(roomId, intervalId)
+  // Start timer at 30 mins
+  timerTable.set(roomId, 10000)
 }
 
-const setRoomTimer = (roomId, io) => {
-  initTimer(roomId, io)
+const getRoomTimer = (roomId) => timerTable.get(roomId)
+
+const setRoomTimer = (roomId) => {
+  if (!intervalIdTable.get(roomId)) {
+    initTimer(roomId)
+  }
 }
 
 module.exports = {
   setRoomTimer,
   clearRoomTimer,
+  getRoomTimer,
 }
