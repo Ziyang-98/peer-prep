@@ -8,7 +8,7 @@ const {
 const router = express.Router()
 
 router.get('/random/:roomId', getRandomQuestionOfDifficulty)
-router.get('/titleSlug', getQuestion)
+router.get('/:titleSlug', getQuestion)
 router.post('/test', test)
 
 module.exports = router
