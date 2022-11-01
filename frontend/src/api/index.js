@@ -22,7 +22,7 @@ export async function deleteUser(cookies) {
 
   const response = await axios.post(URL_DELETE_USER, body, {
     headers: {
-      'Authorization': `Bearer ${cookies}`
+      'Authorization': cookies
     }
   });
   return response;
