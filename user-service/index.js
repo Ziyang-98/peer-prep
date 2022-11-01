@@ -8,13 +8,21 @@ import {
   PREFIX_DELETE,
 } from "./common/config.js";
 
-export const app = express()
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+export const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      process.env.NODE_ENV === "production"
+        ? URI_FRONTEND
+        : "http://localhost:3000",
+  })
+); // config cors so that front-end can use
+app.options("*", cors());
 
-app.use(cors({credentials: true, origin: URI_FRONTEND})) // config cors so that front-end can use
-app.options('*', cors())
-app.use(cookieParser())
 
 import {
   createUser,
