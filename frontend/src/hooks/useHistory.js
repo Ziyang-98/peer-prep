@@ -12,15 +12,15 @@ const useHistory = () => {
 
   getHistory(cookies?.username || "")
     .then((res) => {
-      const questionDatas = res.data;
+      const questionDatas = res.data.map((data) => {
+        const { title, titleSlug, createdAt } = data;
 
-      setHistory(
-        questionDatas.map((questionData) => {
-          const { title, titleSlug } = questionData;
+        return { title, titleSlug, createdAt };
+      });
 
-          return { title, titleSlug };
-        }),
-      );
+      questionDatas.sort((a, b) => b.createdAt - a.createdAt);
+
+      setHistory(questionDatas);
     })
     .catch((err) =>
       console.log("Something went wrong when getting history", err),
