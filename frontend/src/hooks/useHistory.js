@@ -7,15 +7,18 @@ const useHistory = () => {
   const [cookies] = useCookies(["token"]);
 
   const handleQuestionClick = (titleSlug) => {
+    // TODO: navigate to the solo page
     console.dir(titleSlug);
   };
 
   getHistory(cookies?.username || "")
     .then((res) => {
       const questionDatas = res.data.map((data) => {
-        const { title, titleSlug, createdAt } = data;
-
-        return { title, titleSlug, createdAt };
+        return {
+          title: data.title,
+          titleSlug: data.titleSlug,
+          createdAt: data.createdAt,
+        };
       });
 
       questionDatas.sort((a, b) => b.createdAt - a.createdAt);
