@@ -9,9 +9,10 @@ import {
 } from "./common/config.js";
 
 export const app = express();
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser());
+
 app.use(
   cors({
     credentials: true,
