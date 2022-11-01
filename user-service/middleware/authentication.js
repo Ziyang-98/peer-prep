@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_TOKEN } from "../common/constants.js";
 
 export function authentication (req, res, next) {
-    const token = req.headers['authorization'];
+    const token = req.headers['authorization']['token'];
     console.log(token);
 
     if (!token){
