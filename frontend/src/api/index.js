@@ -22,17 +22,19 @@ export async function deleteUser(cookies) {
 
   const response = await axios.post(URL_DELETE_USER, body, {
     headers: {
-      'Authorization': cookies['token']
+      'Authorization': "Bearer " + cookies['token']
     }
   });
   return response;
 }
 
-export async function changePassword(password) {
+export async function changePassword(cookies, password) {
   const body = { password };
 
   const response = await axios.post(URL_CHANGE_PASSWORD, body, {
-    withCredentials: true,
+    headers: {
+      'Authorization': "Bearer " + cookies['token']
+    }
   });
   return response;
 }
