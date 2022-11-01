@@ -25,6 +25,21 @@ const getRandomQuestionOfDifficulty = asyncHandler(async (req, res) => {
   res.status(200).json(problem)
 })
 
+// Description: Get a question with the specific title slug
+// Route: GET /api/questionService/question/:titleSlug
+// Access: Public
+const getQuestion = asyncHandler(async (req, res) => {
+  const { titleSlug } = req.params
+
+  if (!titleSlug) {
+    throw new Error('No titleSlug is given!')
+  }
+
+  const problem = await Problem.findOne({ titleSlug })
+
+  res.status(200).json(problem)
+})
+
 // Description: Populate database with problems (nor for public use)
 // Route: POST /api/questionService/question/test
 // Access: Only in development by devs
@@ -78,5 +93,6 @@ const test = asyncHandler(async (req, res) => {
 
 module.exports = {
   getRandomQuestionOfDifficulty,
+  getQuestion,
   test,
 }
