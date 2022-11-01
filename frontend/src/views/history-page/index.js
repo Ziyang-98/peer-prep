@@ -5,32 +5,35 @@ import useHistory from "hooks/useHistory";
 const historiesMock = [
   {
     title: "Two Sum",
-    "title-slug": "two-sum",
+    titleSlug: "two-sum",
   },
   {
     title: "Group Anagrams",
-    "title-slug": "group-anagrams",
+    titleSlug: "group-anagrams",
   },
   {
     title: "Generate Parentheses",
-    "title-slug": "generate-parentheses",
+    titleSlug: "generate-parentheses",
   },
 ];
 
 const HistoryPage = () => {
-  const { handleQuestionClick } = useHistory();
+  const { handleQuestionClick, history } = useHistory();
 
   return (
     <Box sx={styles.box}>
       <Paper elevation={3} sx={styles.paper}>
-        {historiesMock.map((question) => (
-          <ListItemButton
-            component="a"
-            onClick={() => handleQuestionClick(question["title-slug"])}
-          >
-            <ListItemText primary={question.title} />
-          </ListItemButton>
-        ))}
+        {
+          /* TODO: change historiesMock to history */
+          historiesMock.map((question) => (
+            <ListItemButton
+              component="a"
+              onClick={() => handleQuestionClick(question.titleSlug)}
+            >
+              <ListItemText primary={question.title} />
+            </ListItemButton>
+          ))
+        }
       </Paper>
     </Box>
   );
