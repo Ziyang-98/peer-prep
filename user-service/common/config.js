@@ -1,5 +1,5 @@
-export const URI_FRONTEND = "https://frontend-rob2padjya-de.a.run.app";
-export const URI_USER_SVC = "https://user-service-rob2padjya-de.a.run.app" || "http://localhost:8000";
+export const URI_FRONTEND = process.env.ENV === "PROD" ? process.env.URI_FRONTEND : "http://localhost:3000";
+export const URI_USER_SVC = process.env.ENV === "PROD" ? process.env.URI_USER_SVC : "http://localhost:8000";
 
 export const PREFIX_USER_SVC = "/api/user";
 export const PREFIX_LOGIN = "/login";

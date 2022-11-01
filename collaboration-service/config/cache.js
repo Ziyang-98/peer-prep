@@ -1,12 +1,19 @@
 const { createClient } = require('redis')
 
-const redisClient = createClient({
-  socket: {
-    host: 'redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com',
-    port: 10745
-  },
-  password: 'HwDKiJnZH8oceNGS6K76sakPj08mDldK'
-})
+let redisClient = null
+if (process.env.ENV === 'PROD') {
+  redisClient = createClient({
+    socket: {
+      host: 'redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com',
+      port: 10745,
+    },
+    password: 'HwDKiJnZH8oceNGS6K76sakPj08mDldK',
+  })
+} else {
+  redisClient = createClient({
+    url: process.env.REDIS_DEV_URL || 'redis://localhost:6379',
+  })
+}
 
 const connectCache = async () => {
   try {

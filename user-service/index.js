@@ -16,10 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin:
-      process.env.NODE_ENV === "production"
-        ? URI_FRONTEND
-        : "http://localhost:3000",
+    origin: URI_FRONTEND,
   })
 ); // config cors so that front-end can use
 app.options("*", cors());
@@ -38,7 +35,7 @@ const router = express.Router();
 // Controller will contain all the User-defined Routes
 router.get("/", (_, res) => res.send("Hello World from user-service"));
 router.post("/", createUser);
-//login post http://localhost:8000/api/user/login
+
 router.post(PREFIX_LOGIN, LoginAuth);
 router.post(PREFIX_CHANGE_PASSWORD, authentication, changePassword);
 router.post(PREFIX_DELETE, authentication, deleteUser);

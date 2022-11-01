@@ -16,8 +16,9 @@ RUN npm install
 COPY . .
 
 ENV NODE_ENV=development
+ENV ENV=PROD
 ENV PORT=8002
-ENV REDIS_URL=redis://redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com:10745
+ENV REDIS_DEV_URL=redis://redis:6379
 
 EXPOSE ${PORT}
 CMD [ "node", "index.js" ]
