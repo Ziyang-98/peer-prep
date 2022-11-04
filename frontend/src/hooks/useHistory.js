@@ -1,9 +1,9 @@
 import { getHistory } from "api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 const useHistory = () => {
-  const [history, setHistory] = useState([]);
+  const [pastQuestions, setPastQuestions] = useState([]);
   const [cookies] = useCookies(["token"]);
 
   const handleQuestionClick = (titleSlug) => {
@@ -11,27 +11,29 @@ const useHistory = () => {
     console.dir(titleSlug);
   };
 
-  getHistory(cookies?.username || "")
-    .then((res) => {
-      const questionDatas = res.data.map((data) => {
-        return {
-          title: data.title,
-          titleSlug: data.titleSlug,
-          createdAt: data.createdAt,
-        };
-      });
+  useEffect(() => {
+    getHistory(cookies?.username || "")
+      .then((res) => {
+        const questionDatas = res.data.map((data) => {
+          return {
+            title: data.title,
+            titleSlug: data.titleSlug,
+            createdAt: new Date(data.createdAt),
+          };
+        });
 
-      questionDatas.sort((a, b) => b.createdAt - a.createdAt);
+        questionDatas.sort((a, b) => b.createdAt - a.createdAt);
 
-      setHistory(questionDatas);
-    })
-    .catch((err) =>
-      console.log("Something went wrong when getting history", err),
-    );
+        setPastQuestions(questionDatas);
+      })
+      .catch((err) =>
+        console.log("Something went wrong when getting history", err),
+      );
+  }, [cookies?.username]);
 
   return {
     handleQuestionClick,
-    history,
+    pastQuestions,
   };
 };
 
