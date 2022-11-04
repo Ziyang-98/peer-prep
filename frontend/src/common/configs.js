@@ -1,5 +1,5 @@
 //TODO: frontend env not working
-const ENV = "PROD";
+const ENV = process.env.ENV ?? "PROD";
 
 const URI_USER_SVC =
   ENV === "PROD"
