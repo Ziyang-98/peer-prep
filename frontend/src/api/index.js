@@ -6,6 +6,7 @@ import {
   URL_CHANGE_PASSWORD,
   URL_USER_SVC,
   URL_QUESTION_SVC,
+  URL_HISTORY_SVC,
 } from "common/configs";
 
 export async function loginUser(username, password) {
@@ -55,5 +56,10 @@ export async function deleteMatch(id) {
 
 export async function getQuestion(roomId) {
   const response = await axios.get(URL_QUESTION_SVC + `/${roomId}`);
+  return response;
+}
+
+export async function getHistory(user) {
+  const response = await axios.get(URL_HISTORY_SVC + `/${user}`);
   return response;
 }

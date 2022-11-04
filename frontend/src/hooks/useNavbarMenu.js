@@ -30,6 +30,10 @@ const useNavbarMenu = () => {
     return cookies.username.charAt(0).toUpperCase();
   };
 
+  const handleRedirectToHistory = () => {
+    navigate("/history");
+  };
+
   return {
     handleOpenUserMenu,
     menuProps: {
@@ -40,6 +44,7 @@ const useNavbarMenu = () => {
     handleRedirectToProfile,
     handleLogout,
     getUserInitial,
+    handleRedirectToHistory,
   };
 };
 

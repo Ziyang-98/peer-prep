@@ -30,3 +30,10 @@ export const URL_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;
 
 export const URI_COMMUNICATION_SVC =
   process.env.URI_COMMUNICATION_SVC || "http://localhost:8004";
+
+export const URI_HISTORY_SVC =
+  process.env.URI_HISTORY_SVC || "http://localhost:8005";
+
+const PREFIX_HISTORY_SVC = "/api/historyService/history";
+
+export const URL_HISTORY_SVC = URI_HISTORY_SVC + PREFIX_HISTORY_SVC;
