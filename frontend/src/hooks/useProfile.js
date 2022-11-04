@@ -15,7 +15,7 @@ const useProfile = () => {
   const navigate = useNavigate();
 
   const handleDeleteUser = async (event) => {
-    await deleteUser()
+    await deleteUser(cookies)
       .then((res) => {
         if (res.status === STATUS_CODE_SUCCESS) {
           removeCookie("token");
@@ -38,7 +38,7 @@ const useProfile = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    await changePassword(data.get("password"))
+    await changePassword(cookies, data.get("password"))
       .then((res) => {
         if (res.status === STATUS_CODE_SUCCESS) {
           setIsSuccessAction(true);

@@ -5,8 +5,6 @@ import QuestionPane from "components/QuestionPane";
 import UsersDisplay from "components/UsersDisplay";
 import Editor from "components/Editor";
 
-import useQuestion from "hooks/useQuestion";
-
 import { isCollabType } from "common/utils";
 import { styles } from "./styles";
 
@@ -17,11 +15,9 @@ const QuestionEditorPanel = ({
   users,
   handleOpenNotification,
   type,
+  questionObject,
+  questionName,
 }) => {
-  const { questionObject, questionName } = useQuestion(
-    handleOpenNotification,
-    type,
-  );
   return (
     <Split direction={"horizontal"} style={styles.split}>
       <Box sx={styles.panel}>

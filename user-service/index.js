@@ -9,19 +9,17 @@ import {
 } from "./common/config.js";
 
 export const app = express();
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(
   cors({
     credentials: true,
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "http://localhost"
-        : "http://localhost:3000",
+    origin: URI_FRONTEND,
   })
 ); // config cors so that front-end can use
 app.options("*", cors());
-app.use(cookieParser());
 
 import {
   createUser,
@@ -36,7 +34,7 @@ const router = express.Router();
 // Controller will contain all the User-defined Routes
 router.get("/", (_, res) => res.send("Hello World from user-service"));
 router.post("/", createUser);
-//login post http://localhost:8000/api/user/login
+
 router.post(PREFIX_LOGIN, LoginAuth);
 router.post(PREFIX_CHANGE_PASSWORD, authentication, changePassword);
 router.post(PREFIX_DELETE, authentication, deleteUser);
@@ -44,6 +42,7 @@ router.post(PREFIX_DELETE, authentication, deleteUser);
 app.use("/api/user", router).all((_, res) => {
   res.setHeader("content-type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
 });
 
 app.listen(8000, () => console.log("user-service listening on port 8000"));

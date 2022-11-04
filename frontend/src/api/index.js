@@ -16,20 +16,24 @@ export async function loginUser(username, password) {
   return response;
 }
 
-export async function deleteUser() {
+export async function deleteUser(cookies) {
   const body = {};
 
   const response = await axios.post(URL_DELETE_USER, body, {
-    withCredentials: true,
+    headers: {
+      Authorization: "Bearer " + cookies["token"],
+    },
   });
   return response;
 }
 
-export async function changePassword(password) {
+export async function changePassword(cookies, password) {
   const body = { password };
 
   const response = await axios.post(URL_CHANGE_PASSWORD, body, {
-    withCredentials: true,
+    headers: {
+      Authorization: "Bearer " + cookies["token"],
+    },
   });
   return response;
 }
@@ -66,5 +70,14 @@ export async function getQuestionFromSlug(titleSlug) {
 
 export async function getHistory(user) {
   const response = await axios.get(URL_HISTORY_SVC + `/${user}`);
+  return response;
+}
+
+export async function setHistory(user, questionData) {
+  const body = {
+    title: questionData.title,
+    titleSlug: questionData.titleSlug,
+  };
+  const response = await axios.post(URL_HISTORY_SVC + `/${user}`, body);
   return response;
 }

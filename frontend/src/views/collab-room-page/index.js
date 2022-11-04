@@ -11,6 +11,7 @@ import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
 import useChat from "hooks/useChat";
 import { styles } from "./styles";
+import useQuestion from "hooks/useQuestion";
 
 const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -18,6 +19,11 @@ const CollabRoomPage = () => {
 
   const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
   const roomType = "collab";
+
+  const { questionObject, questionName, handleEndSession } = useQuestion(
+    handleOpenNotification,
+    roomType,
+  );
 
   const {
     isChatOpen,
@@ -37,6 +43,8 @@ const CollabRoomPage = () => {
         users={users}
         handleOpenNotification={handleOpenNotification}
         type={roomType}
+        questionObject={questionObject}
+        questionName={questionName}
       />
       <Box sx={styles.bottomActionHolder}>
         <Chat
@@ -55,6 +63,7 @@ const CollabRoomPage = () => {
           variant="contained"
           sx={styles.endSessionButton}
           href="/endOfSession"
+          onClick={handleEndSession}
         >
           End session
         </Button>

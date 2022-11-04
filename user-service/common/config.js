@@ -1,5 +1,5 @@
-export const URI_FRONTEND = process.env.URI_FRONTEND || "http://localhost:3000";
-export const URI_USER_SVC = process.env.URI_USER_SVC || "http://localhost:8000";
+export const URI_FRONTEND = process.env.ENV === "PROD" ? process.env.URI_FRONTEND : "http://localhost:3000";
+export const URI_USER_SVC = process.env.ENV === "PROD" ? process.env.URI_USER_SVC : "http://localhost:8000";
 
 export const PREFIX_USER_SVC = "/api/user";
 export const PREFIX_LOGIN = "/login";
