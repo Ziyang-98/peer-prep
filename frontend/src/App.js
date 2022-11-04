@@ -30,6 +30,7 @@ function App() {
                   <Route path="/" element={<SelectionPage />} />
                   <Route path="profile" element={<ProfilePage />} />
                   <Route path="room" element={<CollabRoomPage />} />
+                  <Route path="soloRoom" element={<CollabRoomPage />} />
                   <Route path="endOfSession" element={<CollabRoomEndPage />} />
                   <Route path="history" element={<HistoryPage />} />
                 </Route>

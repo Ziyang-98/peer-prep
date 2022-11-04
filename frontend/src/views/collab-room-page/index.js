@@ -1,18 +1,14 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Split from "react-split";
 import RoomTimer from "components/RoomTimer";
-import QuestionPane from "components/QuestionPane";
-import UsersDisplay from "components/UsersDisplay";
-import Editor from "components/Editor";
 import Notification from "components/Notification";
 import Chat from "components/Chat";
 import CollabChatButton from "components/CollabChatButton";
+import QuestionEditorPanel from "components/QuestionEditorPanel";
 
 import useNotification from "hooks/useNotification";
 import useCollabEditor from "hooks/useCollabEditor";
-import useQuestion from "hooks/useQuestion";
 import useChat from "hooks/useChat";
 import { styles } from "./styles";
 
@@ -24,8 +20,7 @@ const CollabRoomPage = () => {
     useNotification();
 
   const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
-
-  const { questionObject, questionName } = useQuestion(handleOpenNotification);
+  const roomType = "collab";
 
   const {
     isChatOpen,
@@ -40,18 +35,12 @@ const CollabRoomPage = () => {
   return (
     <Box sx={styles.mainContainer}>
       <RoomTimer timeInMs={timer} />
-      <Split direction={"horizontal"} style={styles.split}>
-        <Box sx={styles.panel}>
-          <QuestionPane
-            questionObject={questionObject}
-            questionName={questionName}
-          />
-        </Box>
-        <Box sx={styles.panel}>
-          <UsersDisplay activeUsers={users} />
-          <Editor editorProps={editorProps} />
-        </Box>
-      </Split>
+      <QuestionEditorPanel
+        editorProps={editorProps}
+        users={users}
+        handleOpenNotification={handleOpenNotification}
+        type={roomType}
+      />
       <Box sx={styles.bottomActionHolder}>
         <Chat
           isChatOpen={isChatOpen}

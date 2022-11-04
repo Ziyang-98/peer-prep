@@ -55,7 +55,12 @@ export async function deleteMatch(id) {
 }
 
 export async function getQuestion(roomId) {
-  const response = await axios.get(URL_QUESTION_SVC + `/${roomId}`);
+  const response = await axios.get(URL_QUESTION_SVC + `/random/${roomId}`);
+  return response;
+}
+
+export async function getQuestionFromSlug(titleSlug) {
+  const response = await axios.get(URL_QUESTION_SVC + `/${titleSlug}`);
   return response;
 }
 
