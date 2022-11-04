@@ -63,3 +63,12 @@ export async function getHistory(user) {
   const response = await axios.get(URL_HISTORY_SVC + `/${user}`);
   return response;
 }
+
+export async function setHistory(user, questionData) {
+  const body = {
+    title: questionData.title,
+    titleSlug: questionData.titleSlug,
+  };
+  const response = await axios.post(URL_HISTORY_SVC + `/${user}`, body);
+  return response;
+}
