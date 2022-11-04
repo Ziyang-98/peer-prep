@@ -4,7 +4,7 @@ import { URI_COMMUNICATION_SVC } from "common/configs";
 import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const useChat = () => {
+const useChat = (handleOpenNotification) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [noOfNewMessages, setNoOfNewMessages] = useState(0);
@@ -25,6 +25,14 @@ const useChat = () => {
       if (username) {
         socket.emit("joinRoom", { username, roomId });
       }
+    });
+
+    socket.on("connect_error", (err) => {
+      handleOpenNotification(
+        "Encountered issues connecting to chat service!",
+        3000,
+        "error",
+      );
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

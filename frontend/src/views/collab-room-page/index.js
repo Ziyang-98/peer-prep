@@ -28,7 +28,7 @@ const CollabRoomPage = () => {
     handleSendMessage,
     handleEnterSendMessage,
     handleOnType,
-  } = useChat();
+  } = useChat(handleOpenNotification);
   return (
     <Box sx={styles.mainContainer}>
       <RoomTimer timeInMs={timer} />
