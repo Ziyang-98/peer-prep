@@ -5,11 +5,12 @@ services:
     ports:
       - "80:80"
     depends_on:
-    - user-service
-    - matching-service
-    - collaboration-service
-    - question-service
-    - communication-service
+      - user-service
+      - matching-service
+      - collaboration-service
+      - question-service
+      - communication-service
+      - history-service
   user-service:
     build: ./user-service
     ports:
@@ -34,3 +35,7 @@ services:
     build: ./communication-service
     ports:
       - "8004:8004"
+  history-service:
+    build: ./history-service
+    ports:
+      - "8005:8005"
