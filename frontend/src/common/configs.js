@@ -29,4 +29,10 @@ const PREFIX_QUESTION_SVC = "/api/questionService/question/random";
 
 export const URL_QUESTION_SVC = URI_QUESTION_SVC + PREFIX_QUESTION_SVC;
 
-export const URI_COMMUNICATION_SVC = ENV === 'PROD' ? process.env.URI_COMMUNICATION_SVC : "http://localhost:8004";
+export const URI_COMMUNICATION_SVC = ENV === 'PROD' ? "https://communication-service-rob2padjya-de.a.run.app" : "http://localhost:8004";
+
+export const URI_HISTORY_SVC = ENV === 'PROD' ? "https://history-service-rob2padjya-de.a.run.app" : "http://localhost:8005";
+
+const PREFIX_HISTORY_SVC = "/api/historyService/history";
+
+export const URL_HISTORY_SVC = URI_HISTORY_SVC + PREFIX_HISTORY_SVC;

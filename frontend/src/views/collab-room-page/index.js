@@ -25,7 +25,9 @@ const CollabRoomPage = () => {
 
   const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
 
-  const { questionObject, questionName } = useQuestion(handleOpenNotification);
+  const { questionObject, questionName, handleEndSession } = useQuestion(
+    handleOpenNotification,
+  );
 
   const {
     isChatOpen,
@@ -69,6 +71,7 @@ const CollabRoomPage = () => {
           variant="contained"
           sx={styles.endSessionButton}
           href="/endOfSession"
+          onClick={handleEndSession}
         >
           End session
         </Button>
