@@ -24,3 +24,7 @@ services:
     build: ./communication-service
     ports:
       - "8004:8004"
+  history-service:
+    build: ./history-service
+    ports:
+      - "8005:8005"
