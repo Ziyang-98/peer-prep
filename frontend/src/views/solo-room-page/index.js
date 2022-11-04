@@ -28,11 +28,7 @@ const SoloRoomPage = () => {
         type={roomType}
       />
       <Box sx={styles.bottomActionHolder}>
-        <Button
-          variant="contained"
-          sx={styles.endSessionButton}
-          href="/history"
-        >
+        <Button variant="contained" sx={styles.returnButton} href="/history">
           Return to History
         </Button>
       </Box>

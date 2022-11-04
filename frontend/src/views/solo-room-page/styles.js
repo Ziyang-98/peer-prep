@@ -16,7 +16,7 @@ export const styles = {
     mt: "20px",
     position: "relative",
   },
-  endSessionButton: {
+  returnButton: {
     height: "40px",
     bgcolor: "primary.mainColor",
     "&:hover": {

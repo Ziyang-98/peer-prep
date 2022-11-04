@@ -12,9 +12,6 @@ import useCollabEditor from "hooks/useCollabEditor";
 import useChat from "hooks/useChat";
 import { styles } from "./styles";
 
-// For draggable gutter styles
-import "./styles.css";
-
 const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
