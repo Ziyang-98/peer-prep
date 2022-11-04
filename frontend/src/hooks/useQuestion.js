@@ -1,4 +1,5 @@
 import { getQuestion, getQuestionFromSlug } from "api";
+import { isCollabType } from "common/utils";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -11,7 +12,7 @@ const useQuestion = (handleOpenNotification, type) => {
   const search = useLocation().search;
 
   let promiseQuestionObject = null;
-  if (type === "collab") {
+  if (isCollabType(type)) {
     const roomId = new URLSearchParams(search).get("roomId");
     promiseQuestionObject = getQuestion(roomId);
   } else {

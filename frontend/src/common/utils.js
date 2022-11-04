@@ -13,3 +13,7 @@ export const getTimeInMins = (ms) => {
 export const getTimeInSeconds = (ms) => {
   return ms && Math.floor((ms / 1000) % 60);
 };
+
+export const isCollabType = (type) => {
+  return type === "collab";
+};

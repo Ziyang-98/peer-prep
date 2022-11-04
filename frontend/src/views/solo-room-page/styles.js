@@ -10,7 +10,7 @@ export const styles = {
   bottomActionHolder: {
     width: "90%",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     justifyContent: "space-between",
     alignItems: "center",
     mt: "20px",

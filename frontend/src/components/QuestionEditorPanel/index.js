@@ -7,6 +7,7 @@ import Editor from "components/Editor";
 
 import useQuestion from "hooks/useQuestion";
 
+import { isCollabType } from "common/utils";
 import { styles } from "./styles";
 
 import "./styles.css";
@@ -30,7 +31,7 @@ const QuestionEditorPanel = ({
         />
       </Box>
       <Box sx={styles.panel}>
-        <UsersDisplay activeUsers={users} />
+        {isCollabType(type) && <UsersDisplay activeUsers={users} />}
         <Editor editorProps={editorProps} />
       </Box>
     </Split>
