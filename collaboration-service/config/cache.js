@@ -4,10 +4,10 @@ let redisClient = null
 if (process.env.ENV === 'PROD') {
   redisClient = createClient({
     socket: {
-      host: 'redis-10745.c299.asia-northeast1-1.gce.cloud.redislabs.com',
-      port: 10745,
+      host: process.env.REDIS_PROD_HOST,
+      port: process.env.REDIS_PROD_PORT,
     },
-    password: 'HwDKiJnZH8oceNGS6K76sakPj08mDldK',
+    password: process.env.REDIS_PW,
   })
 } else {
   redisClient = createClient({
