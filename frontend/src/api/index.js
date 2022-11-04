@@ -11,25 +11,30 @@ import {
 
 export async function loginUser(username, password) {
   const body = { username, password };
+  
 
   const response = await axios.post(URL_LOGIN, body);
   return response;
 }
 
-export async function deleteUser() {
+export async function deleteUser(cookies) {
   const body = {};
 
   const response = await axios.post(URL_DELETE_USER, body, {
-    withCredentials: true,
+    headers: {
+      'Authorization': "Bearer " + cookies['token']
+    }
   });
   return response;
 }
 
-export async function changePassword(password) {
+export async function changePassword(cookies, password) {
   const body = { password };
 
   const response = await axios.post(URL_CHANGE_PASSWORD, body, {
-    withCredentials: true,
+    headers: {
+      'Authorization': "Bearer " + cookies['token']
+    }
   });
   return response;
 }
