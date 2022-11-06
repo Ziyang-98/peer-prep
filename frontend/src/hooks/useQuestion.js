@@ -1,9 +1,10 @@
-import { getQuestion, setHistory } from "api";
+import { getQuestion, getQuestionFromSlug, setHistory } from "api";
+import { isCollabType } from "common/utils";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useLocation } from "react-router-dom";
 
-const useQuestion = (handleOpenNotification) => {
+const useQuestion = (handleOpenNotification, type) => {
   // Feel free to update this to useState
   const [questionObject, setQuestionObject] = useState("Loading question...");
 
@@ -12,9 +13,16 @@ const useQuestion = (handleOpenNotification) => {
   const [questionTitleSlug, setQuestionTitleSlug] = useState("");
 
   const search = useLocation().search;
-  const roomId = new URLSearchParams(search).get("roomId");
 
-  getQuestion(roomId)
+  let promiseQuestionObject = null;
+  if (isCollabType(type)) {
+    const roomId = new URLSearchParams(search).get("roomId");
+    promiseQuestionObject = getQuestion(roomId);
+  } else {
+    const titleSlug = new URLSearchParams(search).get("titleSlug");
+    promiseQuestionObject = getQuestionFromSlug(titleSlug);
+  }
+  promiseQuestionObject
     .then((res) => {
       const { content, title, titleSlug } = res.data;
       setQuestionName(title);

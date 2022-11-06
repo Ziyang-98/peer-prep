@@ -21,7 +21,6 @@ app.use(
 ); // config cors so that front-end can use
 app.options("*", cors());
 
-
 import {
   createUser,
   changePassword,

@@ -1,14 +1,15 @@
 import { getHistory } from "api";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const useHistory = () => {
   const [pastQuestions, setPastQuestions] = useState([]);
   const [cookies] = useCookies(["token"]);
-
+  const navigate = useNavigate();
   const handleQuestionClick = (titleSlug) => {
     // TODO: navigate to the solo page
-    console.dir(titleSlug);
+    navigate(`/soloRoom?titleSlug=${titleSlug}`);
   };
 
   useEffect(() => {

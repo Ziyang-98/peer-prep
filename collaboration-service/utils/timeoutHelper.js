@@ -24,7 +24,7 @@ const initTimer = (roomId) => {
 
   intervalIdTable.set(roomId, intervalId)
   // Start timer at 30 mins
-  timerTable.set(roomId, 10000)
+  timerTable.set(roomId, 1800000)
 }
 
 const getRoomTimer = (roomId) => timerTable.get(roomId)

@@ -11,7 +11,6 @@ import {
 
 export async function loginUser(username, password) {
   const body = { username, password };
-  
 
   const response = await axios.post(URL_LOGIN, body);
   return response;
@@ -22,8 +21,8 @@ export async function deleteUser(cookies) {
 
   const response = await axios.post(URL_DELETE_USER, body, {
     headers: {
-      'Authorization': "Bearer " + cookies['token']
-    }
+      Authorization: "Bearer " + cookies["token"],
+    },
   });
   return response;
 }
@@ -33,8 +32,8 @@ export async function changePassword(cookies, password) {
 
   const response = await axios.post(URL_CHANGE_PASSWORD, body, {
     headers: {
-      'Authorization': "Bearer " + cookies['token']
-    }
+      Authorization: "Bearer " + cookies["token"],
+    },
   });
   return response;
 }
@@ -60,7 +59,12 @@ export async function deleteMatch(id) {
 }
 
 export async function getQuestion(roomId) {
-  const response = await axios.get(URL_QUESTION_SVC + `/${roomId}`);
+  const response = await axios.get(URL_QUESTION_SVC + `/random/${roomId}`);
+  return response;
+}
+
+export async function getQuestionFromSlug(titleSlug) {
+  const response = await axios.get(URL_QUESTION_SVC + `/${titleSlug}`);
   return response;
 }
 

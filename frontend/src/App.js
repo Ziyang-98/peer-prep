@@ -7,6 +7,7 @@ import CollabRoomPage from "views/collab-room-page";
 import CollabRoomEndPage from "views/collab-room-end-page";
 import ProfilePage from "views/profile-page";
 import HistoryPage from "views/history-page";
+import SoloRoomPage from "views/solo-room-page";
 
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -30,6 +31,7 @@ function App() {
                   <Route path="/" element={<SelectionPage />} />
                   <Route path="profile" element={<ProfilePage />} />
                   <Route path="room" element={<CollabRoomPage />} />
+                  <Route path="soloRoom" element={<SoloRoomPage />} />
                   <Route path="endOfSession" element={<CollabRoomEndPage />} />
                   <Route path="history" element={<HistoryPage />} />
                 </Route>
