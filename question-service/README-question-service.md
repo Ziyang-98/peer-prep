@@ -1,9 +1,54 @@
-# To start development server
+# Question Service
 
-You need to have redis-server
+This microservice stores the coding questions from leetcode.
 
-`npm install`
+## Development
 
-`redis-server`
+1. Install and run [mongodb](https://www.mongodb.com/docs/manual/administration/install-community/) server locally
+2. Run the following commands
 
-`npm run dev`
+```
+npm install
+npm run dev
+```
+
+The above commands will install all the dependencies and start the local development server for Question Service.
+
+## Database Schema
+
+### Problem
+
+```
+{
+  \_id: String,
+  questionId: String,
+  questionFrontendId: String,
+  title: String,
+  titleSlug: String,
+  content: String,
+  difficulty: String,
+  likes: Number,
+  dislikes: Number,
+  similarQuestions: String,
+  topicTags: Array,
+  codeSnippets: Array,
+  stats: String,
+  hints: Array,
+  sampleTestCase: String,
+}
+```
+
+## API
+
+- GET /api/questionService/question/random/:roomId
+
+  - description: Get a random question for the room
+  - params:
+    - roomId: `match-[Easy/Medium/Hard]-[random string]`
+  - response: Problem
+
+- GET /api/questionService/question/:titleSlug
+  - description: Get a question with the specific title slug
+  - params:
+    - titleSlug: `two-sum`
+  - response: Problem
