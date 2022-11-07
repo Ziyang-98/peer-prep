@@ -4,8 +4,9 @@ This microservice stores the coding questions from leetcode.
 
 ## Development
 
+1. Refer to `.env.example` file to create your own `.env` file
 1. Install and run [mongodb](https://www.mongodb.com/docs/manual/administration/install-community/) server locally
-2. Run the following commands
+1. Run the following commands
 
 ```
 npm install
