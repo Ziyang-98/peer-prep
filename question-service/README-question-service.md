@@ -25,9 +25,9 @@ The above commands will install all the dependencies and start the local develop
   questionId: String,
   questionFrontendId: String,
   title: String,
-  titleSlug: String,
+  titleSlug: String, (unique)
   content: String,
-  difficulty: String,
+  difficulty: String, (index)
   likes: Number,
   dislikes: Number,
   similarQuestions: String,
