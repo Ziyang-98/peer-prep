@@ -15,7 +15,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV NODE_ENV=development
 ENV ENV=PROD
 ENV PORT=8002
 ENV REDIS_DEV_URL=redis://redis:6379

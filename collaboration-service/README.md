@@ -1,14 +1,16 @@
-# Key Value pair needed in .env
+# Collaboration Service
 
-- NODE_ENV=development
-- PORT=8002
+This microservice allows the matched users to code together in a shared code editor.
 
-# To start development server
+## Development
 
-You need to have redis-server
+1. Refer to `.env.example` file to create your own `.env` file
+1. Install and run [redis](https://redis.io/docs/getting-started/installation/) server locally
+1. Run the following commands
 
-`npm install`
+```
+npm install
+npm run dev
+```
 
-`redis-server`
-
-`npm run dev`
+The above commands will install all the dependencies and start the local development server for Collaboration Service.
