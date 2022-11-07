@@ -12,4 +12,4 @@ npm install
 npm run dev
 ```
 
-The above commands will install all the dependencies and start the local development server for History Service.
+The above commands will install all the dependencies and start the local development server for Communication Service.
