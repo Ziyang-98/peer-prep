@@ -15,7 +15,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 ENV PORT=8001
 ENV MONGO_URI=mongodb+srv://user3219:user3219@cluster0.fesq8vy.mongodb.net/MatchingService?retryWrites=true&w=majority
 
