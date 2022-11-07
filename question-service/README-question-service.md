@@ -46,10 +46,10 @@ The above commands will install all the dependencies and start the local develop
   - description: Get a random question for the room
   - params:
     - roomId: `match-[Easy/Medium/Hard]-[random string]`
-  - response: Problem
+  - response: `Problem`
 
 - GET /api/questionService/question/:titleSlug
   - description: Get a question with the specific title slug
   - params:
     - titleSlug: `two-sum`
-  - response: Problem
+  - response: `Problem`

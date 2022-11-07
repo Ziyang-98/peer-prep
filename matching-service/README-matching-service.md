@@ -32,8 +32,8 @@ The above commands will install all the dependencies and start the local develop
 - POST /api/matchService/match
   - description: Create a match
   - request body (JSON):
-    - user: `username of the user`
+    - user: username of the user
     - difficulty: `[Easy/Medium/Hard]`
   - response:
-    - room: `id of the room`
-    - isMatch: `boolean`
+    - room: id of the room
+    - isMatch: `Boolean`
