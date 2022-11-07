@@ -36,8 +36,8 @@ router.get("/", (_, res) => res.send("Hello World from user-service"));
 router.post("/", createUser);
 
 router.post(PREFIX_LOGIN, LoginAuth);
-router.post(PREFIX_CHANGE_PASSWORD, authentication, changePassword);
-router.post(PREFIX_DELETE, authentication, deleteUser);
+router.post(PREFIX_CHANGE_PASSWORD, authentication, changePassword); // TODO: should change to PUT
+router.post(PREFIX_DELETE, authentication, deleteUser); // TODO: should change to DELETE
 
 app.use("/api/user", router).all((_, res) => {
   res.setHeader("content-type", "application/json");
