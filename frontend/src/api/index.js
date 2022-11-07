@@ -53,11 +53,6 @@ export async function matchUser(user, difficulty) {
   return response;
 }
 
-export async function deleteMatch(id) {
-  const response = await axios.delete(URL_MATCHING_SVC + `/${id}`);
-  return response;
-}
-
 export async function getQuestion(roomId) {
   const response = await axios.get(URL_QUESTION_SVC + `/random/${roomId}`);
   return response;
