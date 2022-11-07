@@ -1,15 +1,15 @@
-# Message Microservice
+# Communication Service
 
-### Messaging service implemented with Socket.IO
+This microservice allows the matched users to communicate with each other during the session.
 
-## To run:
+## Development
 
-1. Install dependencies: `npm install` or `yarn install`
-2. Create a `.env` file in the `message` directory and set `PORT`
-3. Run the server: `node index.js`
+1. Refer to `.env.example` file to create your own `.env` file
+1. Run the following commands
 
-## Dev:
-1. After starting the server, you can run the test file to show your message.
-2. Connect to the socket
-3. Socket.emit message
-4. Unfortunately, it won't be stored in database (as of now) so if client disconnects, message is not saved.
+```
+npm install
+npm run dev
+```
+
+The above commands will install all the dependencies and start the local development server for History Service.
