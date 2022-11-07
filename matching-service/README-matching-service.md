@@ -1,6 +1,6 @@
 # Matching Service
 
-This microservice stores the coding questions from leetcode.
+This microservice match two users and returns a room id.
 
 ## Development
 
