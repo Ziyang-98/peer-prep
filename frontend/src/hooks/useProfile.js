@@ -13,15 +13,14 @@ const useProfile = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isDelete, setIsDelete] = useState(false);
 
-
   const navigate = useNavigate();
 
   const handleClickDelete = (event) => {
     setIsDelete(true);
-  }
+  };
   const handleClickClose = (event) => {
     setIsDelete(false);
-  }
+  };
 
   const handleDeleteUser = async (event) => {
     await deleteUser(cookies)
