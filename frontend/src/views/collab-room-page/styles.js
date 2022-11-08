@@ -3,8 +3,9 @@ export const styles = {
     height: "90%",
     display: "inline-block",
     width: "100%",
-
-    // paddingTop: "12px",
+  },
+  timerHolder: {
+    width: "100%",
   },
   itemContainer: {
     display: "flex",
