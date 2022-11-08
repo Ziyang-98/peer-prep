@@ -3,7 +3,7 @@ export const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "80vh",
+    height: "90vh",
   },
   subContainer: {
     position: "relative",
@@ -38,11 +38,13 @@ export const styles = {
     height: "150px",
     color: "#527ad3",
   },
+  buttonHolder: {
+    display: "flex",
+    flexDirection: "row-reverse",
+    width: "120%",
+    marginTop: "4%",
+  },
   returnButton: {
-    position: "absolute",
-    bottom: 5,
-    right: 5,
-    marginTop: 5,
     bgcolor: "primary.mainColor",
     "&:hover": {
       bgcolor: "primary.dark",

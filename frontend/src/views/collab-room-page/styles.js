@@ -5,7 +5,9 @@ export const styles = {
     alignItems: "center",
     flexDirection: "column",
     width: "100%",
-    height: "90vh",
+    height: "90%",
+    padding: 0,
+    overflowY: "auto",
   },
   bottomActionHolder: {
     width: "90%",
@@ -13,7 +15,7 @@ export const styles = {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    mt: "20px",
+    m: "20px 0",
     position: "relative",
   },
   endSessionButton: {

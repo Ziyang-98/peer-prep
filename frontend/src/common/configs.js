@@ -28,7 +28,7 @@ export const URI_COLLAB_SVC =
   ENV === "PROD"
     ? "https://collaboration-service-rob2padjya-de.a.run.app"
     : "http://localhost:8002";
-export const REACT_APP_TOKEN_AGE = process.env.REACT_APP_TOKEN_AGE || 259200;
+export const TOKEN_AGE = process.env.REACT_APP_TOKEN_AGE || 259200;
 
 export const URI_QUESTION_SVC =
   ENV === "PROD"
