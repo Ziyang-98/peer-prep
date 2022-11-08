@@ -17,7 +17,7 @@ const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
-  const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
+  const { editor, users, timer } = useCollabEditor(handleOpenNotification);
   const roomType = "collab";
 
   const { questionObject, questionName, handleEndSession } = useQuestion(
@@ -42,7 +42,7 @@ const CollabRoomPage = () => {
         <RoomTimer timeInMs={timer} />
       </Box>
       <QuestionEditorPanel
-        editorProps={editorProps}
+        editor={editor}
         users={users}
         handleOpenNotification={handleOpenNotification}
         type={roomType}

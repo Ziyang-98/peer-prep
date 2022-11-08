@@ -27,6 +27,7 @@ const SoloRoomPage = () => {
   return (
     <Box sx={styles.mainContainer}>
       <QuestionEditorPanel
+        isCollabEditor={false}
         editorProps={{ value: DEFAULT_EDITOR_VALUE }}
         handleOpenNotification={handleOpenNotification}
         type={roomType}
