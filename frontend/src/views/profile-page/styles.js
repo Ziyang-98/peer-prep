@@ -18,7 +18,7 @@ export const styles = {
     bgcolor: "primary.mainColor",
   },
   items: {
-    mt: "2%",
+    mt: "8%",
     height: "80%",
     display: "flex",
     flexDirection: "row",
