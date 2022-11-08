@@ -1,5 +1,5 @@
 //TODO: frontend env not working
-const ENV = process.env.REACT_APP_ENV ?? "PROD";
+const ENV = process.env.REACT_APP_ENV ?? "DEV";
 const URI_USER_SVC =
   ENV === "PROD"
     ? "https://user-service-rob2padjya-de.a.run.app"
