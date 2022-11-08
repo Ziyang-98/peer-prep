@@ -48,23 +48,6 @@ const createMatch = asyncHandler(async (req, res) => {
   }
 })
 
-// Description: Delete a match
-// Route: DELETE /api/matchService/match/:id
-// Access: Private
-const deleteMatch = async (req, res) => {
-  const { id } = req.params
-  const match = await Match.findById(id)
-
-  if (!match) {
-    res.status(STATUS_CODE_BAD_REQUEST)
-    throw new Error('Match not found!')
-  }
-
-  await match.remove()
-
-  res.status(STATUS_CODE_SUCCESS).json({ id })
-}
-
 const deleteMatchForSocket = async (socket) => {
   const promises = []
 
@@ -87,6 +70,5 @@ const deleteMatchForSocket = async (socket) => {
 
 module.exports = {
   createMatch,
-  deleteMatch,
   deleteMatchForSocket,
 }
