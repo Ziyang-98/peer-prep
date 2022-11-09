@@ -15,6 +15,8 @@ npm run dev
 
 The above commands will install all the dependencies and start the local development server for Question Service.
 
+However, before you can start using the service, you have to populate your database with the questions. To do this, send a **POST** request to `/api/questionService/question/test`. This endpoint will fetch 100 questions from leetcode API.
+
 ## Database Schema
 
 ### Problem
