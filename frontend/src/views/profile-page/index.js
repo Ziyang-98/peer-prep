@@ -23,7 +23,6 @@ const ProfilePage = () => {
     handleClickDelete,
     handleClickClose,
   } = useProfile();
-  
 
   return (
     <Container sx={styles.main}>
@@ -56,7 +55,9 @@ const ProfilePage = () => {
 
         <Box sx={styles.items}>
           <Box sx={styles.deleteContainer}>
-            <Typography component="h1" variant="h5">Delete User</Typography>
+            <Typography component="h1" variant="h5">
+              Delete User
+            </Typography>
             <Box sx={styles.buttons}>
               <Button
                 loadingPosition="start"
@@ -71,13 +72,14 @@ const ProfilePage = () => {
             </Box>
           </Box>
 
-
           <Box
             component="form"
             onSubmit={handleChangePassword}
             sx={styles.formContainer}
           >
-            <Typography component="h1" variant="h5">Change Password</Typography>
+            <Typography component="h1" variant="h5">
+              Change Password
+            </Typography>
             <TextField
               margin="normal"
               required

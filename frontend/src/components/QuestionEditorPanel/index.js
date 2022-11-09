@@ -11,9 +11,10 @@ import { styles } from "./styles";
 import "./styles.css";
 
 const QuestionEditorPanel = ({
+  isCollabEditor = true,
+  editor,
   editorProps,
   users,
-  handleOpenNotification,
   type,
   questionObject,
   questionName,
@@ -28,7 +29,11 @@ const QuestionEditorPanel = ({
       </Box>
       <Box sx={styles.panel}>
         {isCollabType(type) && <UsersDisplay activeUsers={users} />}
-        <Editor editorProps={editorProps} />
+        <Editor
+          isCollabEditor={isCollabEditor}
+          editor={editor}
+          editorProps={editorProps}
+        />
       </Box>
     </Split>
   );

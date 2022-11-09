@@ -1,10 +1,9 @@
 export const styles = {
   main: {
-    mt: "5%",
-    height: "100%",
+    height: "90%",
   },
   container: {
-    height: "120%",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
   },
@@ -19,13 +18,11 @@ export const styles = {
     bgcolor: "primary.mainColor",
   },
   items: {
-    mt: "2%",
-    minHeight: "300px",
-    maxHeight: "800px",
-    height: "100%",
+    mt: "8%",
+    height: "80%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   formContainer: {
     height: "100%",
@@ -48,10 +45,10 @@ export const styles = {
     boxShadow: 24,
     borderRadius: "10px",
     justifyContent: "center",
-    alignItems:"center",
+    alignItems: "center",
     bgcolor: "primary.lessLight",
   },
   textField: {
     width: "60%",
-  }
+  },
 };

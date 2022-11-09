@@ -1,8 +1,12 @@
 export const styles = {
+  mainContainer: {
+    height: "100%",
+  },
   navBar: {
     bgcolor: "primary.mainColor",
     display: "flex",
     justifyContent: "space-between",
+    height: "5vh",
   },
   appTitle: {
     ml: "2%",

@@ -22,5 +22,5 @@ The above commands will install all the dependencies and start the local develop
 
 ### Key Value pair needed in .env
 
-- URI_USER_SVC=uri for UserService
-- TOKEN_AGE=cookie lifetime for auth in seconds
+- REACT_APP_ENV=app environment (DEV | PROD)
+- REACT_APP_TOKEN_AGE=cookie lifetime for auth in seconds

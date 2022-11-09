@@ -17,7 +17,7 @@ const CollabRoomPage = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
-  const { editorProps, users, timer } = useCollabEditor(handleOpenNotification);
+  const { editor, users, timer } = useCollabEditor(handleOpenNotification);
   const roomType = "collab";
 
   const { questionObject, questionName, handleEndSession } = useQuestion(
@@ -36,37 +36,42 @@ const CollabRoomPage = () => {
     handleOnType,
   } = useChat(handleOpenNotification);
   return (
-    <Box sx={styles.mainContainer}>
-      <RoomTimer timeInMs={timer} />
+    // <Box sx={styles.mainContainer}>
+    <Box sx={styles.itemContainer}>
+      <Box sx={styles.timerHolder}>
+        <RoomTimer timeInMs={timer} />
+      </Box>
       <QuestionEditorPanel
-        editorProps={editorProps}
+        editor={editor}
         users={users}
         handleOpenNotification={handleOpenNotification}
         type={roomType}
         questionObject={questionObject}
         questionName={questionName}
       />
-      <Box sx={styles.bottomActionHolder}>
-        <Chat
-          isChatOpen={isChatOpen}
-          messages={messages}
-          currMessage={currMessage}
-          handleSendMessage={handleSendMessage}
-          handleEnterSendMessage={handleEnterSendMessage}
-          handleOnType={handleOnType}
-        />
-        <CollabChatButton
-          handleClickChat={handleClickChat}
-          noOfNewMessages={noOfNewMessages}
-        />
-        <Button
-          variant="contained"
-          sx={styles.endSessionButton}
-          href="/endOfSession"
-          onClick={handleEndSession}
-        >
-          End session
-        </Button>
+      <Box sx={styles.bottomActionBackground}>
+        <Box sx={styles.bottomActionHolder}>
+          <Chat
+            isChatOpen={isChatOpen}
+            messages={messages}
+            currMessage={currMessage}
+            handleSendMessage={handleSendMessage}
+            handleEnterSendMessage={handleEnterSendMessage}
+            handleOnType={handleOnType}
+          />
+          <CollabChatButton
+            handleClickChat={handleClickChat}
+            noOfNewMessages={noOfNewMessages}
+          />
+          <Button
+            variant="contained"
+            sx={styles.endSessionButton}
+            href="/endOfSession"
+            onClick={handleEndSession}
+          >
+            End session
+          </Button>
+        </Box>
       </Box>
       <Notification
         snackbarProps={snackbarProps}
@@ -74,6 +79,7 @@ const CollabRoomPage = () => {
         message={message}
       />
     </Box>
+    // </Box>
   );
 };
 

@@ -1,7 +1,7 @@
 export const styles = {
   split: {
     display: "flex",
-    height: "85%",
+    height: "80%",
     width: "90%",
   },
   panel: {
