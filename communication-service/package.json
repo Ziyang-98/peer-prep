@@ -1,7 +1,7 @@
 {
   "name": "communication-service",
   "version": "1.0.0",
-  "description": "### Messaging service implemented with Socket.IO",
+  "description": "Communication service",
   "main": "index.js",
   "engines": {
     "node": "16"
