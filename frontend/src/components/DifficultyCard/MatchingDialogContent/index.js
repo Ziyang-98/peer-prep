@@ -87,7 +87,7 @@ const MatchingDialogContent = ({
         )}
         {success && (
           <DialogContentGrowText
-            text={"Matched found! Redirecting to room..."}
+            text={"Match found! Redirecting to room..."}
             state={success}
             styles={styles}
           />

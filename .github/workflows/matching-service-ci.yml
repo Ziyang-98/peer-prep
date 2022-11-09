@@ -6,13 +6,14 @@ name: Matching Service CI
 on:
   pull_request:
     branches: ['main']
-  
+
 jobs:
   matching-service-job:
     runs-on: ubuntu-latest
 
     env:
       MONGO_URI: ${{ secrets.MONGO_URI }}
+      LOCAL_MONGO_URI: 'mongodb://localhost:27017/MatchingService'
       NODE_ENV: 'development'
 
     defaults:
@@ -31,6 +32,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: latest
       - run: npm ci
       - run: npm run lint
       - run: npm test

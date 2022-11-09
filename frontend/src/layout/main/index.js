@@ -24,7 +24,7 @@ const MainLayout = () => {
   } = useNavbarMenu();
 
   return (
-    <Box>
+    <Box sx={styles.mainContainer}>
       <AppBar position="static">
         <Toolbar sx={styles.navBar}>
           <Typography variant="h6" component="a" href="/" sx={styles.appTitle}>

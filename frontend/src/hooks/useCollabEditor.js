@@ -3,6 +3,8 @@ import { getNewLines } from "common/utils";
 import { URI_COLLAB_SVC } from "common/configs";
 import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
+import { useCodeMirror } from "@uiw/react-codemirror";
+
 import { useCookies } from "react-cookie";
 
 const DEFAULT_NO_OF_LINES = getNewLines(20);
@@ -10,11 +12,37 @@ const DEFAULT_NO_OF_LINES = getNewLines(20);
 const DEFAULT_EDITOR_VALUE =
   "# Loading Room for Collaboration......" + DEFAULT_NO_OF_LINES;
 
+const getCurrentSelection = (state) => {
+  return state.selection.ranges[0].from;
+};
+
 const useCollabEditor = (handleOpenNotification) => {
   const [editorValue, setEditorValue] = useState(DEFAULT_EDITOR_VALUE);
   const [users, setUsers] = useState("");
   const [socket, setSocket] = useState(null);
   const [timer, setTimer] = useState(null);
+
+  const editor = useRef();
+
+  const handleEditorChange = useCallback(
+    (value, viewUpdate) => {
+      if (viewUpdate.docChanged && viewUpdate.selectionSet)
+        socket.emit("codeChanged", { code: value });
+    },
+    [socket],
+  );
+
+  const { setContainer, view } = useCodeMirror({
+    container: editor.current,
+    value: editorValue,
+    onChange: handleEditorChange,
+  });
+  useEffect(() => {
+    if (editor.current) {
+      setContainer(editor.current);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor.current]);
 
   let intervalRef = useRef();
 
@@ -57,7 +85,7 @@ const useCollabEditor = (handleOpenNotification) => {
       setUsers(usersInRoom.join("  ,  "));
     });
 
-    socket.on("codeUpdated", ({ code }) => {
+    socket.on("initialCode", ({ code }) => {
       setEditorValue(code);
     });
 
@@ -94,19 +122,26 @@ const useCollabEditor = (handleOpenNotification) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleEditorChange = useCallback(
-    (value, viewUpdate) => {
-      if (viewUpdate.docChanged && viewUpdate.selectionSet)
-        socket.emit("codeChanged", { code: value });
-    },
-    [socket],
-  );
+  useEffect(() => {
+    if (socket && view) {
+      socket.on("codeUpdated", ({ code }) => {
+        const currSelection = getCurrentSelection(view.state);
+
+        view.dispatch({
+          changes: { from: 0, to: view.state.doc.length, insert: code },
+        });
+
+        view.dispatch({
+          selection: {
+            anchor: currSelection > code.length ? code.length : currSelection,
+          },
+        });
+      });
+    }
+  }, [socket, view]);
 
   return {
-    editorProps: {
-      value: editorValue,
-      onChange: handleEditorChange,
-    },
+    editor,
     users,
     timer,
   };
