@@ -11,8 +11,16 @@ const useProfile = () => {
   const [isSuccessAction, setIsSuccessAction] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleClickDelete = (event) => {
+    setIsDelete(true);
+  };
+  const handleClickClose = (event) => {
+    setIsDelete(false);
+  };
 
   const handleDeleteUser = async (event) => {
     await deleteUser(cookies)
@@ -65,6 +73,9 @@ const useProfile = () => {
     isSuccessAction,
     errorMessage,
     successMessage,
+    isDelete,
+    handleClickDelete,
+    handleClickClose,
   };
 };
 

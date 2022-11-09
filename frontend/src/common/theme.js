@@ -28,9 +28,5 @@ export const theme = createTheme({
       main: "#C34A36",
       light: "#e86868",
     },
-
-    //   accent: {
-    //     main: "#FFE8FF",
-    //   },
   },
 });

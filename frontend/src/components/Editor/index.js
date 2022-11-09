@@ -1,8 +1,11 @@
 import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
 
-const Editor = ({ editorProps }) => {
-  return <CodeMirror {...editorProps} />;
+const Editor = ({ isCollabEditor, editor, editorProps }) => {
+  return isCollabEditor ? (
+    <div id="editor" ref={editor} />
+  ) : (
+    <CodeMirror {...editorProps} />
+  );
 };
-
 export default Editor;

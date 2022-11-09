@@ -40,15 +40,17 @@ const CollabRoomEndPage = () => {
             Now you are one step closer to being well prepared for interviews!
           </Typography>
         </Fade>
-        <Fade in={true} timeout={1000} style={{ transitionDelay: `3000ms` }}>
-          <Button
-            sx={styles.returnButton}
-            variant="contained"
-            onClick={handleRedirect}
-          >
-            Return to Selection
-          </Button>
-        </Fade>
+        <Box sx={styles.buttonHolder}>
+          <Fade in={true} timeout={1000} style={{ transitionDelay: `3000ms` }}>
+            <Button
+              sx={styles.returnButton}
+              variant="contained"
+              onClick={handleRedirect}
+            >
+              Return to Selection
+            </Button>
+          </Fade>
+        </Box>
       </Box>
     </Box>
   );

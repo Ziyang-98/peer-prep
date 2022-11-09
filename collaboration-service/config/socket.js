@@ -58,7 +58,7 @@ const connectSocket = (httpServer, options) => {
         await redisClient.set(codeKey, code)
       }
 
-      io.in(roomId).emit('codeUpdated', { code })
+      io.in(roomId).emit('initialCode', { code })
       await redisClient.hSet(socket.id, { roomId, user }) // For removal of user, when user disconnect
       // Handle 30 minutes timer
       setRoomTimer(roomId)
@@ -93,7 +93,6 @@ const connectSocket = (httpServer, options) => {
       const codeKey = `${roomId}:code`
 
       await redisClient.set(codeKey, code)
-
       socket.to(roomId).emit('codeUpdated', { code })
     })
   })
