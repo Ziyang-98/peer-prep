@@ -18,6 +18,8 @@ Visit the deployed website [here](https://frontend-rob2padjya-de.a.run.app/).
 **1. Using Docker Compose**
 
 1. Clone the repo
+1. Navigate to Dockerfile in the frontend directory
+1. Uncomment "REACT_APP_ENV=DEV"
 1. Run the following command
 
 ```shell
@@ -30,6 +32,7 @@ The above command will build and run the docker containers. You can then access 
 
 1. Clone the repo
 1. cd into each directories and follow the instructions on the README of each services: [Frontend](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/frontend), [User Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/user-service), [Matching Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/matching-service), [Collaboration Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/collaboration-service), [Question Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/question-service), [Communication Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/communication-service), [History Service](https://github.com/CS3219-AY2223S1/cs3219-project-ay2223s1-g52/tree/main/history-service)
+1. Then, you can access the website at http://localhost:3000
 
 ```
 For example:
