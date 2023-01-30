@@ -2,7 +2,7 @@
 
 PeerPrep is a web application that helps students better prepare themselves for technical interviews. It provides a collaborative interview preparation platform and peer matching system, where students can find peers to practice whiteboard-style interview questions together.
 
-Visit the deployed website [here](https://frontend-rob2padjya-de.a.run.app/).
+Visit the deployed website [here](https://frontend-rob2padjya-de.a.run.app/). (Update: The deployed website is discontinued due to a paywall. To use this application, please setup the project in the development environment according to the instructions below)
 
 ## Installing / Getting started
 
